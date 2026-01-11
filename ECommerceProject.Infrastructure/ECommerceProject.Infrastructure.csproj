@@ -11,7 +11,6 @@
     <Folder Include="Identity\" />
     <Folder Include="Jobs\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
