@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceProject.Application.Services.Implementation
 {
-    internal class ProductSurvice
+    public class ProductSurvice : IProductSurvice
     {
     }
 }

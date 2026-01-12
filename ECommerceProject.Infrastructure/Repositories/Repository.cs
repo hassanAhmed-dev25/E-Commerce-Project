@@ -53,7 +53,7 @@ namespace ECommerceProject.Infrastructure.Repositories
             }
         }
 
-        public void UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _context.Update(entity);
         }

@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -20,3 +20,65 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.product-card {
+    border: 1px solid #eee;
+    transition: .2s ease;
+}
+.product-card:hover {
+    transform: translateY(-4px);
+     box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+
+body {
+    background: #f4f6f8;
+}
+
+.navbar {
+    background: #243a3e;
+}
+
+    .navbar a {
+        color: #fff !important;
+    }
+
+.card-header {
+    background: #47575a;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+}
+
+.btn-edit {
+    background: #1f2f33;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background: #162327;
+    color: #fff;
+}
+
+.table th {
+    background: #f1f1f1;
+}
+
+.dropdown-menu {
+    background-color: #243a3e;
+}
+
+
+.dropdown-menu .dropdown-item {
+    color: #f8f9fa;
+}
+
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item.active {
+    background-color: #404f5e;
+    color: #ffffff;
+}
+    

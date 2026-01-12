@@ -17,8 +17,14 @@
                    .IsRequired()
                    .HasMaxLength(200);
 
+
+            builder.Property(c => c.Description)
+                   .HasMaxLength(1000);
+
+
             builder.Property(c => c.IsActive)
                    .HasDefaultValue(true);
+
 
         }
     }

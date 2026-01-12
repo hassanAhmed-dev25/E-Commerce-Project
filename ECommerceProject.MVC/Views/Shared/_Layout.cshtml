@@ -1,35 +1,71 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ECommerceProject.MVC</title>
+    <title>E-Commerce Website</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ECommerceProject.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="ECommerceProject.MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ECommerceProject.MVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <!-- Logo -->
+                <a class="navbar-brand fw-bold" href="#">LOGO</a>
+
+                <!-- Toggler -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <!-- Left Links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item ms-2">
+                            <a class="nav-link active" href="#">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="#">Manage Orders</a>
+                        </li>
+
+                        <li class="nav-item dropdown ms-2">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown">
+                                Seller Section
+                            </a>
+                            <ul class="dropdown-menu ms-2">
+                                <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">Categories</a></li>
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Index">Products</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else</a></li>
+                            </ul>
                         </li>
                     </ul>
+
+                    <!-- Right Links -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item ms-3">
+                            <a class="nav-link" href="#">Sign Up</a>
+                        </li>
+                        <li class="nav-item ms-3">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </nav>
-    </header>
+</header>
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

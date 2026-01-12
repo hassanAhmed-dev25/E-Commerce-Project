@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceProject.Application.Services.Interfaces
 {
-    internal interface IProductSurvice
+    public interface IProductSurvice
     {
     }
 }

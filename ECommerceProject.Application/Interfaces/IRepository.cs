@@ -8,6 +8,6 @@ namespace ECommerceProject.Application.Interfaces
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null);
         Task AddAsync(T entity);
         Task RemoveAsync(int id);
-        void UpdateAsync(T entity);
+        Task UpdateAsync(T entity);
     }
 }

@@ -1,3 +1,5 @@
+using ECommerceProject.Application;
+using ECommerceProject.Infrastructure;
 using ECommerceProject.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +20,10 @@ namespace ECommerceProject.MVC
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+            // Dependency Injection
+            builder.Services.AddInfrastructureServices();
+            builder.Services.AddApplicationServices();
 
 
 
