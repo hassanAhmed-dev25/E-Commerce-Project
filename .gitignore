@@ -364,8 +364,8 @@ FodyWeavers.xsd
 
 
 # Uploaded user files (IMPORTANT)
-wwwroot/uploads/
-wwwroot/images/
+wwwroot/Files/
+
 
 # Prevent committing images
 *.jpg
