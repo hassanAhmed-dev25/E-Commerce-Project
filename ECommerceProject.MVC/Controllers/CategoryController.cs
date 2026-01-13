@@ -34,9 +34,11 @@ namespace ECommerceProject.MVC.Controllers
 
             if (!res.isSuccess)
             {
+                TempData["error"] = "Category is not Created";
                 return View("Error");
             }
 
+            TempData["success"] = "Category Created successfully";
 
             return RedirectToAction("Index");
         }
@@ -89,8 +91,12 @@ namespace ECommerceProject.MVC.Controllers
             // Check if the operation was successful
             if (!res.isSuccess)
             {
+                TempData["error"] = "Category is not Updated";
                 return View("Error");
             }
+
+            TempData["success"] = "Category Updated successfully";
+
 
             return RedirectToAction("Index");
         }
@@ -108,8 +114,11 @@ namespace ECommerceProject.MVC.Controllers
             // Check if the operation was successful
             if (!res.isSuccess)
             {
+                TempData["error"] = "Category is not Deleted";
                 return View("Error");
             }
+
+            TempData["success"] = "Category Deleted successfully";
 
             return RedirectToAction("Index");
         }
