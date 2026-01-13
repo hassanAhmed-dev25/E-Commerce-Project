@@ -1,6 +1,9 @@
 using ECommerceProject.Application;
 using ECommerceProject.Infrastructure;
 using ECommerceProject.Infrastructure.Data;
+using ECommerceProject.Infrastructure.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceProject.MVC
@@ -26,6 +29,37 @@ namespace ECommerceProject.MVC
             builder.Services.AddApplicationServices();
 
 
+            // Identity Configuration
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                            {
+                                options.LoginPath = new PathString("/Account/Login");
+                                options.AccessDeniedPath = new PathString("/Account/Login");
+                            });
+
+            builder.Services.AddIdentityCore<ApplicationUser>(options =>
+                    options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(
+                    TokenOptions.DefaultProvider);
+
+
+            // Password Configuration
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                // Default Password Settings
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
+
 
             var app = builder.Build();
 
@@ -42,6 +76,7 @@ namespace ECommerceProject.MVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

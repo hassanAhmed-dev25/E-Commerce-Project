@@ -1,9 +1,10 @@
-﻿using ECommerceProject.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using ECommerceProject.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace ECommerceProject.Infrastructure.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
