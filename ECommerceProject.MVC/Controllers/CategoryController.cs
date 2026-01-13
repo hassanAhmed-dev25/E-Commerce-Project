@@ -23,6 +23,12 @@ namespace ECommerceProject.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCategoryDto categoryDto)
         {
+            // Validate the model
+            // if false return the view with the model to show validation errors
+            if (!ModelState.IsValid)
+            {
+                return View(categoryDto);
+            }
 
             var res = await _categoryService.CreateCategoryAsync(categoryDto);
 
@@ -70,6 +76,12 @@ namespace ECommerceProject.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UpdateCategoryDto categoryDto)
         {
+            // Validate the model
+            // if false return the view with the model to show validation errors
+            if (!ModelState.IsValid)
+            {
+                return View(categoryDto);
+            }
 
             // Call service to update category
             var res = await _categoryService.UpdateCategoryAsync(categoryDto);
@@ -117,16 +129,6 @@ namespace ECommerceProject.MVC.Controllers
             }
 
             var res = categories.result;
-
-            // Mapp DTOs to ViewModels
-            //var viewModelList = res.Select(c => new GetCategoryVM
-            //{
-            //    Id = c.Id,
-            //    Name = c.Name,
-            //    Description = c.Description,
-            //    ProductCount = c.ProductCount,
-
-            //}).ToList();
 
             return View(res);
         }
