@@ -19,4 +19,8 @@
     <ProjectReference Include="..\ECommerceProject.Infrastructure\ECommerceProject.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>

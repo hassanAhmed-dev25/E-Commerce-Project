@@ -1,6 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs;
 using ECommerceProject.Application.Services.Interfaces;
-using ECommerceProject.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceProject.MVC.Controllers
@@ -22,17 +21,10 @@ namespace ECommerceProject.MVC.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCategoryVM categoryVM)
+        public async Task<IActionResult> Create(CreateCategoryDto categoryDto)
         {
 
-            // Mapp ViewModel to DTO
-            var createCategoryDto = new CreateCategoryDto
-            {
-                Name = categoryVM.Name,
-                Description = categoryVM.Description
-            };
-
-            var res = await _categoryService.CreateCategoryAsync(createCategoryDto);
+            var res = await _categoryService.CreateCategoryAsync(categoryDto);
 
             if (!res.isSuccess)
             {
@@ -51,43 +43,36 @@ namespace ECommerceProject.MVC.Controllers
         public async Task<IActionResult> Update(int catgId)
         {
             // Get category by id
-            var categoryDto = await _categoryService.GetCategoryByIdAsync(catgId);
+            var ResponceCategoryDto = await _categoryService.GetCategoryByIdAsync(catgId);
 
             // Check if the operation was successful
-            if (!categoryDto.isSuccess)
+            if (!ResponceCategoryDto.isSuccess)
             {
                 return View("Error");
             }
 
 
             // Extract the category data
-            var category = categoryDto.result;
+            var category = ResponceCategoryDto.result;
 
-            // Mapp DTO to ViewModel
-            var updateCategoryVM = new UpdateCategoryVM
+            //// Mapp GetDTO to UpdateDTO
+            var updateCategoryDto = new UpdateCategoryDto
             {
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description
             };
 
-            return View(updateCategoryVM);
+            return View(updateCategoryDto);
 
 
         }
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateCategoryVM categoryVM)
+        public async Task<IActionResult> Update(UpdateCategoryDto categoryDto)
         {
-            // Mapp ViewModel to DTO
-            var updateCategoryDto = new UpdateCategoryDto
-            {
-                Id =  categoryVM.Id,
-                Name = categoryVM.Name,
-                Description = categoryVM.Description
-            };
 
             // Call service to update category
-            var res = await _categoryService.UpdateCategoryAsync(updateCategoryDto);
+            var res = await _categoryService.UpdateCategoryAsync(categoryDto);
 
             // Check if the operation was successful
             if (!res.isSuccess)
@@ -134,16 +119,16 @@ namespace ECommerceProject.MVC.Controllers
             var res = categories.result;
 
             // Mapp DTOs to ViewModels
-            var viewModelList = res.Select(c => new GetCategoryVM
-            {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                ProductCount = c.ProductCount,
+            //var viewModelList = res.Select(c => new GetCategoryVM
+            //{
+            //    Id = c.Id,
+            //    Name = c.Name,
+            //    Description = c.Description,
+            //    ProductCount = c.ProductCount,
 
-            }).ToList();
+            //}).ToList();
 
-            return View(viewModelList);
+            return View(res);
         }
 
     }
