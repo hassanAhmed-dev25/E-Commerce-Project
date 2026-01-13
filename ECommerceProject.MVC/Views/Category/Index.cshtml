@@ -1,4 +1,5 @@
 ﻿@using ECommerceProject.Application.DTOs
+@using ECommerceProject.Application.DTOs.Category
 
 
 @model IEnumerable<GetCategoryDto>
@@ -49,7 +50,7 @@
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteModal"
                                         data-id="@catg.Id"
-                                        data-content="@catg.Name"> 
+                                        data-name="@catg.Name">
                                     <i class="bi bi-trash-fill"></i> Delete
                                 </button>
                             </div>

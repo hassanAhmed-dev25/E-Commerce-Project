@@ -1,4 +1,6 @@
-﻿namespace ECommerceProject.Application.Services.Implementation
+﻿using ECommerceProject.Application.DTOs.Category;
+
+namespace ECommerceProject.Application.Services.Implementation
 {
     public class CategoryService : ICategoryService
     {

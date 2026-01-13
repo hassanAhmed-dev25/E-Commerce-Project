@@ -1,4 +1,4 @@
-﻿using ECommerceProject.Application.DTOs;
+﻿using ECommerceProject.Application.DTOs.Category;
 using ECommerceProject.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

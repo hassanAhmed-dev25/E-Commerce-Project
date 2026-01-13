@@ -1,5 +1,5 @@
-﻿using ECommerceProject.Application.Interfaces;
-using ECommerceProject.Infrastructure.Data;
+﻿
+using System.Linq.Expressions;
 
 namespace ECommerceProject.Infrastructure.Repositories
 {
@@ -27,6 +27,23 @@ namespace ECommerceProject.Infrastructure.Repositories
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+
+            return await query.ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllWithAsync(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var item in includes)
+            {
+                query = query.Include(item);
             }
 
             return await query.ToListAsync();

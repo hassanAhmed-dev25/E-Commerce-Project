@@ -1,4 +1,4 @@
-﻿namespace ECommerceProject.Application.DTOs
+﻿namespace ECommerceProject.Application.DTOs.Category
 {
     public class CreateCategoryDto
     {

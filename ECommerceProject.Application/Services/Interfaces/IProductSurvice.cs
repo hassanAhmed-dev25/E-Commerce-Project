@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ECommerceProject.Application.DTOs.Product;
 
 namespace ECommerceProject.Application.Services.Interfaces
 {
     public interface IProductSurvice
     {
+        Task<Response<bool>> CreateProductyAsync(CreateProductDto productDto);
+        Task<Response<bool>> UpdateProductAsync(UpdateProductDto productDto);
+        Task<Response<bool>> DeleteProductyAsync(int id);
+
+        Task<Response<GetProductDto>> GetProductByIdAsync(int id);
+        Task<Response<IEnumerable<GetProductDto>>> GetAllProductsAsync();
     }
 }

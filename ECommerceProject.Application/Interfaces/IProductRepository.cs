@@ -1,6 +1,6 @@
 ﻿namespace ECommerceProject.Application.Interfaces
 {
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<Product>
     {
 
     }

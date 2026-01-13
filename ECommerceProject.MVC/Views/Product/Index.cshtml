@@ -1,12 +1,15 @@
-﻿
+﻿@using ECommerceProject.Application.DTOs.Product
+
+
+@model IEnumerable<GetProductDto>
 
 <div class="w-100 card border-0 p-4">
-    <div class="gg-title mb-4 d-flex justify-content-between align-items-center">
-        <h2 class="mb-0">Products</h2>
-
-        <a asp-controller="Product" asp-action="Create" class="btn btn-dark btn-sm">
-            + Create Product
-        </a>
+    <div class="card-header gg-title ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Product List</h2>
+            </div>
+        </div>
     </div>
     <div class="card-body border p-4">
         <div class="row pb-3">
@@ -21,12 +24,13 @@
             <thead>
                 <tr>
                     <th>
-                        Name
+                        Product Name
                     </th>
                     <th>Price</th>
                     <th>Stock Quantity</th>
-                    <th>Is Active</th>
+                    <th>Status</th>
                     <th>Created At</th>
+                    <th>Category Name</th>
                     <th></th>
                 </tr>
             </thead>
@@ -39,17 +43,20 @@
                         <td>@prod.StockQuantity</td>
                         <td>@prod.IsActive</td>
                         <td>@prod.CreatedAt</td>
-
+                        <td>@prod.CategoryName</td>
                         <td>
                             <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Product" asp-action="Update" asp-route-catgId="@prod.Id"
+                                <a asp-controller="Product" asp-action="Update" asp-route-prodId="@prod.Id"
                                    class="btn btn-success mx-2">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
-                                <a asp-controller="Product" asp-action="Delete" asp-route-catgId="@prod.Id"
-                                   class="btn btn-danger mx-2">
+                                <button class="btn btn-danger mx-2"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal"
+                                        data-id="@prod.Id"
+                                        data-content="@prod.Name">
                                     <i class="bi bi-trash-fill"></i> Delete
-                                </a>
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -58,3 +65,9 @@
         </table>
     </div>
 </div>
+
+
+
+
+<!-- Delete Modal -->
+<partial name="_DeleteProductModal" />

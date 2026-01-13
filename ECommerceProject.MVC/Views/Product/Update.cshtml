@@ -1,0 +1,105 @@
+﻿@using ECommerceProject.Application.DTOs.Product
+﻿
+
+@model UpdateProductDto
+
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header gg-title ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Create Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4" enctype="multipart/form-data">
+        <form method="post" class="row" asp-controller="Product" asp-action="Update">
+            <div class="p-3">
+
+
+                <input type="hidden" asp-for="Id" />
+
+                <!-- Name -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Name" class="form-control border shadow" />
+                    <label asp-for="Name" class="ms-2"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Price -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Price" class="form-control border shadow" />
+                    <label asp-for="Price" class="ms-2"></label>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <!-- Stock Quantity -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="StockQuantity" class="form-control border shadow" />
+                    <label asp-for="StockQuantity" class="ms-2"></label>
+                    <span asp-validation-for="StockQuantity" class="text-danger"></span>
+                </div>
+
+                <!-- Is Active -->
+                <div class="form-floating py-1 col-12">
+                    <select asp-for="IsActive" class="form-select border shadow">
+                        <option value="true">Active</option>
+                        <option value="false">Not Active</option>
+                    </select>
+                    <label asp-for="IsActive" class="ms-2"></label>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Description" class="form-control border shadow" />
+                    <label asp-for="Description" class="ms-2"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+
+
+                <!-- Category -->
+                <div class="form-floating py-1 col-12">
+                    <select asp-for="CategoryId"
+                            asp-items="ViewBag.CategoryList"
+                            class="form-select border shadow">
+                        <option value="">-- Select Category --</option>
+                    </select>
+                    <label asp-for="CategoryId" class="ms-2"></label>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+
+
+
+
+                <!-- ImageUrl -->
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="ImageUrl" type="file" class="form-control border shadow" />
+                    <label asp-for="ImageUrl" class="ms-2"></label>
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+
+
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-circle"></i> Update
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

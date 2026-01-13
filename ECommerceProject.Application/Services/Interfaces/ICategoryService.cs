@@ -1,4 +1,6 @@
-﻿namespace ECommerceProject.Application.Services.Interfaces
+﻿using ECommerceProject.Application.DTOs.Category;
+
+namespace ECommerceProject.Application.Services.Interfaces
 {
     public interface ICategoryService
     {
