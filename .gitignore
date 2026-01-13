@@ -361,3 +361,13 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+# Uploaded user files (IMPORTANT)
+wwwroot/uploads/
+wwwroot/images/
+
+# Prevent committing images
+*.jpg
+*.jpeg
+*.png
