@@ -1,4 +1,6 @@
-﻿namespace ECommerceProject.Application.DTOs.Product
+﻿using Microsoft.AspNetCore.Http;
+
+namespace ECommerceProject.Application.DTOs.Product
 {
     public class CreateProductDto
     {
@@ -7,7 +9,9 @@
         public int StockQuantity { get; set; }
         public bool IsActive { get; set; }
         public string? Description { get; set; }
-        public string? ImageUrl { get; set; }
+
+        
+        public IFormFile? Image { get; set; }
 
 
         public string? CreatedBy { get; set; }

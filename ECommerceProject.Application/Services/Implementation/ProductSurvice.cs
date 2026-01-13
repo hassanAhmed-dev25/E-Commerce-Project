@@ -1,4 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.Product;
+using ECommerceProject.Application.Helper;
 namespace ECommerceProject.Application.Services.Implementation
 {
     public class ProductSurvice : IProductSurvice
@@ -25,6 +26,10 @@ namespace ECommerceProject.Application.Services.Implementation
                 }
 
 
+                // Upload Image to server
+                var imgUrl = Upload.UploadFile("Files", productDto.Image);
+
+
 
                 // Mapp DTO to Entity (Later i will add Auto Mapper)
                 var newProduct = new Product
@@ -34,7 +39,7 @@ namespace ECommerceProject.Application.Services.Implementation
                     StockQuantity = productDto.StockQuantity,
                     IsActive = productDto.IsActive,
                     Description = productDto.Description,
-                    ImageUrl = productDto.ImageUrl,
+                    ImageUrl = imgUrl,
                     CreatedBy = productDto.CreatedBy,
                     CategoryId = productDto.CategoryId,
                 };
@@ -74,6 +79,15 @@ namespace ECommerceProject.Application.Services.Implementation
                 }
 
 
+                // Remove Old Image from server
+                if (productDto.Image != null)
+                {
+                    Upload.RemoveFile("Files", existingProduct.ImageUrl);
+                }
+
+                // Upload Updated Image to server
+                var imgUrl = Upload.UploadFile("Files", productDto.Image);
+
 
 
                 // Update Entity
@@ -82,7 +96,7 @@ namespace ECommerceProject.Application.Services.Implementation
                 existingProduct.StockQuantity = productDto.StockQuantity;
                 existingProduct.IsActive = productDto.IsActive;
                 existingProduct.Description = productDto.Description;
-                existingProduct.ImageUrl = productDto.ImageUrl;
+                existingProduct.ImageUrl = imgUrl;
 
 
 

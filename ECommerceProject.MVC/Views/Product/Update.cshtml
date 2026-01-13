@@ -12,8 +12,8 @@
             </div>
         </div>
     </div>
-    <div class="card-body border p-4" enctype="multipart/form-data">
-        <form method="post" class="row" asp-controller="Product" asp-action="Update">
+    <div class="card-body border p-4">
+        <form method="post" class="row" asp-controller="Product" asp-action="Update" enctype="multipart/form-data">
             <div class="p-3">
 
 
@@ -76,9 +76,9 @@
 
                 <!-- ImageUrl -->
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="ImageUrl" type="file" class="form-control border shadow" />
-                    <label asp-for="ImageUrl" class="ms-2"></label>
-                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    <input asp-for="Image" type="file" class="form-control border shadow" />
+                    <label asp-for="Image" class="ms-2"></label>
+                    <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
 
 

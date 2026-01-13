@@ -67,6 +67,8 @@ namespace ECommerceProject.MVC.Controllers
             // if false return the view with the model to show validation errors
             if (!ModelState.IsValid)
             {
+                await LoadCategories();
+
                 return View(productDto);
             }
 
@@ -75,6 +77,7 @@ namespace ECommerceProject.MVC.Controllers
             if (!res.isSuccess)
             {
                 TempData["error"] = "Product is not Created";
+
                 return View("Error");
             }
 
@@ -137,6 +140,8 @@ namespace ECommerceProject.MVC.Controllers
             // if false return the view with the model to show validation errors
             if (!ModelState.IsValid)
             {
+                await LoadCategories();
+
                 return View(productDto);
             }
 

@@ -1,4 +1,6 @@
-﻿namespace ECommerceProject.Application.DTOs.Product
+﻿using Microsoft.AspNetCore.Http;
+
+namespace ECommerceProject.Application.DTOs.Product
 {
     public class GetProductDto
     {

@@ -1,4 +1,6 @@
-﻿namespace ECommerceProject.Application.DTOs.Product
+﻿using Microsoft.AspNetCore.Http;
+
+namespace ECommerceProject.Application.DTOs.Product
 {
     public class UpdateProductDto
     {
@@ -22,7 +24,7 @@
         [MaxLength(500)]
         public string? Description { get; set; }
 
-        public string? ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
 
 
         [Required(ErrorMessage = "The Category is required")]
