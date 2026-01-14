@@ -1,6 +1,7 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
 using ECommerceProject.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Tsp;
 
 
 namespace ECommerceProject.MVC.Controllers
@@ -47,7 +48,8 @@ namespace ECommerceProject.MVC.Controllers
         }
 
 
-        //ConfirmEmailNotice
+
+        //Confirm Email Notice
         [HttpGet]
         public IActionResult ConfirmEmailNotice()
         {
@@ -71,6 +73,19 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
+
+        // Login
+        [HttpGet]
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> LogIn()
+        //{
+
+        //}
 
 
 

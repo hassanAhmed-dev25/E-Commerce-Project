@@ -87,15 +87,6 @@ namespace ECommerceProject.Infrastructure.Identity
             }
         }
 
-        public async Task<bool> IsUserNameUniqueAsync(string userName)
-        {
-            return await _userManager.FindByNameAsync(userName) == null;
-        }
-
-        public async Task<bool> IsEmailUniqueAsync(string email)
-        {
-            return await _userManager.FindByEmailAsync(email) == null;
-        }
 
         public async Task<IdentityResult> VerifyEmailAsync(VerifyEmailDto verifyEmail)
         {
@@ -109,6 +100,19 @@ namespace ECommerceProject.Infrastructure.Identity
             return await _userManager.ConfirmEmailAsync(user, verifyEmail.Token);
         }
 
+
+
+
+
+        public async Task<bool> IsUserNameUniqueAsync(string userName)
+        {
+            return await _userManager.FindByNameAsync(userName) == null;
+        }
+
+        public async Task<bool> IsEmailUniqueAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email) == null;
+        }
 
     }
 }
