@@ -9,5 +9,6 @@ namespace ECommerceProject.Application.Services.Interfaces
         //Task<bool> LoginUserAsync(LoginUser user);
 
         Task<bool> IsUserNameUniqueAsync(string userName);
+        Task<bool> IsEmailUniqueAsync(string email);
     }
 }

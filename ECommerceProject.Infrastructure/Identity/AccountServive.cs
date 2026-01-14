@@ -39,7 +39,9 @@ namespace ECommerceProject.Infrastructure.Identity
             return await _userManager.FindByNameAsync(userName) == null;
         }
 
-
-
+        public async Task<bool> IsEmailUniqueAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email) == null;
+        }
     }
 }

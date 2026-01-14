@@ -5,9 +5,8 @@ namespace ECommerceProject.Application.Validation.Account
 {
     public class RegisterUserValidator : AbstractValidator<RegisterUser>
     {
-        private readonly IAccountServive _accountServive;
 
-        public RegisterUserValidator(IAccountServive accountServive)
+        public RegisterUserValidator(IAccountServive _accountServive)
         {
             
             RuleFor(r => r.FirstName)
@@ -24,8 +23,11 @@ namespace ECommerceProject.Application.Validation.Account
 
             RuleFor(r => r.Email)
                 .NotEmpty().WithMessage("Email is required")
-                .EmailAddress();
+                .EmailAddress()
+                .MustAsync(async (userName, _) =>
+                    await _accountServive.IsEmailUniqueAsync(userName)
 
+                ).WithMessage("Email already exists");
 
             RuleFor(r => r.UserName)
                 .NotEmpty().WithMessage("User name is required")
