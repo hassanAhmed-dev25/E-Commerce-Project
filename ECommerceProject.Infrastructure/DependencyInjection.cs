@@ -1,4 +1,5 @@
-﻿using ECommerceProject.Infrastructure.Repositories;
+﻿using ECommerceProject.Infrastructure.Identity;
+using ECommerceProject.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ECommerceProject.Infrastructure
@@ -11,6 +12,7 @@ namespace ECommerceProject.Infrastructure
             // Register infrastructure services here
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAccountServive, AccountServive>();
 
             return services;
         }

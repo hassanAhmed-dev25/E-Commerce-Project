@@ -11,6 +11,7 @@ namespace ECommerceProject.Application
             // Register application services here
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductSurvice, ProductSurvice>();
+            
 
             return services;
         }

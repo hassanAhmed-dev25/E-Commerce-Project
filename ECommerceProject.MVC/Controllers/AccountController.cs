@@ -1,16 +1,15 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
-using ECommerceProject.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
+using ECommerceProject.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceProject.MVC.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> userManager;
-        public AccountController(UserManager<ApplicationUser> userManager)
+        private readonly IAccountServive _accountServive;
+        public AccountController(IAccountServive accountServive)
         {
-            this.userManager = userManager;
+            _accountServive = accountServive;
         }
 
 
@@ -26,19 +25,13 @@ namespace ECommerceProject.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUser model)
         {
+
             if (!ModelState.IsValid)
-                return View(model);
-
-
-            var user = new ApplicationUser()
             {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                UserName = model.Email,
-            };
+                return View(model);
+            }
 
-            var result = await userManager.CreateAsync(user, model.Password);
+            var result = await _accountServive.RegisterUserAsync(model);
 
             if (result.Succeeded)
             {
@@ -52,7 +45,7 @@ namespace ECommerceProject.MVC.Controllers
                 }
             }
 
-            return View();
+            return View(model);
         }
 
 
