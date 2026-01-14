@@ -1,4 +1,5 @@
 ﻿using ECommerceProject.Application.Validation.Account;
+using ECommerceProject.Infrastructure.Common;
 using ECommerceProject.Infrastructure.Identity;
 using ECommerceProject.Infrastructure.Repositories;
 using FluentValidation;
@@ -19,6 +20,7 @@ namespace ECommerceProject.Infrastructure
 
             // Fluent Validation
             services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
+
 
 
 

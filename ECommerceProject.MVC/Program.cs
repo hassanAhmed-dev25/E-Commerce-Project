@@ -1,9 +1,10 @@
 using ECommerceProject.Application;
-using ECommerceProject.Application.Validation.Account;
+using ECommerceProject.Application.Services.Implementation;
+using ECommerceProject.Application.Services.Interfaces;
 using ECommerceProject.Infrastructure;
+using ECommerceProject.Infrastructure.Common;
 using ECommerceProject.Infrastructure.Data;
 using ECommerceProject.Infrastructure.Identity;
-using FluentValidation;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -61,7 +62,11 @@ namespace ECommerceProject.MVC
 
 
 
-            
+            // Email 
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddScoped<IEmailService, EmailService>();
+
+
 
 
             var app = builder.Build();
