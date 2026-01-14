@@ -1,15 +1,14 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
 using ECommerceProject.Application.Services.Interfaces;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace ECommerceProject.MVC.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IAccountServive _accountServive;
-        public AccountController(IAccountServive accountServive)
+        public AccountController(IAccountServive accountServive, IEmailService emailService)
         {
             _accountServive = accountServive;
         }
@@ -28,24 +27,13 @@ namespace ECommerceProject.MVC.Controllers
         public async Task<IActionResult> Register(RegisterUser model)
         {
 
-            // Apply Fluent Validation
-            //var validationResult = await validator.ValidateAsync(model);
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
 
-            //if (!validationResult.IsValid)
-            //{
-            //    foreach (var error in validationResult.Errors)
-            //        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
-
-            //    return View(model);
-            //}
-
-
-
-            var result = await _accountServive.RegisterUserAsync(model);
+            var result = await _accountServive.RegisterUserAsync(model, baseUrl);
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("ConfirmEmailNotice");
             }
             else
             {
@@ -56,6 +44,29 @@ namespace ECommerceProject.MVC.Controllers
             }
 
             return View(model);
+        }
+
+
+        //ConfirmEmailNotice
+        [HttpGet]
+        public IActionResult ConfirmEmailNotice()
+        {
+            return View();
+        }
+
+
+
+
+        // Confirm Email
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(VerifyEmailDto verifyEmail)
+        {
+            var result = await _accountServive.VerifyEmailAsync(verifyEmail);
+
+            if (result.Succeeded)
+                return View("ConfirmEmailSuccess");
+
+            return View("ConfirmEmailFailed");
         }
 
 

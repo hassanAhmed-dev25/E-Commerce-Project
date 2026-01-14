@@ -12,7 +12,7 @@ namespace ECommerceProject.Application
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductSurvice, ProductSurvice>();
             
-            
+           
 
             return services;
         }

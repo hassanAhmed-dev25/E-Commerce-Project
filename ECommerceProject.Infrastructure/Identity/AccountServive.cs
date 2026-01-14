@@ -1,18 +1,23 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
+using ECommerceProject.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using System.Net;
 
 namespace ECommerceProject.Infrastructure.Identity
 {
     public class AccountServive : IAccountServive
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public AccountServive(UserManager<ApplicationUser> userManager)
+        private readonly IEmailService _emailService;
+
+        public AccountServive(UserManager<ApplicationUser> userManager, IEmailService emailService)
         {
             _userManager = userManager;
+            _emailService = emailService;
         }
 
         
-        public async Task<IdentityResult> RegisterUserAsync(RegisterUser user)
+        public async Task<IdentityResult> RegisterUserAsync(RegisterUser user, string baseUrl)
         {
             try
             {
@@ -41,8 +46,40 @@ namespace ECommerceProject.Infrastructure.Identity
                 };
 
                 var result = await _userManager.CreateAsync(userRes, user.Password);
+                if (!result.Succeeded)
+                    return result;
+
+
+                // Genereate token for email verify
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(userRes);
+
+                
+                // encode Token
+                var encodedToken = WebUtility.UrlEncode(token);
+                // Create link for email verify
+                var link = $"{baseUrl}/Account/ConfirmEmail?UserId={userRes.Id}&Token={encodedToken}";
+
+
+                // the message
+                var message = $@"
+                    <h2>Confirm your email</h2>
+                    <p>Please confirm your account by clicking the link below:</p>
+                    <a href='{link}'>Confirm Email</a>
+                ";
+
+                // Send Email
+                await _emailService.SendAsync(
+                    user.Email,
+                    "Confirm your email",
+                    message
+                );
+
+
+
 
                 return result;
+
+
             }
             catch
             {
@@ -59,5 +96,19 @@ namespace ECommerceProject.Infrastructure.Identity
         {
             return await _userManager.FindByEmailAsync(email) == null;
         }
+
+        public async Task<IdentityResult> VerifyEmailAsync(VerifyEmailDto verifyEmail)
+        {
+            if (string.IsNullOrEmpty(verifyEmail.UserId) || string.IsNullOrEmpty(verifyEmail.Token))
+                return IdentityResult.Failed();
+
+            var user = await _userManager.FindByIdAsync(verifyEmail.UserId);
+            if (user == null)
+                return IdentityResult.Failed();
+
+            return await _userManager.ConfirmEmailAsync(user, verifyEmail.Token);
+        }
+
+
     }
 }
