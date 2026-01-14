@@ -1,5 +1,5 @@
-﻿using ECommerceProject.Application.DTOs.Account;
-using ECommerceProject.Application.Services.Interfaces;
+﻿using ECommerceProject.Application.Common;
+using ECommerceProject.Application.DTOs.Account;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
 
@@ -9,11 +9,13 @@ namespace ECommerceProject.Infrastructure.Identity
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailService _emailService;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountServive(UserManager<ApplicationUser> userManager, IEmailService emailService)
+        public AccountServive(UserManager<ApplicationUser> userManager, IEmailService emailService, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _emailService = emailService;
+            _signInManager = signInManager;
         }
 
         
@@ -101,6 +103,36 @@ namespace ECommerceProject.Infrastructure.Identity
         }
 
 
+        public async Task<Response<bool>> LoginUserAsync(LogInUser user)
+        {
+            var userDetails = await _userManager.FindByEmailAsync(user.Email);
+
+            if (userDetails == null)
+            {
+                return new Response<bool>(false, "Invalid email or password", false);
+            }
+
+            if (!userDetails.EmailConfirmed)
+            {
+                return new Response<bool>(false, "Please confirm your email first", false);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(
+                userDetails.UserName,
+                user.Password,
+                true,
+                false
+            );
+
+            if(!result.Succeeded)
+            {
+                return new Response<bool>(false, "Invalid email or password", false);
+            }
+
+
+            return new Response<bool>(true, null, true);
+        }
+
 
 
 
@@ -114,5 +146,6 @@ namespace ECommerceProject.Infrastructure.Identity
             return await _userManager.FindByEmailAsync(email) == null;
         }
 
+        
     }
 }

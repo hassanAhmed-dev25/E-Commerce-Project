@@ -6,11 +6,12 @@ namespace ECommerceProject.Application.Services.Interfaces
     public interface IAccountServive
     {
         Task<IdentityResult> RegisterUserAsync(RegisterUser user, string baseUrl);
-        //Task<bool> LoginUserAsync(LoginUser user);
+        Task<IdentityResult> VerifyEmailAsync(VerifyEmailDto verifyEmail);
+        Task<Response<bool>> LoginUserAsync(LogInUser user);
 
         Task<bool> IsUserNameUniqueAsync(string userName);
         Task<bool> IsEmailUniqueAsync(string email);
 
-        Task<IdentityResult> VerifyEmailAsync(VerifyEmailDto verifyEmail);
+        
     }
 }

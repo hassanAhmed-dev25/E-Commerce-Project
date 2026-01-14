@@ -1,5 +1,7 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
 using ECommerceProject.Application.Services.Interfaces;
+using ECommerceProject.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Tsp;
 
@@ -9,7 +11,7 @@ namespace ECommerceProject.MVC.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountServive _accountServive;
-        public AccountController(IAccountServive accountServive, IEmailService emailService)
+        public AccountController(IAccountServive accountServive)
         {
             _accountServive = accountServive;
         }
@@ -81,11 +83,23 @@ namespace ECommerceProject.MVC.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> LogIn()
-        //{
+        [HttpPost]
+        public async Task<IActionResult> LogIn(LogInUser user)
+        {
 
-        //}
+            var loginResponse = await _accountServive.LoginUserAsync(user);
+
+            if (loginResponse.isSuccess)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("Password", $"{loginResponse.errorMessege}");
+                return View(user);
+            }
+
+        }
 
 
 

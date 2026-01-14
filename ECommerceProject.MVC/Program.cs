@@ -32,25 +32,11 @@ namespace ECommerceProject.MVC
             builder.Services.AddApplicationServices();
 
 
-            // Identity Configuration
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-                            {
-                                options.LoginPath = new PathString("/Account/Login");
-                                options.AccessDeniedPath = new PathString("/Account/Login");
-                            });
-
-            builder.Services.AddIdentityCore<ApplicationUser>(options =>
-                    options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(
-                    TokenOptions.DefaultProvider);
-
-
-            // Password Configuration
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            // Identity Configuration -  with Password Configuration
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-                // Default Password Settings
+                options.SignIn.RequireConfirmedAccount = true;
+
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -58,7 +44,11 @@ namespace ECommerceProject.MVC
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 0;
             })
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+
+
 
 
 
