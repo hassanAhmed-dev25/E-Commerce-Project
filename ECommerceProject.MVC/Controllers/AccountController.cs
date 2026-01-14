@@ -7,8 +7,8 @@ namespace ECommerceProject.MVC.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        public AccountController(UserManager<IdentityUser> userManager)
+        private readonly UserManager<ApplicationUser> userManager;
+        public AccountController(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
         }
@@ -18,7 +18,7 @@ namespace ECommerceProject.MVC.Controllers
 
         // Register
         [HttpGet]
-        public async Task<IActionResult> Register(string userId)
+        public IActionResult Register()
         {
             return View();
         }
@@ -26,10 +26,16 @@ namespace ECommerceProject.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUser model)
         {
-            var user = new IdentityUser()
+            if (!ModelState.IsValid)
+                return View(model);
+
+
+            var user = new ApplicationUser()
             {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
                 UserName = model.Email,
-                Email = model.Email
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
@@ -46,7 +52,7 @@ namespace ECommerceProject.MVC.Controllers
                 }
             }
 
-            return View(model);
+            return View();
         }
 
 
