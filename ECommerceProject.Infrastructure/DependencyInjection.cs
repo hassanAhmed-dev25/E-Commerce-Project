@@ -1,5 +1,7 @@
-﻿using ECommerceProject.Infrastructure.Identity;
+﻿using ECommerceProject.Application.Validation.Account;
+using ECommerceProject.Infrastructure.Identity;
 using ECommerceProject.Infrastructure.Repositories;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ECommerceProject.Infrastructure
@@ -13,6 +15,12 @@ namespace ECommerceProject.Infrastructure
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAccountServive, AccountServive>();
+
+
+            // Fluent Validation
+            services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
+
+
 
             return services;
         }

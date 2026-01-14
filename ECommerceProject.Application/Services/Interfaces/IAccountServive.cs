@@ -7,5 +7,7 @@ namespace ECommerceProject.Application.Services.Interfaces
     {
         Task<IdentityResult> RegisterUserAsync(RegisterUser user);
         //Task<bool> LoginUserAsync(LoginUser user);
+
+        Task<bool> IsUserNameUniqueAsync(string userName);
     }
 }

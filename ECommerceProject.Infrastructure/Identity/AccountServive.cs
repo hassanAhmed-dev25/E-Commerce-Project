@@ -11,7 +11,7 @@ namespace ECommerceProject.Infrastructure.Identity
             _userManager = userManager;
         }
 
-
+        
         public async Task<IdentityResult> RegisterUserAsync(RegisterUser user)
         {
             try
@@ -32,6 +32,11 @@ namespace ECommerceProject.Infrastructure.Identity
             {
                 return IdentityResult.Failed();
             }
+        }
+
+        public async Task<bool> IsUserNameUniqueAsync(string userName)
+        {
+            return await _userManager.FindByNameAsync(userName) == null;
         }
 
 

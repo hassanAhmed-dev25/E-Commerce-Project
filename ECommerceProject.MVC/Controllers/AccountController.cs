@@ -1,5 +1,6 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
 using ECommerceProject.Application.Services.Interfaces;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceProject.MVC.Controllers
@@ -23,13 +24,21 @@ namespace ECommerceProject.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterUser model)
+        public async Task<IActionResult> Register(RegisterUser model, [FromServices] IValidator<RegisterUser> validator)
         {
 
-            if (!ModelState.IsValid)
+            // Apply Fluent Validation
+            var validationResult = await validator.ValidateAsync(model);
+
+            if (!validationResult.IsValid)
             {
+                foreach (var error in validationResult.Errors)
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+
                 return View(model);
             }
+
+
 
             var result = await _accountServive.RegisterUserAsync(model);
 
