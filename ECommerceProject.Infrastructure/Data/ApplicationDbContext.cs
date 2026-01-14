@@ -1,4 +1,5 @@
-﻿using ECommerceProject.Infrastructure.Identity;
+﻿using ECommerceProject.Infrastructure.Data.SeedData;
+using ECommerceProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
@@ -18,6 +19,9 @@ namespace ECommerceProject.Infrastructure.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
 
+
+            // Seeding Data
+            modelBuilder.SeedRoleData();
 
         }
 

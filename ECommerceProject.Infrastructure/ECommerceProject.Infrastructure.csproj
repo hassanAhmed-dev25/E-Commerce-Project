@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\SeedData\" />
     <Folder Include="Jobs\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
