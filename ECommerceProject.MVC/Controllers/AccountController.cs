@@ -2,6 +2,7 @@
 using ECommerceProject.Application.Services.Interfaces;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ECommerceProject.MVC.Controllers
 {
@@ -24,19 +25,19 @@ namespace ECommerceProject.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterUser model, [FromServices] IValidator<RegisterUser> validator)
+        public async Task<IActionResult> Register(RegisterUser model)
         {
 
             // Apply Fluent Validation
-            var validationResult = await validator.ValidateAsync(model);
+            //var validationResult = await validator.ValidateAsync(model);
 
-            if (!validationResult.IsValid)
-            {
-                foreach (var error in validationResult.Errors)
-                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            //if (!validationResult.IsValid)
+            //{
+            //    foreach (var error in validationResult.Errors)
+            //        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
 
-                return View(model);
-            }
+            //    return View(model);
+            //}
 
 
 
@@ -48,9 +49,9 @@ namespace ECommerceProject.MVC.Controllers
             }
             else
             {
-                foreach (var item in result.Errors)
+                foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError("Password", item.Description);
+                    ModelState.AddModelError(error.Code, error.Description);
                 }
             }
 

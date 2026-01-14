@@ -16,6 +16,22 @@ namespace ECommerceProject.Infrastructure.Identity
         {
             try
             {
+                // Is Email exists
+                if (await _userManager.FindByEmailAsync(user.Email) != null)
+                {
+                    return IdentityResult.Failed(
+                        new IdentityError { Code = "Email", Description = "Email already exists" });
+                }
+
+                // Is User Name exists
+                if (await _userManager.FindByNameAsync(user.UserName) != null)
+                {
+                    return IdentityResult.Failed(
+                        new IdentityError { Code = "userName", Description = "User name already exists" });
+                }
+
+
+
                 var userRes = new ApplicationUser()
                 {
                     FirstName = user.FirstName,
