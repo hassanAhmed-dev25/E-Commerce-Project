@@ -60,6 +60,19 @@
                 </div>
 
 
+                <!-- Selected Role -->
+                <div class="form-group">
+                    <label>Register As</label>
+                    <select asp-for="SelectedRole" class="form-control">
+                        <option value="">-- Select Role --</option>
+                        <option value="Buyer">Buyer</option>
+                        <option value="Seller">Seller</option>
+                    </select>
+                    <span asp-validation-for="SelectedRole" class="text-danger"></span>
+                </div>
+
+
+
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-success w-100">
@@ -72,6 +85,9 @@
                         </a>
                     </div>
                 </div>
+
+
+
             </div>
         </form>
     </div>
