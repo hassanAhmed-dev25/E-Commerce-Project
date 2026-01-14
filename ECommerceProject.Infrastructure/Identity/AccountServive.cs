@@ -1,6 +1,7 @@
 ﻿using ECommerceProject.Application.Common;
 using ECommerceProject.Application.DTOs.Account;
 using Microsoft.AspNetCore.Identity;
+using System.Data;
 using System.Net;
 
 namespace ECommerceProject.Infrastructure.Identity
@@ -52,6 +53,18 @@ namespace ECommerceProject.Infrastructure.Identity
                     return result;
 
 
+
+
+                // Add role
+                var IsHaveRole = await _userManager.IsInRoleAsync(userRes, "Admin");
+                if(!IsHaveRole)
+                {
+                    var resultRole = await _userManager.AddToRoleAsync(userRes, user.SelectedRole);
+                }
+
+                
+
+
                 // Genereate token for email verify
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(userRes);
 
@@ -75,6 +88,9 @@ namespace ECommerceProject.Infrastructure.Identity
                     "Confirm your email",
                     message
                 );
+
+
+
 
 
 
@@ -132,6 +148,8 @@ namespace ECommerceProject.Infrastructure.Identity
 
             return new Response<bool>(true, null, true);
         }
+
+
 
 
 

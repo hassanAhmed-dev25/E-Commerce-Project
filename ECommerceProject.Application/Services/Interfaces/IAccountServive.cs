@@ -9,6 +9,9 @@ namespace ECommerceProject.Application.Services.Interfaces
         Task<IdentityResult> VerifyEmailAsync(VerifyEmailDto verifyEmail);
         Task<Response<bool>> LoginUserAsync(LogInUser user);
 
+        //Task<bool> CreateRole(IdentityResult userResult);
+       
+
         Task<bool> IsUserNameUniqueAsync(string userName);
         Task<bool> IsEmailUniqueAsync(string email);
 
