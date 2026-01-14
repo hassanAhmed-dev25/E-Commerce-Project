@@ -4,6 +4,7 @@ using ECommerceProject.Application.Services.Interfaces;
 using ECommerceProject.Infrastructure;
 using ECommerceProject.Infrastructure.Common;
 using ECommerceProject.Infrastructure.Data;
+using ECommerceProject.Infrastructure.Data.SeedData;
 using ECommerceProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -58,7 +59,6 @@ namespace ECommerceProject.MVC
 
 
 
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -68,6 +68,17 @@ namespace ECommerceProject.MVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Seed Roles Data
+            using (var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider
+                    .GetRequiredService<RoleManager<IdentityRole>>();
+
+                RoleSeedData.SeedRoleDataAsync(roleManager).Wait();
+            }
+
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

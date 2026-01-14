@@ -21,7 +21,7 @@ namespace ECommerceProject.Infrastructure.Data
 
 
             // Seeding Data
-            modelBuilder.SeedRoleData();
+            
 
         }
 

@@ -4,29 +4,29 @@ namespace ECommerceProject.Infrastructure.Data.SeedData
 {
     public static class RoleSeedData
     {
-        public static void SeedRoleData(this ModelBuilder modelBuilder)
+        public static async Task SeedRoleDataAsync(RoleManager<IdentityRole> roleManager)
         {
-            modelBuilder.Entity<IdentityRole>().HasData(
+            string[] roles =
+            {
 
-                new IdentityRole
+                "Admin",
+                "Seller",
+                "Buyer"
+            };
+
+            foreach (var roleName in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(roleName))
                 {
-                    Id = "1",
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                },
-                new IdentityRole
-                {
-                    Id = "2",
-                    Name = "Seller",
-                    NormalizedName = "SELLER"
-                },
-                new IdentityRole
-                {
-                    Id = "3",
-                    Name = "Buyer",
-                    NormalizedName = "BUYER"
+                    var role = new IdentityRole
+                    {
+                        Name = roleName,
+                        NormalizedName = roleName.ToUpper()
+                    };
+
+                    await roleManager.CreateAsync(role);
                 }
-            );
+            }
         }
     }
 }
