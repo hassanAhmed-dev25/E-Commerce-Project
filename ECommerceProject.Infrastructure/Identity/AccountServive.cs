@@ -112,7 +112,7 @@ namespace ECommerceProject.Infrastructure.Identity
             var result = await _signInManager.PasswordSignInAsync(
                 userDetails.UserName,
                 user.Password,
-                true,
+                user.RememberMe,
                 false
             );
 
