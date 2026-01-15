@@ -1,7 +1,7 @@
 ﻿using ECommerceProject.Application.Validation.Account;
-using ECommerceProject.Infrastructure.Common;
 using ECommerceProject.Infrastructure.Identity;
 using ECommerceProject.Infrastructure.Repositories;
+using ECommerceProject.Infrastructure.Services;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +16,7 @@ namespace ECommerceProject.Infrastructure
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAccountServive, AccountServive>();
+            services.AddScoped<IEmailConfirmationService, EmailConfirmationService>();
 
 
             // Fluent Validation

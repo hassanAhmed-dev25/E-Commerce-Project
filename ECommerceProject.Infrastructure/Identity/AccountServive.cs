@@ -9,13 +9,13 @@ namespace ECommerceProject.Infrastructure.Identity
     public class AccountServive : IAccountServive
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailService _emailService;
+        private readonly IEmailConfirmationService _emailConfirmationService;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountServive(UserManager<ApplicationUser> userManager, IEmailService emailService, SignInManager<ApplicationUser> signInManager)
+        public AccountServive(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailConfirmationService emailConfirmationService)
         {
             _userManager = userManager;
-            _emailService = emailService;
+            _emailConfirmationService = emailConfirmationService;
             _signInManager = signInManager;
         }
 
@@ -62,37 +62,9 @@ namespace ECommerceProject.Infrastructure.Identity
                     var resultRole = await _userManager.AddToRoleAsync(userRes, user.SelectedRole);
                 }
 
-                
 
-
-                // Genereate token for email verify
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(userRes);
-
-                
-                // encode Token
-                var encodedToken = WebUtility.UrlEncode(token);
-                // Create link for email verify
-                var link = $"{baseUrl}/Account/ConfirmEmail?UserId={userRes.Id}&Token={encodedToken}";
-
-
-                // the message
-                var message = $@"
-                    <h2>Confirm your email</h2>
-                    <p>Please confirm your account by clicking the link below:</p>
-                    <a href='{link}'>Confirm Email</a>
-                ";
-
-                // Send Email
-                await _emailService.SendAsync(
-                    user.Email,
-                    "Confirm your email",
-                    message
-                );
-
-
-
-
-
+                // Send verification Link to emai
+                await _emailConfirmationService.SendConfirmationEmailAsync(userRes.Id, userRes.Email, baseUrl);
 
 
                 return result;
