@@ -203,6 +203,13 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
+        // Get Products By Category
+
+        public IActionResult GetByCategory(int catgId)
+        {
+            return RedirectToAction("Index", "Home", new { catgId });
+        }
+
 
 
 

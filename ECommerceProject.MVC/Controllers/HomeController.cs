@@ -21,10 +21,12 @@ namespace ECommerceProject.MVC.Controllers
 
 
         // Show all products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? catgId)
         {
 
-            var allProducts = await _productSurvice.GetAllProductsAsync();
+            var allProducts = catgId == null
+                ? await _productSurvice.GetAllProductsAsync()
+                : await _productSurvice.GetProductsByCategoryIdAsync((catgId.Value));
 
 
             var catgRes = await _categoryService.GetAllCategoriesAsync();
