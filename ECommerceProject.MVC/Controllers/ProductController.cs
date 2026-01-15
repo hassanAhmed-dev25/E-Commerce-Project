@@ -3,6 +3,7 @@ using ECommerceProject.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace ECommerceProject.MVC.Controllers
 {
@@ -190,8 +191,12 @@ namespace ECommerceProject.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var products = await _productSurvice.GetAllProductsAsync();
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var products = await _productSurvice.GetMyProductsAsync(userId);
 
             if (!products.isSuccess)
             {

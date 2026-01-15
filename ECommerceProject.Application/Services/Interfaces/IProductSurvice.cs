@@ -10,5 +10,6 @@ namespace ECommerceProject.Application.Services.Interfaces
 
         Task<Response<GetProductDto>> GetProductByIdAsync(int id);
         Task<Response<IEnumerable<GetProductDto>>> GetAllProductsAsync();
+        Task<Response<IEnumerable<GetProductDto>>> GetMyProductsAsync(string id);
     }
 }

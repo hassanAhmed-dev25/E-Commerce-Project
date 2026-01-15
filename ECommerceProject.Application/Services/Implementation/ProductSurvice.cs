@@ -235,6 +235,49 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        
+        public async Task<Response<IEnumerable<GetProductDto>>> GetMyProductsAsync(string id)
+        {
+            try
+            {
+                // Getting the Products
+                var products = await _unitOfWork.Products
+                                                                  .GetAllWithAsync(p => p.CreatedBy == id, p => p.Category);
+
+                // Check is null or not
+                if (products == null)
+                {
+                    return new Response<IEnumerable<GetProductDto>>(null, "Categories not found", false);
+                }
+
+
+                // Mapp Entity to DTO (Later i will add Auto Mapper)
+                var productsResult = new List<GetProductDto>();
+                foreach (var catg in products)
+                {
+                    productsResult.Add(new GetProductDto
+                    {
+                        Id = catg.Id,
+                        Name = catg.Name,
+                        Price = catg.Price,
+                        StockQuantity = catg.StockQuantity,
+                        IsActive = catg.IsActive,
+                        Description = catg.Description,
+                        ImageUrl = catg.ImageUrl,
+                        CreatedAt = catg.CreatedAt,
+
+                        CategoryName = catg.Category.Name
+                    });
+                }
+
+
+
+                return new Response<IEnumerable<GetProductDto>>(productsResult, null, true);
+
+            }
+            catch (Exception ex)
+            {
+                return new Response<IEnumerable<GetProductDto>>(null, ex.Message, false);
+            }
+        }
     }
 }
