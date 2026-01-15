@@ -1,9 +1,11 @@
 ﻿using ECommerceProject.Application.DTOs.Category;
 using ECommerceProject.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceProject.MVC.Controllers
 {
+    [Authorize(Roles ="Seller")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;

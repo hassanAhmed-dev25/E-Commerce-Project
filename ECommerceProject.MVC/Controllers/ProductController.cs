@@ -1,12 +1,12 @@
-﻿using ECommerceProject.Application.DTOs.Category;
-using ECommerceProject.Application.DTOs.Product;
-using ECommerceProject.Application.Services.Implementation;
+﻿using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ECommerceProject.MVC.Controllers
 {
+    [Authorize(Roles = "Seller")]
     public class ProductController : Controller
     {
         private readonly IProductSurvice _productSurvice;
