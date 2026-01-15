@@ -53,12 +53,33 @@
 
                     <!-- Right Links -->
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item ms-3">
-                            <a class="nav-link" asp-controller="Account" asp-action="Register">Sign Up</a>
-                        </li>
-                        <li class="nav-item ms-3">
-                            <a class="nav-link" asp-controller="Account" asp-action="LogIn">Login</a>
-                        </li>
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item ms-3">
+                                <a class="nav-link" asp-controller="Account" asp-action="Register">Sign Up</a>
+                            </li>
+                            <li class="nav-item ms-3">
+                                <a class="nav-link" asp-controller="Account" asp-action="LogIn">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-3">
+                                <span class="nav-link">
+                                    Hello, @User.Identity.Name
+                                </span>
+                            </li>
+
+                            <li class="nav-item ms-3">
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-danger">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        }
+
                     </ul>
 
                 </div>
