@@ -105,6 +105,19 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
+
+
+        // Logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOut()
+        {
+            await _accountServive.LogOutAsync();
+
+            return RedirectToAction("Login", "Account");
+        }
+
+
         public IActionResult Index()
         {
             return View();

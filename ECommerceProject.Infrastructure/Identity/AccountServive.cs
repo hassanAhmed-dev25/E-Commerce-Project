@@ -124,7 +124,10 @@ namespace ECommerceProject.Infrastructure.Identity
         }
 
 
-
+        public async Task LogOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
 
 
 
