@@ -105,6 +105,23 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
+        // Forget Password 
+        [HttpGet]
+        public IActionResult ForgetPassword()
+        {
+            return View();
+        }
+        //[HttpPost]
+        //public async Task<IActionResult> ForgetPassword(ForgetPasswordDto user)
+        //{
+        //    return View();
+        //}
+
+
+
+
+
+
 
 
         // Logout
