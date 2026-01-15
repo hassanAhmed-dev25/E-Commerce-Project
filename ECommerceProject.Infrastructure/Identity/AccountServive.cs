@@ -56,15 +56,17 @@ namespace ECommerceProject.Infrastructure.Identity
 
 
                 // Add role
-                var IsHaveRole = await _userManager.IsInRoleAsync(userRes, "Admin");
-                if(!IsHaveRole)
+                string[] allowedRoles = { "Seller", "Buyer" };
+
+                if (!allowedRoles.Contains(user.SelectedRole))
                 {
-                    var resultRole = await _userManager.AddToRoleAsync(userRes, user.SelectedRole);
+                    return IdentityResult.Failed(
+                        new IdentityError { Description = "Invalid role" }
+                    );
                 }
 
 
-                // Send verification Link to emai
-                await _emailConfirmationService.SendConfirmationEmailAsync(userRes.Id, userRes.Email, baseUrl);
+                var resultRole = await _userManager.AddToRoleAsync(userRes, user.SelectedRole);
 
 
                 return result;
