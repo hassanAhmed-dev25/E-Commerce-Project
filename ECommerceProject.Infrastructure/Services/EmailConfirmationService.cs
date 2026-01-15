@@ -44,5 +44,39 @@ namespace ECommerceProject.Infrastructure.Services
                 message
             );
         }
+
+        public async Task SendResetPasswordEmailAsync(string userId, string email, string baseUrl)
+        {
+
+            // Find the user
+            var user = await _userManager.FindByIdAsync(userId);
+
+            // Genereate token for reset password
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+
+            // encode Token
+            var encodedToken = WebUtility.UrlEncode(token);
+            // Create link for email verify
+            var link =
+                            $"{baseUrl}/Account/ResetPassword" +
+                            $"?email={Uri.EscapeDataString(user.Email)}" +
+                            $"&token={encodedToken}";
+
+
+            // the message
+            var message = $@"
+                    <h2>Reset Password</h2>
+                    <p>Please confirm your account by clicking the link below to reset your password:</p>
+                    <a href='{link}'>Confirm Email</a>
+                ";
+
+            // Send Email
+            await _emailService.SendAsync(
+                user.Email,
+                "Reset Password",
+                message
+            );
+        }
     }
 }

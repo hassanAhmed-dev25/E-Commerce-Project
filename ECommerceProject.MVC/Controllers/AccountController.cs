@@ -111,15 +111,53 @@ namespace ECommerceProject.MVC.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public async Task<IActionResult> ForgetPassword(ForgetPasswordDto user)
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordDto user)
+        {
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
+
+            var res = await _accountServive.SendResetPasswordLinkAsync(user, baseUrl);
+
+            if(!res.Succeeded)
+            {
+                ModelState.AddModelError("Email", $"Email is not exist");
+
+                return View(user);
+            }
+
+
+            return RedirectToAction("ResetPasswordNotice");
+        }
+
+
+        public IActionResult ResetPasswordNotice()
+        {
+            return View();
+        }
 
 
 
+        [HttpGet]
+        public IActionResult ResetPassword(string email, string token)
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto user)
+        {
+            if (!ModelState.IsValid)
+                return View(user);
+
+            var result = await _accountServive.ResetPasswordAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return View(user);
+            }
+
+            return View("Login");
+        }
 
 
 

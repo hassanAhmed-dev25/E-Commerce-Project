@@ -143,6 +143,39 @@ namespace ECommerceProject.Infrastructure.Identity
             return await _userManager.FindByEmailAsync(email) == null;
         }
 
-        
+
+
+
+        // send link to Reset password
+        public async Task<IdentityResult> SendResetPasswordLinkAsync(ForgetPasswordDto user, string baseUrl)
+        {
+            var curUser = await _userManager.FindByEmailAsync(user.Email);
+
+            if(curUser == null)
+                return IdentityResult.Failed();
+
+            await _emailConfirmationService.SendResetPasswordEmailAsync(curUser.Id,curUser.Email, baseUrl);
+
+            return IdentityResult.Success;
+        }
+        // Reset password
+        public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto user)
+        {
+            var oldUser = await _userManager.FindByEmailAsync(user.Email);
+
+            if (oldUser == null)
+                return IdentityResult.Failed();
+
+            var result = await _userManager.ResetPasswordAsync(
+                oldUser,
+                user.Token,
+                user.NewPassword
+            );
+
+            if (!result.Succeeded)
+                return IdentityResult.Failed();
+
+            return IdentityResult.Success;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace ECommerceProject.Application.Services.Interfaces
 {
@@ -9,6 +10,9 @@ namespace ECommerceProject.Application.Services.Interfaces
         Task<IdentityResult> VerifyEmailAsync(VerifyEmailDto verifyEmail);
         Task<Response<bool>> LoginUserAsync(LogInUser user);
         Task LogOutAsync();
+        Task<IdentityResult> SendResetPasswordLinkAsync(ForgetPasswordDto user, string baseUrl);
+        Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto user);
+
 
         //Task<bool> CreateRole(IdentityResult userResult);
 
