@@ -183,15 +183,17 @@ namespace ECommerceProject.MVC.Controllers
         // Delete
         public async Task<IActionResult> Delete(int prodId)
         {
-            // Call service to delete category
-            var res = await _productSurvice.DeleteProductyAsync(prodId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            // Check if the operation was successful
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var res = await _productSurvice.DeleteProductyAsync(prodId, userId);
+
+            // Check if this is the owner of this product
             if (!res.isSuccess)
-            {
-                TempData["error"] = "Product is not Deleted";
-                return View("Error");
-            }
+                return Forbid();
+
 
             TempData["success"] = "Product Deleted successfully";
 

@@ -1,5 +1,6 @@
 ﻿using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Helper;
+using ECommerceProject.Domain.Entities;
 namespace ECommerceProject.Application.Services.Implementation
 {
     public class ProductSurvice : IProductSurvice
@@ -117,23 +118,23 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        public async Task<Response<bool>> DeleteProductyAsync(int id)
+        public async Task<Response<bool>> DeleteProductyAsync(int productId, string userId)
         {
             try
             {
 
                 // Check is exist
                 var existingProduct = await _unitOfWork.Products
-                                                     .GetAsync(c => c.Id == id);
+                                                     .GetAsync(p => p.Id == productId && p.CreatedBy == userId);
 
                 if (existingProduct == null)
                 {
-                    return new Response<bool>(false, "Category not found", false);
+                    return new Response<bool>(false, "Access denied", false);
                 }
 
 
                 // Delete it
-                await _unitOfWork.Products.RemoveAsync(id);
+                await _unitOfWork.Products.RemoveAsync(productId);
 
 
                 // Saving database
@@ -142,7 +143,7 @@ namespace ECommerceProject.Application.Services.Implementation
 
 
                 // Return Response
-                return new Response<bool>(true, "Category deleted successfully", true);
+                return new Response<bool>(true, "Product deleted successfully", true);
 
             }
             catch (Exception ex)
@@ -317,5 +318,7 @@ namespace ECommerceProject.Application.Services.Implementation
                 return new Response<GetProductDto>(null, ex.Message, false);
             }
         }
+
+        
     }
 }
