@@ -106,14 +106,17 @@ namespace ECommerceProject.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int prodId)
         {
-            // Get category by id
-            var ResponceProductDto = await _productSurvice.GetProductByIdAsync(prodId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            // Check if the operation was successful
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var ResponceProductDto = await _productSurvice.GetProductForUpdateAsync(prodId, userId);
+
+
+            // Check if this is the owner of this product
             if (!ResponceProductDto.isSuccess)
-            {
-                return View("Error");
-            }
+                return Forbid();
 
 
             // Extract the product data

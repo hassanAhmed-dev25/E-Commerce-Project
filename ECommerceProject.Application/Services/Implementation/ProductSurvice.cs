@@ -203,12 +203,12 @@ namespace ECommerceProject.Application.Services.Implementation
             {
                 // Getting the product
                 var product = await _unitOfWork.Products
-                                                             .GetAsync(c => c.Id == id);
+                                                             .GetAsync(p => p.Id == id);
 
                 // Check is null or not
                 if (product == null)
                 {
-                    return new Response<GetProductDto>(null, "Category not found", false);
+                    return new Response<GetProductDto>(null, "Products not found", false);
                 }
 
                 // Mapp Entity to DTO (Later i will add Auto Mapper)
@@ -235,18 +235,18 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        public async Task<Response<IEnumerable<GetProductDto>>> GetMyProductsAsync(string id)
+        public async Task<Response<IEnumerable<GetProductDto>>> GetMyProductsAsync(string userId)
         {
             try
             {
                 // Getting the Products
                 var products = await _unitOfWork.Products
-                                                                  .GetAllWithAsync(p => p.CreatedBy == id, p => p.Category);
+                                                                  .GetAllWithAsync(p => p.CreatedBy == userId, p => p.Category);
 
                 // Check is null or not
                 if (products == null)
                 {
-                    return new Response<IEnumerable<GetProductDto>>(null, "Categories not found", false);
+                    return new Response<IEnumerable<GetProductDto>>(null, "Products not found", false);
                 }
 
 
@@ -277,6 +277,44 @@ namespace ECommerceProject.Application.Services.Implementation
             catch (Exception ex)
             {
                 return new Response<IEnumerable<GetProductDto>>(null, ex.Message, false);
+            }
+        }
+
+        public async Task<Response<GetProductDto>> GetProductForUpdateAsync(int productId, string userId)
+        {
+            try
+            {
+                // Getting the product
+                var product = await _unitOfWork.Products
+                                                             .GetAsync(p => p.Id == productId && p.CreatedBy == userId);
+
+                // Check is null or not
+                if (product == null)
+                {
+                    return new Response<GetProductDto>(null, "Access denied", false);
+                }
+
+                // Mapp Entity to DTO (Later i will add Auto Mapper)
+                var productResult = new GetProductDto
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    StockQuantity = product.StockQuantity,
+                    IsActive = product.IsActive,
+                    Description = product.Description,
+                    ImageUrl = product.ImageUrl,
+                    CreatedAt = product.CreatedAt,
+                    CategoryId = product.CategoryId,
+                };
+
+
+                return new Response<GetProductDto>(productResult, null, true);
+
+            }
+            catch (Exception ex)
+            {
+                return new Response<GetProductDto>(null, ex.Message, false);
             }
         }
     }
