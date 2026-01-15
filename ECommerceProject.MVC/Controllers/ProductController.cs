@@ -64,6 +64,15 @@ namespace ECommerceProject.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateProductDto productDto)
         {
+            // Add User that created this product
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            productDto.CreatedBy = userId;
+
+
+
             // Validate the model
             // if false return the view with the model to show validation errors
             if (!ModelState.IsValid)
@@ -72,6 +81,9 @@ namespace ECommerceProject.MVC.Controllers
 
                 return View(productDto);
             }
+
+            
+
 
             var res = await _productSurvice.CreateProductyAsync(productDto);
 
