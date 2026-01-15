@@ -64,9 +64,11 @@ namespace ECommerceProject.Infrastructure.Identity
                         new IdentityError { Description = "Invalid role" }
                     );
                 }
-
-
                 var resultRole = await _userManager.AddToRoleAsync(userRes, user.SelectedRole);
+
+
+                // Send Email
+                await _emailConfirmationService.SendConfirmationEmailAsync(userRes.Id, userRes.Email, baseUrl);
 
 
                 return result;

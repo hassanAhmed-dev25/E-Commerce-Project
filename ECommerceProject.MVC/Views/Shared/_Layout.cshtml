@@ -37,18 +37,48 @@
                             <a class="nav-link" href="#">Manage Orders</a>
                         </li>
 
-                        <li class="nav-item dropdown ms-2">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-toggle="dropdown">
-                                Seller Section
-                            </a>
-                            <ul class="dropdown-menu ms-2">
-                                <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">Categories</a></li>
-                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Index">Products</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else</a></li>
-                            </ul>
-                        </li>
+
+                        @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown ms-2">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown">
+                                    Admin Panel
+                                </a>
+                                <ul class="dropdown-menu ms-2">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Admin"
+                                           asp-action="Dashboard">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Admin"
+                                           asp-action="Users">
+                                            Manage Users
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else if (User.Identity.IsAuthenticated && User.IsInRole("Seller"))
+                        {
+                            <li class="nav-item dropdown ms-2">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown">
+                                    Seller Section
+                                </a>
+                                <ul class="dropdown-menu ms-2">
+                                    <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">Categories</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Product" asp-action="Index">Products</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Something else</a></li>
+                                </ul>
+                            </li>
+                        }
+                        
                     </ul>
 
                     <!-- Right Links -->
