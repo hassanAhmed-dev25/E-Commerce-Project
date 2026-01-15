@@ -1,12 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Net;
-using System.Net.Mail;
+﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.Extensions.Configuration;
+using MimeKit;
 
 namespace ECommerceProject.Application.Services.Implementation
 {
     public class EmailService : IEmailService
     {
         private readonly IConfiguration _configuration;
+
         public EmailService(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -14,25 +16,35 @@ namespace ECommerceProject.Application.Services.Implementation
 
         public async Task SendAsync(string to, string subject, string body)
         {
-            var from = _configuration["EmailSettings:From"];
-            var smtpServer = _configuration["EmailSettings:SmtpServer"];
-            var port = int.Parse(_configuration["EmailSettings:Port"]);
-            var userName = _configuration["EmailSettings:UserName"];
-            var password = _configuration["EmailSettings:Password"];
+            var email = new MimeMessage();
 
-            var message = new MailMessage(from, to, subject, body);
-            message.IsBodyHtml = true;
+            email.From.Add(
+                MailboxAddress.Parse(_configuration["EmailSettings:From"])
+            );
 
-            using var client = new SmtpClient(smtpServer, port)
+            email.To.Add(MailboxAddress.Parse(to));
+            email.Subject = subject;
+
+            email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-
-                Credentials = new NetworkCredential(userName, password),
-                EnableSsl = true,
-
+                Text = body
             };
 
-            await client.SendMailAsync(message);
+            using var smtp = new SmtpClient();
 
+            await smtp.ConnectAsync(
+                _configuration["EmailSettings:SmtpServer"],
+                int.Parse(_configuration["EmailSettings:Port"]),
+                SecureSocketOptions.StartTls
+            );
+
+            await smtp.AuthenticateAsync(
+                _configuration["EmailSettings:UserName"],
+                _configuration["EmailSettings:Password"]
+            );
+
+            await smtp.SendAsync(email);
+            await smtp.DisconnectAsync(true);
         }
     }
 }
