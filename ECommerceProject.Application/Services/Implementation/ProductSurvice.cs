@@ -28,7 +28,7 @@ namespace ECommerceProject.Application.Services.Implementation
 
 
                 // Upload Image to server
-                var imgUrl = Upload.UploadFile("Files", productDto.Image);
+                var imgUrl = productDto.Image == null ? null : Upload.UploadFile("Files", productDto.Image);
 
 
 
