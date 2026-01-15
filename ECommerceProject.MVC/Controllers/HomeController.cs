@@ -1,3 +1,4 @@
+using ECommerceProject.Application.Services.Implementation;
 using ECommerceProject.Application.Services.Interfaces;
 using ECommerceProject.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,32 +9,30 @@ namespace ECommerceProject.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductSurvice _productSurvice;
+        private readonly IProductSurvice _productService;
         private readonly ICategoryService _categoryService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IProductSurvice productSurvice, ICategoryService categoryService)
+        public HomeController(ILogger<HomeController> logger, IProductSurvice productService, ICategoryService categoryService)
         {
             _logger = logger;
-            _productSurvice = productSurvice;
+            _productService = productService;
             _categoryService = categoryService;
         }
 
 
         // Show all products
+        [HttpGet]
         public async Task<IActionResult> Index(int? catgId)
         {
+            var products = catgId == null
+                ? await _productService.GetAllProductsAsync()
+                : await _productService.GetProductsByCategoryIdAsync(catgId.Value);
 
-            var allProducts = catgId == null
-                ? await _productSurvice.GetAllProductsAsync()
-                : await _productSurvice.GetProductsByCategoryIdAsync((catgId.Value));
+            ViewBag.Categories = (await _categoryService.GetAllCategoriesAsync()).result;
+            ViewBag.SelectedCategory = catgId;
 
-
-            var catgRes = await _categoryService.GetAllCategoriesAsync();
-
-            ViewBag.Categories = catgRes.result;
-
-            return View(allProducts.result);
+            return View(products.result);
         }
 
 
