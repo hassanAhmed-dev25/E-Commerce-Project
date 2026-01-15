@@ -1,8 +1,76 @@
-﻿@{
+﻿@using ECommerceProject.Application.DTOs.Product
+@model IEnumerable<GetProductDto>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@using ECommerceProject.Application.DTOs.Category
+
+@{
+    var categories = ViewBag.Categories as List<GetCategoryDto> ?? new();
+}
+
+<div class="container mb-4">
+    <div class="d-flex align-items-center flex-wrap gap-2 category-bar">
+
+        @foreach (var cat in categories)
+        {
+            <a asp-controller="Products"
+               asp-action="ByCategory"
+               asp-route-categoryId="@cat.Id"
+               class="category-pill">
+                @cat.Name
+            </a>
+        }
+
+    </div>
+</div>
+
+
+
+
+
+<div class="container mt-4">
+    <div class="row g-4">
+
+        @foreach (var prod in Model)
+        {
+            var imageUrl = string.IsNullOrEmpty(prod.ImageUrl)
+            ? Url.Content("~/images/no-image.png")
+            : Url.Content($"~/Files/{prod.ImageUrl}");
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card product-card h-100 shadow-sm">
+
+                    <img src="@imageUrl"
+                         class="card-img-top product-img"
+                         alt="@prod.Name">
+
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title fw-bold text-truncate">
+                            @prod.Name
+                        </h6>
+
+                        <p class="card-text text-muted small flex-grow-1">
+                            @(prod.Description?.Length > 80
+                                                    ? prod.Description.Substring(0, 80) + "..."
+                                                    : prod.Description)
+                    </p>
+
+                        <div class="d-grid gap-2">
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                View
+                            </a>
+                            <a href="#" class="btn btn-primary btn-sm">
+                                Add to cart
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+                }
+
+    </div>
 </div>

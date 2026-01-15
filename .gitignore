@@ -366,8 +366,10 @@ FodyWeavers.xsd
 # Uploaded user files (IMPORTANT)
 wwwroot/Files/
 
+ECommerceProject.MVC/wwwroot/Files
 
 # Prevent committing images
 *.jpg
 *.jpeg
 *.png
+!no-image.png
