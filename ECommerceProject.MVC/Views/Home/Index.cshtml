@@ -76,9 +76,29 @@
                                 <input type="hidden" name="Quantity" value="1" />
                                 <input type="hidden" name="UnitPrice" value="@prod.Price" />
 
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    Add to cart
-                                </button>
+                            @if (item.IsInCart)
+                                {
+                                    <button class="btn btn-success btn-sm w-100" disabled>
+                                        Added to your cart
+                                    </button>
+                                }
+                                else
+                                {
+                                    <form asp-controller="CartItem"
+                                          asp-action="AddToCart"
+                                          method="post"
+                                          class="d-grid">
+
+                                        <input type="hidden" name="ProductId" value="@prod.Id" />
+                                        <input type="hidden" name="Quantity" value="1" />
+                                        <input type="hidden" name="UnitPrice" value="@prod.Price" />
+
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Add to cart
+                                        </button>
+                                    </form>
+                                }
+
                             </form>
                         </div>
                     </div>

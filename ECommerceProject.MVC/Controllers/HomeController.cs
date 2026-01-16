@@ -1,11 +1,14 @@
+using ECommerceProject.Application.DTOs.Cart;
 using ECommerceProject.Application.DTOs.CartItem;
 using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Services.Implementation;
 using ECommerceProject.Application.Services.Interfaces;
+using ECommerceProject.Domain.Entities;
 using ECommerceProject.MVC.Models;
 using ECommerceProject.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ECommerceProject.MVC.Controllers
@@ -14,13 +17,17 @@ namespace ECommerceProject.MVC.Controllers
     {
         private readonly IProductSurvice _productService;
         private readonly ICategoryService _categoryService;
+        private readonly ICartService _cartService;
+        private readonly ICartItemService _cartItemService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IProductSurvice productService, ICategoryService categoryService)
+        public HomeController(ILogger<HomeController> logger, IProductSurvice productService, ICategoryService categoryService, ICartItemService cartItemService, ICartService cartService)
         {
             _logger = logger;
             _productService = productService;
             _categoryService = categoryService;
+            _cartItemService = cartItemService;
+            _cartService = cartService;
         }
 
 
@@ -37,12 +44,24 @@ namespace ECommerceProject.MVC.Controllers
 
             var allProducts = products.result;
 
-            var vm = allProducts.Select(p => new ProductDetailsVM
+
+            // get its cart
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            CartDto cart = null;
+            if (!string.IsNullOrEmpty(userId))
+                cart = await _cartService.GetOrCreateCartAsync(userId);
+
+
+            var vm = new List<ProductDetailsVM>();
+            foreach(var product in products.result)
             {
-                Product = p,
-
-            }).ToList();
-
+                vm.Add(new ProductDetailsVM
+                {
+                    Product = product,
+                    IsInCart = cart != null && await _cartItemService.IsProductInCartAsync(cart.Id, product.Id),
+                });
+            }
 
             return View(vm);
         }

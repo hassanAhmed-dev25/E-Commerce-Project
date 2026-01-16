@@ -6,5 +6,6 @@ namespace ECommerceProject.Application.Services.Interfaces
     {
         Task<Response<bool>> AddToCartItemAsync(CreateCartItemDto item);
         Task<Response<bool>> DeleteFromCartItemAsync(int cartItemId);
+        Task<bool> IsProductInCartAsync(int cartId, int productId);
     }
 }
