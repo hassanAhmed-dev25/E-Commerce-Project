@@ -1,4 +1,4 @@
-﻿namespace ECommerceProject.Application.DTOs.Cart
+﻿namespace ECommerceProject.Application.DTOs.CartItem
 {
     public class CartItemDto
     {

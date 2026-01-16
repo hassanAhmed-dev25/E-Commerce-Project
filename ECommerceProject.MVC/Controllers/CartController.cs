@@ -1,4 +1,4 @@
-﻿using ECommerceProject.Application.DTOs.Cart;
+﻿using ECommerceProject.Application.DTOs.CartItem;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceProject.MVC.Controllers
