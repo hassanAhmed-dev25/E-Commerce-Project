@@ -22,6 +22,60 @@ namespace ECommerceProject.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ECommerceProject.Domain.Entities.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Carts", (string)null);
+                });
+
+            modelBuilder.Entity("ECommerceProject.Domain.Entities.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems", (string)null);
+                });
+
             modelBuilder.Entity("ECommerceProject.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -55,56 +109,56 @@ namespace ECommerceProject.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 1, 15, 10, 18, 5, 747, DateTimeKind.Utc).AddTicks(7965),
+                            CreatedAt = new DateTime(2026, 1, 16, 15, 2, 36, 781, DateTimeKind.Utc).AddTicks(2737),
                             IsActive = false,
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 1, 15, 10, 18, 5, 747, DateTimeKind.Utc).AddTicks(7967),
+                            CreatedAt = new DateTime(2026, 1, 16, 15, 2, 36, 781, DateTimeKind.Utc).AddTicks(2739),
                             IsActive = false,
                             Name = "Mobile Phones"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 1, 15, 10, 18, 5, 747, DateTimeKind.Utc).AddTicks(7968),
+                            CreatedAt = new DateTime(2026, 1, 16, 15, 2, 36, 781, DateTimeKind.Utc).AddTicks(2740),
                             IsActive = false,
                             Name = "Laptops"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 1, 15, 10, 18, 5, 747, DateTimeKind.Utc).AddTicks(7969),
+                            CreatedAt = new DateTime(2026, 1, 16, 15, 2, 36, 781, DateTimeKind.Utc).AddTicks(2741),
                             IsActive = false,
                             Name = "Clothing"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2026, 1, 15, 10, 18, 5, 747, DateTimeKind.Utc).AddTicks(7969),
+                            CreatedAt = new DateTime(2026, 1, 16, 15, 2, 36, 781, DateTimeKind.Utc).AddTicks(2741),
                             IsActive = false,
                             Name = "Shoes"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2026, 1, 15, 10, 18, 5, 747, DateTimeKind.Utc).AddTicks(7970),
+                            CreatedAt = new DateTime(2026, 1, 16, 15, 2, 36, 781, DateTimeKind.Utc).AddTicks(2742),
                             IsActive = false,
                             Name = "Home Appliances"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2026, 1, 15, 10, 18, 5, 747, DateTimeKind.Utc).AddTicks(7971),
+                            CreatedAt = new DateTime(2026, 1, 16, 15, 2, 36, 781, DateTimeKind.Utc).AddTicks(2743),
                             IsActive = false,
                             Name = "Books"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2026, 1, 15, 10, 18, 5, 747, DateTimeKind.Utc).AddTicks(7971),
+                            CreatedAt = new DateTime(2026, 1, 16, 15, 2, 36, 781, DateTimeKind.Utc).AddTicks(2787),
                             IsActive = false,
                             Name = "Gaming"
                         });
@@ -586,6 +640,25 @@ namespace ECommerceProject.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ECommerceProject.Domain.Entities.CartItem", b =>
+                {
+                    b.HasOne("ECommerceProject.Domain.Entities.Cart", "Cart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceProject.Domain.Entities.Product", "Product")
+                        .WithMany("CartItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("ECommerceProject.Domain.Entities.Product", b =>
                 {
                     b.HasOne("ECommerceProject.Domain.Entities.Category", "Category")
@@ -648,9 +721,19 @@ namespace ECommerceProject.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ECommerceProject.Domain.Entities.Cart", b =>
+                {
+                    b.Navigation("CartItems");
+                });
+
             modelBuilder.Entity("ECommerceProject.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ECommerceProject.Domain.Entities.Product", b =>
+                {
+                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }
