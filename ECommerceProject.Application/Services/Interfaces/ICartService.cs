@@ -4,7 +4,7 @@ namespace ECommerceProject.Application.Services.Interfaces
 {
     public interface ICartService
     {
-        Task<CartDto> GetOrCreateCart(string userId);
+        Task<CartDto> GetOrCreateCartAsync(string userId);
     }
 
 }

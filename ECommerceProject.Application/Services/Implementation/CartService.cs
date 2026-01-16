@@ -11,9 +11,46 @@ namespace ECommerceProject.Application.Services.Implementation
         }
 
 
-        public Task<CartDto> GetOrCreateCart(string userId)
+        public async Task<CartDto> GetOrCreateCartAsync(string userId)
         {
-            throw new NotImplementedException();
+            
+            var res = await _unitOfWork.Carts.GetAsync(c => c.UserId == userId);
+
+
+            // return it if its already exists
+            if (res != null)
+            {
+                return new CartDto 
+                {
+                    Id = res.Id,
+                    UserId = userId,
+                    CreatedAt = res.CreatedAt 
+                };
+            }
+
+            var newCart = new Cart
+            {
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow
+            };
+
+
+            // Create it
+            await _unitOfWork.Carts.AddAsync(newCart);
+
+            // Save it
+            await _unitOfWork.SaveChangesAsync();
+
+
+            // return it
+            return new CartDto 
+            {
+                Id = newCart.Id,
+                UserId = userId,
+                CreatedAt = newCart.CreatedAt 
+            };
+
+
         }
     }
 }
