@@ -47,5 +47,14 @@ namespace ECommerceProject.Application.Services.Implementation
             // Return
             return new Response<bool>(true, null, true);
         }
+
+
+        public async Task<bool> IsProductInCartAsync(int cartId, int productId)
+        {
+            return await _unitOfWork.CartItems.AnyAsync(ci => ci.CartId == cartId && ci.ProductId == productId);
+        }
+
+
+
     }
 }
