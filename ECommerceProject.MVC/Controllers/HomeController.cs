@@ -1,7 +1,9 @@
+using ECommerceProject.Application.DTOs.CartItem;
 using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Services.Implementation;
 using ECommerceProject.Application.Services.Interfaces;
 using ECommerceProject.MVC.Models;
+using ECommerceProject.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -33,7 +35,16 @@ namespace ECommerceProject.MVC.Controllers
             ViewBag.Categories = (await _categoryService.GetAllCategoriesAsync()).result;
             ViewBag.SelectedCategory = catgId;
 
-            return View(products.result);
+            var allProducts = products.result;
+
+            var vm = allProducts.Select(p => new ProductDetailsVM
+            {
+                Product = p,
+
+            }).ToList();
+
+
+            return View(vm);
         }
 
 

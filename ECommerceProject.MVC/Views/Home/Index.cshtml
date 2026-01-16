@@ -1,11 +1,13 @@
-﻿@using ECommerceProject.Application.DTOs.Product
-@model IEnumerable<GetProductDto>
+﻿@using ECommerceProject.Application.DTOs.Category
+@using ECommerceProject.MVC.ViewModels
+
+@model IEnumerable<ProductDetailsVM>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@using ECommerceProject.Application.DTOs.Category
+
 
 @{
     var categories = ViewBag.Categories as List<GetCategoryDto> ?? new();
@@ -35,8 +37,10 @@
 <div class="container mt-4">
     <div class="row g-4">
 
-        @foreach (var prod in Model)
+        @foreach (var item in Model)
         {
+            var prod = item.Product;
+
             var imageUrl = string.IsNullOrEmpty(prod.ImageUrl)
             ? Url.Content("~/images/no-image.png")
             : Url.Content($"~/Files/{prod.ImageUrl}");
@@ -57,17 +61,33 @@
                             @(prod.Description?.Length > 80
                                                     ? prod.Description.Substring(0, 80) + "..."
                                                     : prod.Description)
-                    </p>
+                        </p>
 
                         <div class="d-grid gap-2">
                             <a asp-controller="Home" asp-action="ViewProduct" asp-route-prodId="@prod.Id" class="btn btn-outline-primary btn-sm">
                                 View
                             </a>
-                            <a href="#" class="btn btn-primary btn-sm">
-                                Add to cart
-                            </a>
+                            <form asp-controller="CartItem"
+                                  asp-action="AddToCart"
+                                  method="post"
+                                  class="d-grid">
+
+                                <input type="hidden" name="ProductId" value="@prod.Id" />
+                                <input type="hidden" name="Quantity" value="1" />
+                                <input type="hidden" name="UnitPrice" value="@prod.Price" />
+
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Add to cart
+                                </button>
+                            </form>
                         </div>
                     </div>
+
+                    
+
+
+                    
+
 
                 </div>
             </div>
