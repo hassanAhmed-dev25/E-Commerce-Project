@@ -125,3 +125,26 @@ body {
 .dropdown-menu {
     border-radius: 12px;
 }
+
+.product-details-img {
+    max-height: 420px;
+    object-fit: contain;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+}
+
+.product-details-img {
+    max-height: 420px;
+    object-fit: contain;
+}
+
+.quantity-selector input {
+    font-weight: 600;
+}
+
+.quantity-selector button {
+    width: 40px;
+}

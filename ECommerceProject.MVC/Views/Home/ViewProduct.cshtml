@@ -3,12 +3,13 @@
 
 @{
     ViewData["Title"] = Model.Name;
+
     var imageUrl = string.IsNullOrEmpty(Model.ImageUrl)
         ? Url.Content("~/images/no-image.png")
         : Url.Content($"~/Files/{Model.ImageUrl}");
+
+    var inStock = Model.StockQuantity > 0;
 }
-
-
 
 
 <div class="container mt-5 mb-5">
@@ -43,7 +44,7 @@
             </h3>
 
             <!-- Stock -->
-            @if (Model.StockQuantity > 0)
+            @if (inStock)
             {
                 <p class="text-success fw-semibold mt-2">
                     <i class="bi bi-check-circle"></i>
@@ -58,6 +59,7 @@
                 </p>
             }
 
+
             <!-- Description -->
             <p class="text-muted mt-4 lh-lg">
                 @(string.IsNullOrWhiteSpace(Model.Description)
@@ -65,11 +67,44 @@
                                 : Model.Description)
             </p>
 
+            <!-- Quantity Selector -->
+            <div class="mt-4">
+                <label class="form-label fw-semibold">
+                    Quantity
+                </label>
+
+                <div class="input-group quantity-selector" style="max-width: 150px;">
+                    <button class="btn btn-outline-secondary btnMinus"
+                            type="button"
+                            @(inStock ? "" : "disabled")>
+                        −
+                    </button>
+
+                    <input type="number"
+                           id="quantityInput"
+                           class="form-control text-center fw-semibold"
+                           value="1"
+                           min="1"
+                           max="@Model.StockQuantity"
+                           @(inStock ? "" : "disabled") />
+
+                    <button class="btn btn-outline-secondary btnPlus"
+                            type="button"
+                            @(inStock ? "" : "disabled")>
+                        +
+                    </button>
+                </div>
+
+                <small class="text-muted d-block mt-1">
+                    Max available: @Model.StockQuantity
+                </small>
+            </div>
+
             <!-- Actions -->
             <div class="d-flex gap-3 mt-4">
 
                 <button class="btn btn-primary px-4 py-2"
-                        @(Model.StockQuantity > 0 ? "" : "disabled")>
+                        @(inStock ? "" : "disabled")>
                     <i class="bi bi-cart-plus"></i>
                     Add to Cart
                 </button>
@@ -81,6 +116,7 @@
 
             </div>
 
+
             <!-- Meta Info -->
             <div class="border-top pt-4 mt-5 small text-muted">
                 <div class="d-flex justify-content-between">
@@ -89,7 +125,35 @@
                 </div>
             </div>
 
+
         </div>
     </div>
 
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            const $qty = $("#quantityInput");
+
+            $(".btnPlus").on("click", function () {
+                let current = parseInt($qty.val());
+                let max = parseInt($qty.attr("max"));
+
+                if (!isNaN(max) && current < max) {
+                    $qty.val(current + 1);
+                }
+            });
+
+            $(".btnMinus").on("click", function () {
+                let current = parseInt($qty.val());
+                if (current > 1) {
+                    $qty.val(current - 1);
+                }
+            });
+
+        });
+    </script>
+}
+
