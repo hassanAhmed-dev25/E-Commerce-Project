@@ -20,6 +20,7 @@
                asp-action="Index"
                asp-route-catgId="@cat.Id"
                class="category-pill">
+
                 @cat.Name
             </a>
         }
@@ -59,7 +60,7 @@
                     </p>
 
                         <div class="d-grid gap-2">
-                            <a href="#" class="btn btn-outline-primary btn-sm">
+                            <a asp-controller="Home" asp-action="ViewProduct" asp-route-prodId="@prod.Id" class="btn btn-outline-primary btn-sm">
                                 View
                             </a>
                             <a href="#" class="btn btn-primary btn-sm">
@@ -76,3 +77,28 @@
 </div>
 
 
+<script>
+    $("#btnSearch").click(function () {
+        var searchValue = $("#searchTerm").val();
+
+        $.ajax({
+            url: '@Url.Action("SearchUsers", "User")',
+            type: 'POST',
+            data: { searchTerm: searchValue },
+            success: function (data) {
+                var rows = '';
+                if (data.length === 0) {
+                    rows += '<tr><td colspan="3">No results found</td></tr>';
+                } else {
+                    $.each(data, function (i, user) {
+                        rows += '<tr><td>' + user.Id + '</td><td>' + user.Name + '</td><td>' + user.Email + '</td></tr>';
+                    });
+                }
+                $("#userTable tbody").html(rows);
+            },
+            error: function () {
+                alert("Error loading data!");
+            }
+        });
+    });
+</script>

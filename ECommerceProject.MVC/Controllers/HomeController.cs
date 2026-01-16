@@ -1,3 +1,4 @@
+using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Services.Implementation;
 using ECommerceProject.Application.Services.Interfaces;
 using ECommerceProject.MVC.Models;
@@ -35,6 +36,17 @@ namespace ECommerceProject.MVC.Controllers
             return View(products.result);
         }
 
+
+        // View Product
+        [HttpGet]
+        public async Task<IActionResult> ViewProduct(int prodId)
+        {
+            var productResult = await _productService.GetProductByIdAsync(prodId); 
+
+            var prod = productResult.result;
+
+            return View(prod);
+        }
 
 
 
