@@ -11,6 +11,8 @@
             
             Categories = new CategoryRepository(_context);
             Products = new ProductRepository(_context);
+            Carts = new CartRepository(_context);
+            CartItems = new CartItemRepository(_context);
 
         }
 
@@ -18,7 +20,8 @@
 
         public ICategoryRepository Categories { get;}
         public IProductRepository Products  { get;}
-
+        public ICartRepository Carts  { get;}
+        public ICartItemRepository CartItems { get;}
 
 
 
