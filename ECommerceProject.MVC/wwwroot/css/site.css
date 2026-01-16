@@ -148,3 +148,60 @@ body {
 .quantity-selector button {
     width: 40px;
 }
+
+.cart-link {
+    position: relative;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.25s ease-in-out;
+}
+
+    .cart-link:hover {
+        background-color: rgba(13, 110, 253, 0.15); /* Bootstrap primary soft */
+        color: #0d6efd !important;
+    }
+
+.cart-icon {
+    font-size: 1.2rem;
+    transition: transform 0.25s ease;
+}
+
+.cart-link:hover .cart-icon {
+    transform: scale(1.15);
+}
+
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    font-size: 0.7rem;
+}
+
+.cart-item {
+    border-radius: 12px;
+}
+
+.cart-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background: #f8f9fa;
+    padding: 6px;
+}
+
+.quantity-box {
+    min-width: 60px;
+}
+
+.cart-summary {
+    border-radius: 12px;
+    position: sticky;
+    top: 90px;
+}
+
+    .cart-summary button {
+        padding: 10px;
+        font-weight: 600;
+    }
