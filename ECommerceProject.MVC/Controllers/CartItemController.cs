@@ -38,7 +38,7 @@ namespace ECommerceProject.MVC.Controllers
             var cartItemResult = await _cartItemService.AddToCartItemAsync(cartItemDto);
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ShowAllProducts", "Product");
 
         }
 

@@ -1,15 +1,20 @@
-﻿@using ECommerceProject.Application.DTOs.Product
-@model GetProductDto
+﻿@using ECommerceProject.MVC.ViewModels
+@model ProductDetailsVM
 
 @{
-    ViewData["Title"] = Model.Name;
+    var prod = Model.Product;
+    var isInCart = Model.IsInCart;
 
-    var imageUrl = string.IsNullOrEmpty(Model.ImageUrl)
+
+    ViewData["Title"] = prod.Name;
+
+    var imageUrl = string.IsNullOrEmpty(prod.ImageUrl)
         ? Url.Content("~/images/no-image.png")
-        : Url.Content($"~/Files/{Model.ImageUrl}");
+        : Url.Content($"~/Files/{prod.ImageUrl}");
 
-    var inStock = Model.StockQuantity > 0;
+    var inStock = prod.StockQuantity > 0;
 }
+
 
 
 <div class="container mt-5 mb-5">
@@ -21,7 +26,7 @@
             <div class="border rounded-4 p-4 bg-light text-center shadow-sm">
                 <img src="@imageUrl"
                      class="img-fluid product-details-img"
-                     alt="@Model.Name">
+                     alt="@prod.Name">
             </div>
         </div>
 
@@ -30,17 +35,17 @@
 
             <!-- Category -->
             <span class="badge bg-dark-subtle text-dark mb-2">
-                @Model.CategoryName
+                @prod.CategoryName
             </span>
 
             <!-- Name -->
             <h2 class="fw-bold mt-2">
-                @Model.Name
+                @prod.Name
             </h2>
 
             <!-- Price -->
             <h3 class="text-success fw-semibold mt-3">
-                $ @Model.Price
+                $ @prod.Price
             </h3>
 
             <!-- Stock -->
@@ -48,7 +53,7 @@
             {
                 <p class="text-success fw-semibold mt-2">
                     <i class="bi bi-check-circle"></i>
-                    In Stock (@Model.StockQuantity available)
+                    In Stock (@prod.StockQuantity available)
                 </p>
             }
             else
@@ -62,10 +67,11 @@
 
             <!-- Description -->
             <p class="text-muted mt-4 lh-lg">
-                @(string.IsNullOrWhiteSpace(Model.Description)
+                @(string.IsNullOrWhiteSpace(prod.Description)
                                 ? "No description available for this product."
-                                : Model.Description)
+                                : prod.Description)
             </p>
+
 
             <!-- Quantity Selector -->
             <div class="mt-4">
@@ -85,7 +91,7 @@
                            class="form-control text-center fw-semibold"
                            value="1"
                            min="1"
-                           max="@Model.StockQuantity"
+                           max="@prod.StockQuantity"
                            @(inStock ? "" : "disabled") />
 
                     <button class="btn btn-outline-secondary btnPlus"
@@ -96,18 +102,38 @@
                 </div>
 
                 <small class="text-muted d-block mt-1">
-                    Max available: @Model.StockQuantity
+                    Max available: @prod.StockQuantity
                 </small>
             </div>
+
 
             <!-- Actions -->
             <div class="d-flex gap-3 mt-4">
 
-                <button class="btn btn-primary px-4 py-2"
-                        @(inStock ? "" : "disabled")>
-                    <i class="bi bi-cart-plus"></i>
-                    Add to Cart
-                </button>
+                @if (isInCart)
+                {
+                    <button class="btn btn-success btn-sm w-100" disabled>
+                        Added to your cart
+                    </button>
+                }
+                else
+                {
+                    <form asp-controller="CartItem"
+                          asp-action="AddToCart"
+                          method="post"
+                          class="d-grid">
+
+                        <input type="hidden" name="ProductId" value="@prod.Id" />
+                        <input type="hidden" id="quantityHidden" name="Quantity" value="" />
+                        <input type="hidden" name="UnitPrice" value="@prod.Price" />
+
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            Add to cart
+                        </button>
+                    </form>
+                }
+
+                
 
                 <button class="btn btn-outline-secondary px-4 py-2">
                     <i class="bi bi-heart"></i>
@@ -121,7 +147,7 @@
             <div class="border-top pt-4 mt-5 small text-muted">
                 <div class="d-flex justify-content-between">
                     <span>Created At</span>
-                    <span>@Model.CreatedAt.ToString("dd MMM yyyy")</span>
+                    <span>@prod.CreatedAt.ToString("dd MMM yyyy")</span>
                 </div>
             </div>
 
@@ -136,6 +162,12 @@
         $(document).ready(function () {
 
             const $qty = $("#quantityInput");
+            const $hiddenQty = $("#quantityHidden");
+
+            function syncQuantity() {
+                $hiddenQty.val($qty.val());
+            }
+
 
             $(".btnPlus").on("click", function () {
                 let current = parseInt($qty.val());
@@ -151,6 +183,18 @@
                 if (current > 1) {
                     $qty.val(current - 1);
                 }
+            });
+
+
+            
+            // If user write manually
+            $qty.on("change keyup", function () {
+                syncQuantity();
+            });
+
+            // sync before send
+            $("form").on("submit", function () {
+                syncQuantity();
             });
 
         });

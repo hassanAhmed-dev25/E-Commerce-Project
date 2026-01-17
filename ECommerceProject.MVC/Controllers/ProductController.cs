@@ -1,6 +1,7 @@
 ﻿using ECommerceProject.Application.DTOs.Cart;
 using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Services.Interfaces;
+using ECommerceProject.Domain.Entities;
 using ECommerceProject.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -283,7 +284,20 @@ namespace ECommerceProject.MVC.Controllers
 
             var prod = productResult.result;
 
-            return View(prod);
+            // get its cart
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            CartDto cart = null;
+            if (!string.IsNullOrEmpty(userId))
+                cart = await _cartService.GetOrCreateCartAsync(userId);
+
+            var vm = new ProductDetailsVM
+            {
+                Product = prod,
+                IsInCart = cart != null && await _cartItemService.IsProductInCartAsync(cart.Id, prodId)
+            };
+
+            return View(vm);
         }
 
 
