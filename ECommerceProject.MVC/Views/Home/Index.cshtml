@@ -1,7 +1,6 @@
 ﻿@using ECommerceProject.Application.DTOs.Category
-@using ECommerceProject.MVC.ViewModels
 
-@model IEnumerable<ProductDetailsVM>
+@model IEnumerable<GetCategoryDto>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -9,136 +8,78 @@
 
 
 
-@{
-    var categories = ViewBag.Categories as List<GetCategoryDto> ?? new();
-}
 
-<div class="container mb-4">
-    <div class="d-flex align-items-center flex-wrap gap-2 category-bar">
+<!-- Welcome -->
+<section class="hero text-center py-5 bg-light">
+    <h1 class="display-5 fw-bold">Welcome to Our Store</h1>
+    <p class="lead text-muted">Discover amazing products with great prices</p>
 
-        @foreach (var cat in categories)
+    <a asp-controller="Product" asp-action="ShowAllProducts"
+       class="btn btn-primary btn-lg mt-3">
+        Browse Products
+    </a>
+</section>
+
+
+
+
+<!-- Categories -->
+<section class="container my-5">
+    <h2 class="text-center mb-4">Shop by Category</h2>
+
+    <div class="row">
+        @foreach (var cat in Model)
         {
-            <a asp-controller="Home"
-               asp-action="Index"
-               asp-route-catgId="@cat.Id"
-               class="category-pill">
+            <div class="col-md-3 mb-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5>@cat.Name</h5>
 
-                @cat.Name
-            </a>
-        }
-
-    </div>
-</div>
-
-
-
-
-
-<div class="container mt-4">
-    <div class="row g-4">
-
-        @foreach (var item in Model)
-        {
-            var prod = item.Product;
-
-            var imageUrl = string.IsNullOrEmpty(prod.ImageUrl)
-            ? Url.Content("~/images/no-image.png")
-            : Url.Content($"~/Files/{prod.ImageUrl}");
-
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card product-card h-100 shadow-sm">
-
-                    <img src="@imageUrl"
-                         class="card-img-top product-img"
-                         alt="@prod.Name">
-
-                    <div class="card-body d-flex flex-column">
-                        <h6 class="card-title fw-bold text-truncate">
-                            @prod.Name
-                        </h6>
-
-                        <p class="card-text text-muted small flex-grow-1">
-                            @(prod.Description?.Length > 80
-                                                    ? prod.Description.Substring(0, 80) + "..."
-                                                    : prod.Description)
-                        </p>
-
-                        <div class="d-grid gap-2">
-                            <a asp-controller="Home" asp-action="ViewProduct" asp-route-prodId="@prod.Id" class="btn btn-outline-primary btn-sm">
-                                View
-                            </a>
-                            <form asp-controller="CartItem"
-                                  asp-action="AddToCart"
-                                  method="post"
-                                  class="d-grid">
-
-                                <input type="hidden" name="ProductId" value="@prod.Id" />
-                                <input type="hidden" name="Quantity" value="1" />
-                                <input type="hidden" name="UnitPrice" value="@prod.Price" />
-
-                            @if (item.IsInCart)
-                                {
-                                    <button class="btn btn-success btn-sm w-100" disabled>
-                                        Added to your cart
-                                    </button>
-                                }
-                                else
-                                {
-                                    <form asp-controller="CartItem"
-                                          asp-action="AddToCart"
-                                          method="post"
-                                          class="d-grid">
-
-                                        <input type="hidden" name="ProductId" value="@prod.Id" />
-                                        <input type="hidden" name="Quantity" value="1" />
-                                        <input type="hidden" name="UnitPrice" value="@prod.Price" />
-
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            Add to cart
-                                        </button>
-                                    </form>
-                                }
-
-                            </form>
-                        </div>
+                        <a asp-controller="Product"
+                           asp-action="Index"
+                           asp-route-catgId="@cat.Id"
+                           class="btn btn-outline-primary btn-sm mt-2">
+                            View Products
+                        </a>
                     </div>
-
-                    
-
-
-                    
-
-
                 </div>
             </div>
-                }
-
+        }
     </div>
-</div>
+</section>
 
 
-<script>
-    $("#btnSearch").click(function () {
-        var searchValue = $("#searchTerm").val();
 
-        $.ajax({
-            url: '@Url.Action("SearchUsers", "User")',
-            type: 'POST',
-            data: { searchTerm: searchValue },
-            success: function (data) {
-                var rows = '';
-                if (data.length === 0) {
-                    rows += '<tr><td colspan="3">No results found</td></tr>';
-                } else {
-                    $.each(data, function (i, user) {
-                        rows += '<tr><td>' + user.Id + '</td><td>' + user.Name + '</td><td>' + user.Email + '</td></tr>';
-                    });
-                }
-                $("#userTable tbody").html(rows);
-            },
-            error: function () {
-                alert("Error loading data!");
-            }
-        });
-    });
-</script>
+
+<!-- Info -->
+<section class="bg-dark text-white py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h4>Fast Delivery</h4>
+                <p>Get your order quickly</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Secure Payment</h4>
+                <p>100% safe checkout</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Best Prices</h4>
+                <p>Affordable and competitive</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Shop Now -->
+<section class="text-center my-5">
+    <h3>Ready to start shopping?</h3>
+
+    <a asp-controller="Product"
+       asp-action="ShowAllProducts"
+       class="btn btn-success btn-lg mt-3">
+        Shop Now
+    </a>
+</section>

@@ -1,0 +1,159 @@
+﻿@using ECommerceProject.Application.DTOs.Product
+@model GetProductDto
+
+@{
+    ViewData["Title"] = Model.Name;
+
+    var imageUrl = string.IsNullOrEmpty(Model.ImageUrl)
+        ? Url.Content("~/images/no-image.png")
+        : Url.Content($"~/Files/{Model.ImageUrl}");
+
+    var inStock = Model.StockQuantity > 0;
+}
+
+
+<div class="container mt-5 mb-5">
+
+    <div class="row g-5 align-items-start">
+
+        <!-- Image Section -->
+        <div class="col-lg-6">
+            <div class="border rounded-4 p-4 bg-light text-center shadow-sm">
+                <img src="@imageUrl"
+                     class="img-fluid product-details-img"
+                     alt="@Model.Name">
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-6">
+
+            <!-- Category -->
+            <span class="badge bg-dark-subtle text-dark mb-2">
+                @Model.CategoryName
+            </span>
+
+            <!-- Name -->
+            <h2 class="fw-bold mt-2">
+                @Model.Name
+            </h2>
+
+            <!-- Price -->
+            <h3 class="text-success fw-semibold mt-3">
+                $ @Model.Price
+            </h3>
+
+            <!-- Stock -->
+            @if (inStock)
+            {
+                <p class="text-success fw-semibold mt-2">
+                    <i class="bi bi-check-circle"></i>
+                    In Stock (@Model.StockQuantity available)
+                </p>
+            }
+            else
+            {
+                <p class="text-danger fw-semibold mt-2">
+                    <i class="bi bi-x-circle"></i>
+                    Out of Stock
+                </p>
+            }
+
+
+            <!-- Description -->
+            <p class="text-muted mt-4 lh-lg">
+                @(string.IsNullOrWhiteSpace(Model.Description)
+                                ? "No description available for this product."
+                                : Model.Description)
+            </p>
+
+            <!-- Quantity Selector -->
+            <div class="mt-4">
+                <label class="form-label fw-semibold">
+                    Quantity
+                </label>
+
+                <div class="input-group quantity-selector" style="max-width: 150px;">
+                    <button class="btn btn-outline-secondary btnMinus"
+                            type="button"
+                            @(inStock ? "" : "disabled")>
+                        −
+                    </button>
+
+                    <input type="number"
+                           id="quantityInput"
+                           class="form-control text-center fw-semibold"
+                           value="1"
+                           min="1"
+                           max="@Model.StockQuantity"
+                           @(inStock ? "" : "disabled") />
+
+                    <button class="btn btn-outline-secondary btnPlus"
+                            type="button"
+                            @(inStock ? "" : "disabled")>
+                        +
+                    </button>
+                </div>
+
+                <small class="text-muted d-block mt-1">
+                    Max available: @Model.StockQuantity
+                </small>
+            </div>
+
+            <!-- Actions -->
+            <div class="d-flex gap-3 mt-4">
+
+                <button class="btn btn-primary px-4 py-2"
+                        @(inStock ? "" : "disabled")>
+                    <i class="bi bi-cart-plus"></i>
+                    Add to Cart
+                </button>
+
+                <button class="btn btn-outline-secondary px-4 py-2">
+                    <i class="bi bi-heart"></i>
+                    Wishlist
+                </button>
+
+            </div>
+
+
+            <!-- Meta Info -->
+            <div class="border-top pt-4 mt-5 small text-muted">
+                <div class="d-flex justify-content-between">
+                    <span>Created At</span>
+                    <span>@Model.CreatedAt.ToString("dd MMM yyyy")</span>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            const $qty = $("#quantityInput");
+
+            $(".btnPlus").on("click", function () {
+                let current = parseInt($qty.val());
+                let max = parseInt($qty.attr("max"));
+
+                if (!isNaN(max) && current < max) {
+                    $qty.val(current + 1);
+                }
+            });
+
+            $(".btnMinus").on("click", function () {
+                let current = parseInt($qty.val());
+                if (current > 1) {
+                    $qty.val(current - 1);
+                }
+            });
+
+        });
+    </script>
+}
+

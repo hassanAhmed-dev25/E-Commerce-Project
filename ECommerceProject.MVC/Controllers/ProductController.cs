@@ -1,5 +1,7 @@
-﻿using ECommerceProject.Application.DTOs.Product;
+﻿using ECommerceProject.Application.DTOs.Cart;
+using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Services.Interfaces;
+using ECommerceProject.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,12 +12,18 @@ namespace ECommerceProject.MVC.Controllers
     [Authorize(Roles = "Seller")]
     public class ProductController : Controller
     {
-        private readonly IProductSurvice _productSurvice;
+        private readonly IProductSurvice _productService;
         private readonly ICategoryService _categoryService;
-        public ProductController(IProductSurvice productSurvice, ICategoryService categoryService)
+
+        private readonly ICartService _cartService;
+        private readonly ICartItemService _cartItemService;
+        public ProductController(IProductSurvice productService, ICategoryService categoryService, ICartService cartService, ICartItemService cartItemService)
         {
-            _productSurvice = productSurvice;
+            _productService = productService;
             _categoryService = categoryService;
+
+            _cartService = cartService;
+            _cartItemService = cartItemService;
         }
 
 
@@ -85,7 +93,7 @@ namespace ECommerceProject.MVC.Controllers
             
 
 
-            var res = await _productSurvice.CreateProductyAsync(productDto);
+            var res = await _productService.CreateProductyAsync(productDto);
 
             if (!res.isSuccess)
             {
@@ -111,7 +119,7 @@ namespace ECommerceProject.MVC.Controllers
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized();
 
-            var ResponceProductDto = await _productSurvice.GetProductForUpdateAsync(prodId, userId);
+            var ResponceProductDto = await _productService.GetProductForUpdateAsync(prodId, userId);
 
 
             // Check if this is the owner of this product
@@ -162,7 +170,7 @@ namespace ECommerceProject.MVC.Controllers
             }
 
             // Call service to update category
-            var res = await _productSurvice.UpdateProductAsync(productDto);
+            var res = await _productService.UpdateProductAsync(productDto);
 
             // Check if the operation was successful
             if (!res.isSuccess)
@@ -188,7 +196,7 @@ namespace ECommerceProject.MVC.Controllers
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized();
 
-            var res = await _productSurvice.DeleteProductyAsync(prodId, userId);
+            var res = await _productService.DeleteProductyAsync(prodId, userId);
 
             // Check if this is the owner of this product
             if (!res.isSuccess)
@@ -212,7 +220,7 @@ namespace ECommerceProject.MVC.Controllers
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized();
 
-            var products = await _productSurvice.GetMyProductsAsync(userId);
+            var products = await _productService.GetMyProductsAsync(userId);
 
             if (!products.isSuccess)
             {
@@ -225,5 +233,60 @@ namespace ECommerceProject.MVC.Controllers
             return View(res);
 
         }
+
+
+
+
+
+        // Show All Products
+        [AllowAnonymous]
+        public async Task<IActionResult> ShowAllProducts(int? catgId)
+        {
+            var products = catgId == null
+                ? await _productService.GetAllProductsAsync()
+                : await _productService.GetProductsByCategoryIdAsync(catgId.Value);
+
+            ViewBag.Categories = (await _categoryService.GetAllCategoriesAsync()).result;
+
+
+            var allProducts = products.result;
+
+
+            // get its cart
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            CartDto cart = null;
+            if (!string.IsNullOrEmpty(userId))
+                cart = await _cartService.GetOrCreateCartAsync(userId);
+
+
+            var vm = new List<ProductDetailsVM>();
+            foreach (var product in products.result)
+            {
+                vm.Add(new ProductDetailsVM
+                {
+                    Product = product,
+                    IsInCart = cart != null && await _cartItemService.IsProductInCartAsync(cart.Id, product.Id),
+                });
+            }
+
+            return View(vm);
+        }
+
+
+        // View Product
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ViewProduct(int prodId)
+        {
+            var productResult = await _productService.GetProductByIdAsync(prodId);
+
+            var prod = productResult.result;
+
+            return View(prod);
+        }
+
+
+
     }
 }

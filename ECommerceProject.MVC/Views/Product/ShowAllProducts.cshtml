@@ -1,0 +1,158 @@
+﻿@using ECommerceProject.Application.DTOs.Category
+@using ECommerceProject.MVC.ViewModels
+
+@model IEnumerable<ProductDetailsVM>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+@{
+    var categories = ViewBag.Categories as List<GetCategoryDto> ?? new();
+}
+
+
+<!-- Category Filter -->
+<div class="container mb-4">
+    <div class="d-flex align-items-center flex-wrap gap-2 category-bar">
+
+        <!-- All Button -->
+        <a asp-controller="Product"
+           asp-action="ShowAllProducts"
+           class="category-pill category-all">
+            All
+        </a>
+
+
+        <!-- All Categories -->
+        @foreach (var cat in categories)
+        {
+            <a asp-controller="Product"
+               asp-action="ShowAllProducts"
+               asp-route-catgId="@cat.Id"
+               class="category-pill">
+
+                @cat.Name
+            </a>
+        }
+
+    </div>
+</div>
+
+
+
+
+<!-- All Products -->
+<div class="container mt-4">
+    <div class="row g-4">
+
+        @foreach (var item in Model)
+        {
+            var prod = item.Product;
+
+            var imageUrl = string.IsNullOrEmpty(prod.ImageUrl)
+            ? Url.Content("~/images/no-image.png")
+            : Url.Content($"~/Files/{prod.ImageUrl}");
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card product-card h-100 shadow-sm">
+
+                    <img src="@imageUrl"
+                         class="card-img-top product-img"
+                         alt="@prod.Name">
+
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title fw-bold text-truncate">
+                            @prod.Name
+                        </h6>
+
+                        <p class="card-text text-muted small flex-grow-1">
+                            @(prod.Description?.Length > 80
+                                                    ? prod.Description.Substring(0, 80) + "..."
+                                                    : prod.Description)
+                    </p>
+
+                        <div class="d-grid gap-2">
+                            <a asp-controller="Product" asp-action="ViewProduct" asp-route-prodId="@prod.Id" class="btn btn-outline-primary btn-sm">
+                                View
+                            </a>
+                            <form asp-controller="CartItem"
+                                  asp-action="AddToCart"
+                                  method="post"
+                                  class="d-grid">
+
+                                <input type="hidden" name="ProductId" value="@prod.Id" />
+                                <input type="hidden" name="Quantity" value="1" />
+                                <input type="hidden" name="UnitPrice" value="@prod.Price" />
+
+                            @if (item.IsInCart)
+                                {
+                                    <button class="btn btn-success btn-sm w-100" disabled>
+                                        Added to your cart
+                                    </button>
+                                }
+                                else
+                                {
+                                    <form asp-controller="CartItem"
+                                          asp-action="AddToCart"
+                                          method="post"
+                                          class="d-grid">
+
+                                        <input type="hidden" name="ProductId" value="@prod.Id" />
+                                        <input type="hidden" name="Quantity" value="1" />
+                                        <input type="hidden" name="UnitPrice" value="@prod.Price" />
+
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Add to cart
+                                        </button>
+                                    </form>
+                                }
+
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+
+
+<script>
+    $("#btnSearch").click(function () {
+        var searchValue = $("#searchTerm").val();
+
+        $.ajax({
+            url: '@Url.Action("SearchUsers", "User")',
+            type: 'POST',
+            data: { searchTerm: searchValue },
+            success: function (data) {
+                var rows = '';
+                if (data.length === 0) {
+                    rows += '<tr><td colspan="3">No results found</td></tr>';
+                } else {
+                    $.each(data, function (i, user) {
+                        rows += '<tr><td>' + user.Id + '</td><td>' + user.Name + '</td><td>' + user.Email + '</td></tr>';
+                    });
+                }
+                $("#userTable tbody").html(rows);
+            },
+            error: function () {
+                alert("Error loading data!");
+            }
+        });
+    });
+</script>
