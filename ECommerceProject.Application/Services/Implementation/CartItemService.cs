@@ -1,4 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.CartItem;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceProject.Application.Services.Implementation
 {
@@ -48,12 +49,34 @@ namespace ECommerceProject.Application.Services.Implementation
             return new Response<bool>(true, null, true);
         }
 
-
         public async Task<bool> IsProductInCartAsync(int cartId, int productId)
         {
             return await _unitOfWork.CartItems.AnyAsync(ci => ci.CartId == cartId && ci.ProductId == productId);
         }
 
+
+        public async Task<Response<IEnumerable<CartItemDto>>> GetMyCartItemsAsync(int cartId)
+        {
+
+            var cartItems = await _unitOfWork.CartItems.GetAllAsync(ci => ci.CartId == cartId, 
+                                                                            q => q.Include(ci => ci.Product));
+
+
+
+            var res = cartItems.Select(ci => new CartItemDto
+            {
+                ProductName = ci.Product.Name,
+                ImageUrl = ci.Product.ImageUrl,
+                Quantity = ci.Quantity,
+                UnitPrice = ci.UnitPrice
+
+            }).ToList();
+
+
+
+            return new Response<IEnumerable<CartItemDto>>(res, null, true);
+
+        }
 
 
     }

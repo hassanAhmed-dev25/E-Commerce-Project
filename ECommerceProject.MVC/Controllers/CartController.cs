@@ -1,24 +1,42 @@
-﻿using ECommerceProject.Application.DTOs.CartItem;
+﻿using ECommerceProject.Application.DTOs.Cart;
+using ECommerceProject.Application.DTOs.CartItem;
+using ECommerceProject.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ECommerceProject.MVC.Controllers
 {
     public class CartController : Controller
     {
-        public IActionResult Index()
+        private readonly ICartService _cartService;
+        public readonly ICartItemService _cartItemService;
+        public CartController(ICartService cartService, ICartItemService cartItemService)
         {
+            _cartService = cartService;
+            _cartItemService = cartItemService;
+        }
 
-            var cartItemDto = new CartItemDto{ ProductName="s", Quantity=10, UnitPrice=20 };
-            var cartItemDto2 = new CartItemDto{ ProductName="s", Quantity=2, UnitPrice=2000 };
-            var cartItemDto3 = new CartItemDto{ ProductName="s", Quantity=34, UnitPrice=3424324 };
 
-            var cartItems = new List<CartItemDto>();
 
-            cartItems.Add(cartItemDto);
-            cartItems.Add(cartItemDto2);
-            cartItems.Add(cartItemDto3);
+        public async Task<IActionResult> Index()
+        {
+            // Get the user
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+
+            // Get its cart
+            var cart = await _cartService.GetOrCreateCartAsync(userId);
+
+
+            // Get its item
+            var cartItems = (await _cartItemService.GetMyCartItemsAsync(cart.Id)).result;
 
             return View(cartItems);
+
         }
     }
 }
