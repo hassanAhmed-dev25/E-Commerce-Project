@@ -68,6 +68,18 @@
                                  data-price="@item.UnitPrice">
                                 $@(item.UnitPrice* item.Quantity)
                             </div>
+
+                            <!-- Remove -->
+                            <form asp-controller="CartItem"
+                                  asp-action="RemoveFromCart"
+                                  asp-route-cartItemId="@item.Id">
+
+
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 }

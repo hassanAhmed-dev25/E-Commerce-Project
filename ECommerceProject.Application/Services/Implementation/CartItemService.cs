@@ -65,6 +65,7 @@ namespace ECommerceProject.Application.Services.Implementation
 
             var res = cartItems.Select(ci => new CartItemDto
             {
+                Id = ci.Id,
                 ProductName = ci.Product.Name,
                 ImageUrl = ci.Product.ImageUrl,
                 Quantity = ci.Quantity,

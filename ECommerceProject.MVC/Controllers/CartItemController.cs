@@ -43,6 +43,30 @@ namespace ECommerceProject.MVC.Controllers
         }
 
 
+        
+        public async Task<IActionResult> RemoveFromCart(int cartItemId)
+        {
+            // UserId
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            // Get or Create Cart
+            var cart = await _cartService.GetOrCreateCartAsync(userId);
+
+            var response = await _cartItemService.DeleteFromCartItemAsync(cartItemId);
+
+            if(!response.isSuccess)
+            {
+                return View("Error");
+            }
+
+            return RedirectToAction("Index", "Cart");
+
+        }
+
+
         public IActionResult Index()
         {
             return View();
