@@ -9,5 +9,7 @@ namespace ECommerceProject.Application.Services.Interfaces
         Task<bool> IsProductInCartAsync(int cartId, int productId);
         Task<Response<IEnumerable<CartItemDto>>> GetMyCartItemsAsync(int cartId);
 
+        Task Increase(int cartItemId);
+        Task Decrease(int cartItemId);
     }
 }

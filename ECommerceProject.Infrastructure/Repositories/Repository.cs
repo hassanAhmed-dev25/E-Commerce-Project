@@ -54,13 +54,18 @@ namespace ECommerceProject.Infrastructure.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<T?> GetAsync(System.Linq.Expressions.Expression<Func<T, bool>> filter)
+        public async Task<T?> GetAsync(System.Linq.Expressions.Expression<Func<T, bool>> filter, Func<IQueryable<T>, IQueryable<T>>? include = null)
         {
             IQueryable<T> query = _dbSet;
 
             if(filter != null)
             {
                 query = query.Where(filter);
+            }
+
+            if (include != null)
+            {
+                query = include(query);
             }
 
             return await query.FirstOrDefaultAsync();

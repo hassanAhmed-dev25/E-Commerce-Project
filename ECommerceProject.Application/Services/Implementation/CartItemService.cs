@@ -81,5 +81,45 @@ namespace ECommerceProject.Application.Services.Implementation
         }
 
 
+        public async Task Increase(int cartItemId)
+        {
+            var entity = await _unitOfWork.CartItems.GetAsync(ci => ci.Id == cartItemId,
+                                                                   q => q.Include(ci => ci.Product));
+            if(entity == null)
+                return;
+
+
+            var stock = entity.Product.StockQuantity;
+
+            // Increase
+            if (entity.Quantity < stock)
+            {
+                entity.Quantity++;
+
+                await _unitOfWork.CartItems.UpdateAsync(entity);
+
+                await _unitOfWork.SaveChangesAsync();
+            }
+            
+        }
+
+        public async Task Decrease(int cartItemId)
+        {
+            var entity = await _unitOfWork.CartItems.GetAsync(ci => ci.Id == cartItemId,
+                                                                   q => q.Include(ci => ci.Product));
+            if (entity == null)
+                return;
+
+
+            // Decrease
+            if (entity.Quantity > 1)
+            {
+                entity.Quantity--;
+
+                await _unitOfWork.CartItems.UpdateAsync(entity);
+
+                await _unitOfWork.SaveChangesAsync();
+            }
+        }
     }
 }

@@ -71,5 +71,22 @@ namespace ECommerceProject.MVC.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> EditQuantity(CartItemQuantityVM cartItemQuantityVM)
+        {
+
+            if (cartItemQuantityVM.Action == "increase")
+            {
+                await _cartItemService.Increase(cartItemQuantityVM.CartItemId);
+            }
+            else if (cartItemQuantityVM.Action == "decrease")
+            {
+                await _cartItemService.Decrease(cartItemQuantityVM.CartItemId);
+            }
+
+            return RedirectToAction("Index", "Cart");
+
+        }
+
     }
 }

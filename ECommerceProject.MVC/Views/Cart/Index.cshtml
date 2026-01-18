@@ -39,6 +39,7 @@
 
                             <input type="checkbox"
                                    class="form-check-input cart-checkbox"
+                                   value="@item.Id"
                                    data-price="@item.UnitPrice"
                                    checked />
 
@@ -53,16 +54,29 @@
                             </div>
 
                             <!-- Quantity -->
-                            <div class="quantity-box d-flex align-items-center gap-2">
+                            <form method="post" asp-controller="CartItem" asp-action="EditQuantity">
 
-                                <button class="btn btn-outline-secondary btn-sm qty-minus">-</button>
+                                <div class="quantity-box d-flex align-items-center gap-2">
 
-                                <span class="fw-semibold qty-value">
-                                    @item.Quantity
-                                </span>
+                                    <input type="hidden" name="CartItemId" value="@item.Id" />
 
-                                <button class="btn btn-outline-secondary btn-sm qty-plus">+</button>
-                            </div>
+                                    <button type="submit"
+                                            name="Action"
+                                            value="decrease"
+                                        class="btn btn-outline-secondary btn-sm qty-minus">-</button>
+
+                                    <span class="fw-semibold qty-value">
+                                        @item.Quantity
+                                    </span>
+
+                                    <button type="submit"
+                                            name="Action"
+                                            value="increase"
+                                            class="btn btn-outline-secondary btn-sm qty-plus">+</button>
+                                </div>
+
+                            </form>
+                            
 
                             <div class="fw-bold text-success item-total"
                                  data-price="@item.UnitPrice">
@@ -125,75 +139,42 @@
 
 
 @section Scripts {
-    <script>
 
+    <script>
+    $(document).ready(function () {
         function updateSummary() {
             let total = 0;
             let count = 0;
+            let selectedIds = [];
 
             $(".cart-checkbox:checked").each(function () {
                 const price = parseFloat($(this).data("price"));
                 const card = $(this).closest(".cart-item");
                 const qty = parseInt(card.find(".qty-value").text());
+                const id = $(this).val();
 
                 total += price * qty;
                 count += qty;
-            });
+                selectedIds.push(id);
+
+              });
+            
 
             $("#selectedTotal").text(total.toFixed(2));
             $("#selectedCount").text(count);
-        }
 
-        function updateItemTotal(card, qty) {
-            const price = parseFloat(card.find(".item-total").data("price"));
-            card.find(".item-total").text("$" + (price * qty).toFixed(2));
-        }
+            $("#selectedItems").val(selectedIds.join(","));
+         }
 
-        $(document).ready(function () {
-
-            // plus
-                    $(".qty-plus").on("click", function () {
-            const card = $(this).closest(".cart-item");
-            const qtySpan = card.find(".qty-value");
-
-            const maxQty = parseInt(card.data("max"));
-            let qty = parseInt(qtySpan.text());
-
-            if (qty < maxQty) {
-                qty++;
-                qtySpan.text(qty);
-
-                updateItemTotal(card, qty);
-                updateSummary();
-            }
-        });
-
-
-            // minus
-            $(".qty-minus").on("click", function () {
-                const card = $(this).closest(".cart-item");
-                const qtySpan = card.find(".qty-value");
-
-                let qty = parseInt(qtySpan.text());
-
-                if (qty > 1) {
-                    qty--;
-                    qtySpan.text(qty);
-
-                    updateItemTotal(card, qty);
-                    updateSummary();
-                }
-            });
-
-            // checkbox change
+            
             $(".cart-checkbox").on("change", function () {
-                updateSummary();
-            });
+                    updateSummary();
+                });
 
-            // initial load
+
             updateSummary();
         });
-
     </script>
+
 }
 
