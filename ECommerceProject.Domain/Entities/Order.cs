@@ -17,7 +17,7 @@ namespace ECommerceProject.Domain.Entities
 
         // Navigation Properties
         public ICollection<OrderItem>? OrderItems { get; set; }
-
+        public ShippingAddress ShippingAddress { get; set; }
 
     }
 }
