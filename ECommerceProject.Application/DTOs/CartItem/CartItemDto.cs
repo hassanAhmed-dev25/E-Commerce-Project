@@ -6,5 +6,6 @@
         public string ImageUrl { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
+        public int maxQuantity { get; set; }
     }
 }

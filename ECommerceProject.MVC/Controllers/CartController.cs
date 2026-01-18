@@ -1,6 +1,7 @@
 ﻿using ECommerceProject.Application.DTOs.Cart;
 using ECommerceProject.Application.DTOs.CartItem;
 using ECommerceProject.Application.Services.Interfaces;
+using ECommerceProject.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -35,7 +36,15 @@ namespace ECommerceProject.MVC.Controllers
             // Get its item
             var cartItems = (await _cartItemService.GetMyCartItemsAsync(cart.Id)).result;
 
-            return View(cartItems);
+            
+            var vm = cartItems.Select(ci => new CartItemVM
+            {
+                Items = ci,
+                MaxQuantity = ci.maxQuantity,
+            }).ToList();
+
+
+            return View(vm);
 
         }
     }

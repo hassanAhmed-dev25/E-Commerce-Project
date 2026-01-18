@@ -68,7 +68,8 @@ namespace ECommerceProject.Application.Services.Implementation
                 ProductName = ci.Product.Name,
                 ImageUrl = ci.Product.ImageUrl,
                 Quantity = ci.Quantity,
-                UnitPrice = ci.UnitPrice
+                UnitPrice = ci.UnitPrice,
+                maxQuantity = ci.Product.StockQuantity,
 
             }).ToList();
 
