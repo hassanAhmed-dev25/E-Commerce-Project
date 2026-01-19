@@ -72,7 +72,6 @@ namespace ECommerceProject.Application.Services.Implementation
             // Create OrderItems
             await _unitOfWork.OrderItems.AddRangeAsync(newOrderItems);
 
-
         }
         private async Task CreateShippingAddress(ShippingAddressDto shippingAddress, int newOrderId)
         {
@@ -87,39 +86,50 @@ namespace ECommerceProject.Application.Services.Implementation
             };
 
             await _unitOfWork.ShippingAddresses.AddAsync(entity);
+
         }
 
 
         public async Task PlaceOrderAsync(PlaceOrderDto order)
         {
 
+            try
+            {
 
-            // 1) Create Order
-            int newOrderId = await CreateOrder(order);
-
-
-
-            // 2) Create Order Items
-            await CreateOrderItems(order.CartItemsDto, newOrderId);
+                // 1) Create Order
+                int newOrderId = await CreateOrder(order);
 
 
 
-            // 3) Create ShippingAddress
-            await CreateShippingAddress(order.ShippingAddressDto, newOrderId);
+                // 2) Create Order Items
+                await CreateOrderItems(order.CartItemsDto, newOrderId);
 
+
+
+                // 3) Create ShippingAddress
+                await CreateShippingAddress(order.ShippingAddressDto, newOrderId);
+
+                // Save
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
         }
 
+
+        public Task<GetOrderDto> GetOrderAsync(int orderId)
+        {
+            
+        }
 
         public Task CancelOrderAsync(int orderId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<GetOrderDto> GetOrderAsync(int orderId)
-        {
-            throw new NotImplementedException();
-        }
 
         
     }
