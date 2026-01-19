@@ -8,5 +8,8 @@
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public int maxQuantity { get; set; }
+
+        public int ProductId { get; set; }
+        public int SellerId { get; set; }
     }
 }

@@ -10,7 +10,7 @@
         // Foreign Keys
         public int OrderId { get; set; }
         public int ProductId { get; set; }
-        public int SellerId { get; set; }
+        public string SellerId { get; set; }
 
 
         // Navigation Properties
