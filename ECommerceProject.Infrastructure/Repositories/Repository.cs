@@ -85,7 +85,6 @@ namespace ECommerceProject.Infrastructure.Repositories
                 _dbSet.Remove(curEntity);
             }
         }
-
         public async Task UpdateAsync(T entity)
         {
             _context.Update(entity);

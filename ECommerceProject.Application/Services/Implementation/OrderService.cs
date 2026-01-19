@@ -169,9 +169,34 @@ namespace ECommerceProject.Application.Services.Implementation
         }
 
 
-        public Task CancelOrderAsync(int orderId)
+        public async Task CancelOrderAsync(int orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var order = await _unitOfWork.Orders.GetAsync(o => o.Id == orderId);
+
+                if (order == null)
+                    throw new Exception("Order not found");
+
+                if (order.Status == OrderStatus.Cancelled)
+                    return;
+
+                if (order.Status == OrderStatus.Shipped)
+                    throw new Exception("Cannot cancel shipped order");
+
+                order.Status = OrderStatus.Cancelled;
+
+
+
+                await _unitOfWork.SaveChangesAsync();
+
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+
+
         }
 
 
