@@ -2,6 +2,7 @@
 using ECommerceProject.Application.DTOs.Order;
 using ECommerceProject.Domain.Entities;
 using ECommerceProject.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace ECommerceProject.Application.Services.Implementation
@@ -120,10 +121,53 @@ namespace ECommerceProject.Application.Services.Implementation
         }
 
 
-        public Task<GetOrderDto> GetOrderAsync(int orderId)
+        public async Task<GetOrderDto> GetOrderAsync(int orderId)
         {
+            try
+            {
+
+                var order = await _unitOfWork.Orders.GetAsync(o => o.Id == orderId, 
+                                                       q => q.Include(o => o.OrderItems)
+                                                                           .Include(o => o.ShippingAddress));
+
+
+                if(order == null)
+                    throw new Exception("Order not found");
+
+
+                return new GetOrderDto
+                {
+                    Id = order.Id,
+                    CreatedAt = order.CreatedAt,
+                    Status = order.Status,
+                    TotalAmount = order.TotalAmount,
+
+                    Items = order.OrderItems.Select(oi => new GetOrderItemDto
+                    {
+                        ProductId = oi.ProductId,
+                        Quantity = oi.Quantity,
+                        UnitPrice = oi.UnitPrice
+
+                    }).ToList(),
+
+                    ShippingAddress = new GetShippingAddressDto
+                    {
+                        City = order.ShippingAddress.City,
+                        Street = order.ShippingAddress.Street,
+                        Address = order.ShippingAddress.Address
+                    }
+
+                };
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             
+
         }
+
 
         public Task CancelOrderAsync(int orderId)
         {
