@@ -6,5 +6,6 @@ namespace ECommerceProject.MVC.ViewModels
     {
         public CartItemDto Items { get; set; }
         public int MaxQuantity { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

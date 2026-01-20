@@ -80,6 +80,29 @@ namespace ECommerceProject.Application.Services.Implementation
 
         }
 
+        public async Task<Response<IEnumerable<CartItemDto>>> GetCartItemsByIdAsync(IEnumerable<int> selectedCartItemIds)
+        {
+
+            var cartItems = await _unitOfWork.CartItems.GetAllAsync(ci => selectedCartItemIds.Contains(ci.Id),
+                                                                            q => q.Include(ci => ci.Product));
+
+
+            var res = cartItems.Select(ci => new CartItemDto
+            {
+                Id = ci.Id,
+                ProductName = ci.Product.Name,
+                ImageUrl = ci.Product.ImageUrl,
+                Quantity = ci.Quantity,
+                UnitPrice = ci.UnitPrice,
+                maxQuantity = ci.Product.StockQuantity,
+
+            }).ToList();
+
+
+
+            return new Response<IEnumerable<CartItemDto>>(res, null, true);
+        }
+
 
         public async Task Increase(int cartItemId)
         {
@@ -121,5 +144,7 @@ namespace ECommerceProject.Application.Services.Implementation
                 await _unitOfWork.SaveChangesAsync();
             }
         }
+
+        
     }
 }

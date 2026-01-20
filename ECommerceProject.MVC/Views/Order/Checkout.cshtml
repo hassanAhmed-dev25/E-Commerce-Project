@@ -1,0 +1,99 @@
+﻿@using ECommerceProject.MVC.ViewModels
+@model CheckoutVM
+
+<div class="container my-5">
+    <h2 class="mb-4 fw-bold">Checkout</h2>
+
+    <form asp-controller="Order" asp-action="PlaceOrder" method="post">
+        <div class="row g-4">
+
+            <!-- LEFT -->
+            <div class="col-lg-8">
+
+                <!-- Shipping Address -->
+                <div class="card mb-4">
+                    <div class="card-header fw-bold">
+                        Shipping Address
+                    </div>
+                    <div class="card-body row g-3">
+                        <div class="col-md-6">
+                            <input asp-for="ShippingAddress.City"
+                                   class="form-control"
+                                   placeholder="City" />
+                        </div>
+                        <div class="col-md-6">
+                            <input asp-for="ShippingAddress.Street"
+                                   class="form-control"
+                                   placeholder="Street" />
+                        </div>
+                        <div class="col-12">
+                            <input asp-for="ShippingAddress.Address"
+                                   class="form-control"
+                                   placeholder="Full Address" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment -->
+                @*     <div class="card">
+                    <div class="card-header fw-bold">
+                        Payment Method
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   checked />
+                            <label class="form-check-label">
+                                Cash on Delivery
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="radio"
+                               checked />
+                        <label class="form-check-label">
+                            Online Playment
+                        </label>
+                    </div>
+                </div>
+            </div> *@
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header fw-bold">
+                        Order Summary
+                    </div>
+                    <div class="card-body">
+
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>@item.ProductName x @item.Quantity</span>
+                                <span>@item.UnitPrice EGP</span>
+                            </div>
+                        }
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total</span>
+                            <span>@Model.TotalAmount EGP</span>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-dark w-100 mt-3">
+                            Place Order
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
