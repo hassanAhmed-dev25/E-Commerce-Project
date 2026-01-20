@@ -1,10 +1,19 @@
 ﻿@using ECommerceProject.MVC.ViewModels
 @model CheckoutVM
 
+
 <div class="container my-5">
     <h2 class="mb-4 fw-bold">Checkout</h2>
 
     <form asp-controller="Order" asp-action="PlaceOrder" method="post">
+
+
+        <!-- Return Selected Cart Items IDs -->
+        @foreach (var item in Model.CartItems)
+        {
+            <input type="hidden" name="SelectedCartItemIds" value="@item.Id" />
+        }
+
         <div class="row g-4">
 
             <!-- LEFT -->
@@ -25,6 +34,11 @@
                             <input asp-for="ShippingAddress.Street"
                                    class="form-control"
                                    placeholder="Street" />
+                        </div>
+                        <div class="col-md-6">
+                            <input asp-for="ShippingAddress.Apartment"
+                                   class="form-control"
+                                   placeholder="Apartment" />
                         </div>
                         <div class="col-12">
                             <input asp-for="ShippingAddress.Address"

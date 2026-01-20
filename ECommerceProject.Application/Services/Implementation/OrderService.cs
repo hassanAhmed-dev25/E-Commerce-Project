@@ -17,13 +17,13 @@ namespace ECommerceProject.Application.Services.Implementation
 
 
 
-        private async Task<int> CreateOrder(PlaceOrderDto order)
+        private async Task<int> CreateOrder(string userId, IEnumerable<CartItem> cartItems, IEnumerable<Product> products)
         {
             // Calculate Total Price
             decimal totalPrice = 0m;
-            foreach (var item in order.CartItemsDto)
+            foreach (var item in cartItems)
             {
-                var product = await _unitOfWork.Products.GetAsync(x => x.Id == item.ProductId);
+                var product = products.First(p => p.Id == item.ProductId);
                 totalPrice += product.Price * item.Quantity;
             }
 
@@ -32,25 +32,19 @@ namespace ECommerceProject.Application.Services.Implementation
                 TotalAmount = totalPrice,
                 Status = OrderStatus.Pending,
                 CreatedAt = DateTime.UtcNow,
-                UserId = order.UserId,
+                UserId = userId,
             };
 
             // Create Order
             await _unitOfWork.Orders.AddAsync(newOrder);
             await _unitOfWork.SaveChangesAsync();
 
-            // Get Order ID
 
+            // Get Order ID
             return newOrder.Id;
         }
-        private async Task CreateOrderItems(IEnumerable<CartItemDto> cartItems, int newOrderId)
+        private async Task CreateOrderItems(IEnumerable<CartItem> cartItems, int newOrderId, IEnumerable<Product> products)
         {
-            // Get IDs all products in cart
-            var productIds = cartItems.Select(ci => ci.ProductId).ToList();
-
-            // Get all products in cart
-            var products = await _unitOfWork.Products.GetAllAsync(p => productIds.Contains(p.Id));
-
 
 
             var newOrderItems = cartItems.Select( ci =>
@@ -96,14 +90,29 @@ namespace ECommerceProject.Application.Services.Implementation
 
             try
             {
+                // Get cart items
+                var cartItems = await _unitOfWork.CartItems.GetAllAsync(ci => order.CartItemIds.Contains(ci.Id));
+
+                if (!cartItems.Any())
+                    throw new Exception("No cart items selected");
+
+
+                // Get products
+                var productIds = cartItems.Select(ci => ci.ProductId).Distinct().ToList();
+
+                var products = await _unitOfWork.Products.GetAllAsync(p => productIds.Contains(p.Id));
+
+
+
+                // ----------------------------------------------------------------------------------------
 
                 // 1) Create Order
-                int newOrderId = await CreateOrder(order);
+                int newOrderId = await CreateOrder(order.UserId, cartItems, products);
 
 
 
                 // 2) Create Order Items
-                await CreateOrderItems(order.CartItemsDto, newOrderId);
+                await CreateOrderItems(cartItems, newOrderId, products);
 
 
 

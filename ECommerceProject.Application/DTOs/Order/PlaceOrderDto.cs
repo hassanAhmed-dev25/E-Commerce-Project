@@ -4,7 +4,7 @@ namespace ECommerceProject.Application.DTOs.Order
 {
     public class PlaceOrderDto
     {
-        public List<CartItemDto> CartItemsDto {  get; set; }
+        public List<int> CartItemIds { get; set; }
         public ShippingAddressDto ShippingAddressDto { get; set; }
 
         public string PaymentMethod { get; set; }

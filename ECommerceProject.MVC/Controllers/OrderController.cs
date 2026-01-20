@@ -1,7 +1,10 @@
-﻿using ECommerceProject.Application.Services.Interfaces;
+﻿using ECommerceProject.Application.DTOs.CartItem;
+using ECommerceProject.Application.DTOs.Order;
+using ECommerceProject.Application.Services.Interfaces;
 using ECommerceProject.MVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace ECommerceProject.MVC.Controllers
 {
@@ -35,6 +38,32 @@ namespace ECommerceProject.MVC.Controllers
 
             return View(vm);
         }
+
+
+        [Authorize]
+        public async Task<IActionResult> PlaceOrder(PlaceOrderVM vm) 
+        {
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+
+
+
+            var dto = new PlaceOrderDto
+            {
+                CartItemIds = vm.SelectedCartItemIds,
+                ShippingAddressDto = vm.ShippingAddress,
+                PaymentMethod = "online",
+                UserId = userId
+            };
+
+            await _orderService.PlaceOrderAsync(dto);
+
+            return View();
+        }
+
 
     }
 }

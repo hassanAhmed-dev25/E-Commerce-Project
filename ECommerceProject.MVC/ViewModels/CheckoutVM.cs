@@ -8,5 +8,7 @@ namespace ECommerceProject.MVC.ViewModels
         public IEnumerable<CartItemDto> CartItems { get; set; }
         public ShippingAddressDto ShippingAddress { get; set; }
         public decimal TotalAmount { get; set; }
+
+       // public IEnumerable<int> SelectedCartItemIds { get; set; }
     }
 }
