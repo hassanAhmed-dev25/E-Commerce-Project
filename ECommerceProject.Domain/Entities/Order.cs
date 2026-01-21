@@ -6,7 +6,8 @@ namespace ECommerceProject.Domain.Entities
     {
         public int Id { get; set; }   
         public decimal TotalAmount { get; set; }
-        public OrderStatus Status { get; set; }
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.Created;
+        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 

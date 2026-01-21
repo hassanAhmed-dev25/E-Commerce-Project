@@ -30,7 +30,8 @@ namespace ECommerceProject.Application.Services.Implementation
             var newOrder = new Order
             {
                 TotalAmount = totalPrice,
-                Status = OrderStatus.Pending,
+                OrderStatus = OrderStatus.Created,
+                PaymentStatus = PaymentStatus.Pending,
                 CreatedAt = DateTime.UtcNow,
                 UserId = userId,
             };
@@ -148,7 +149,7 @@ namespace ECommerceProject.Application.Services.Implementation
                 {
                     Id = order.Id,
                     CreatedAt = order.CreatedAt,
-                    Status = order.Status,
+                    Status = order.OrderStatus,
                     TotalAmount = order.TotalAmount,
 
                     Items = order.OrderItems.Select(oi => new GetOrderItemDto
@@ -187,13 +188,13 @@ namespace ECommerceProject.Application.Services.Implementation
                 if (order == null)
                     throw new Exception("Order not found");
 
-                if (order.Status == OrderStatus.Cancelled)
+                if (order.OrderStatus == OrderStatus.Cancelled)
                     return;
 
-                if (order.Status == OrderStatus.Shipped)
+                if (order.OrderStatus == OrderStatus.Shipped)
                     throw new Exception("Cannot cancel shipped order");
 
-                order.Status = OrderStatus.Cancelled;
+                order.OrderStatus = OrderStatus.Cancelled;
 
 
 

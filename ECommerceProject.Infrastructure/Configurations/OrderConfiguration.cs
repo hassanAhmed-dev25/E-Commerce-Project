@@ -17,7 +17,10 @@
                    .HasColumnType("decimal(18,2)")
                    .IsRequired();
 
-            builder.Property(o => o.Status)
+            builder.Property(o => o.OrderStatus)
+                   .IsRequired();
+
+            builder.Property(o => o.PaymentStatus)
                    .IsRequired();
 
             builder.Property(o => o.CreatedAt)

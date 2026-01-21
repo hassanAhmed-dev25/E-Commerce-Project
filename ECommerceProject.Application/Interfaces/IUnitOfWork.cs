@@ -1,6 +1,6 @@
 ﻿namespace ECommerceProject.Application.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
 
         ICategoryRepository Categories { get; }
@@ -12,6 +12,14 @@
         IOrderRepository Orders { get; }
         IOrderItemRepository OrderItems { get; }
         IShippingAddressRepository ShippingAddresses { get; }
+
+
+
+
+        // Transaction Methods
+        Task BeginTransactionAsync();
+        Task CommitAsync();
+        Task RollbackAsync();
 
 
         Task SaveChangesAsync();

@@ -1,9 +1,13 @@
-﻿namespace ECommerceProject.Infrastructure.Repositories
+﻿using Microsoft.EntityFrameworkCore.Storage;
+
+namespace ECommerceProject.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
 
         private readonly ApplicationDbContext _context;
+        private IDbContextTransaction? _transaction;
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -37,10 +41,42 @@
         public IShippingAddressRepository ShippingAddresses { get; }
 
 
-
+        
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }
+
+
+
+        public async Task BeginTransactionAsync()
+        {
+            _transaction = await _context.Database.BeginTransactionAsync();
+        }
+
+        public async Task CommitAsync()
+        {
+            if (_transaction == null)
+                throw new InvalidOperationException("Transaction has not been started.");
+
+            await _transaction.CommitAsync();
+        }
+
+        public async Task RollbackAsync()
+        {
+            if (_transaction == null)
+                return;
+
+            await _transaction.RollbackAsync();
+        }
+
+        public void Dispose()
+        {
+            _transaction?.Dispose();
+        }
+
+
+
+        
     }
 }
