@@ -18,6 +18,7 @@ namespace ECommerceProject.Infrastructure
             services.AddScoped<IAccountServive, AccountServive>();
             services.AddScoped<IEmailConfirmationService, EmailConfirmationService>();
 
+            services.AddScoped<IStripeService, StripeService>();
 
             // Fluent Validation
             services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();

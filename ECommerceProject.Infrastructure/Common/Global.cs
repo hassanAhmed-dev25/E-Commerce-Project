@@ -6,7 +6,7 @@ global using ECommerceProject.Infrastructure.Data;
 global using ECommerceProject.Application.Services.Interfaces;
 global using ECommerceProject.Infrastructure.Identity;
 global using Microsoft.AspNetCore.Identity;
-
+global using Microsoft.Extensions.Configuration;
 
 
 

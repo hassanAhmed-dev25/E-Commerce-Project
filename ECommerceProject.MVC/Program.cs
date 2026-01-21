@@ -59,6 +59,12 @@ namespace ECommerceProject.MVC
 
 
 
+            // Stripe
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+            
+
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
