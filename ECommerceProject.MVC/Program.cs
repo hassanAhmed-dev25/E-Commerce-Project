@@ -69,14 +69,25 @@ namespace ECommerceProject.MVC
                 app.UseHsts();
             }
 
-            // Seed Roles Data
+
+            // Seed Roles Data and Admin
             using (var scope = app.Services.CreateScope())
             {
+                var services = scope.ServiceProvider;
+
+
                 var roleManager = scope.ServiceProvider
                     .GetRequiredService<RoleManager<IdentityRole>>();
 
+                var userManager = scope.ServiceProvider
+                    .GetRequiredService<UserManager<ApplicationUser>>();
+
+
                 await RoleSeedData.SeedRoleDataAsync(roleManager);
+                await UserSeedData.SeedAdminUserAsync(userManager);
+                await ProductSeedData.SeedProductsAsync(services);
             }
+
 
 
 

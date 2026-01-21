@@ -22,7 +22,6 @@ namespace ECommerceProject.Infrastructure.Data
 
             // Seeding Data
             modelBuilder.SeedCategoryData();
-            modelBuilder.SeedProductData();
 
 
         }

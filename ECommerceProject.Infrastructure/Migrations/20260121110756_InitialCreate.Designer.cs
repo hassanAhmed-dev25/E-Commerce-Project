@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260120160349_EditSellerIdCoulumnFronIntToString")]
-    partial class EditSellerIdCoulumnFronIntToString
+    [Migration("20260121110756_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,56 +112,56 @@ namespace ECommerceProject.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 1, 20, 16, 3, 45, 940, DateTimeKind.Utc).AddTicks(2414),
+                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2499),
                             IsActive = false,
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 1, 20, 16, 3, 45, 940, DateTimeKind.Utc).AddTicks(2416),
+                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2502),
                             IsActive = false,
                             Name = "Mobile Phones"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 1, 20, 16, 3, 45, 940, DateTimeKind.Utc).AddTicks(2417),
+                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2503),
                             IsActive = false,
                             Name = "Laptops"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 1, 20, 16, 3, 45, 940, DateTimeKind.Utc).AddTicks(2418),
+                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2503),
                             IsActive = false,
                             Name = "Clothing"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2026, 1, 20, 16, 3, 45, 940, DateTimeKind.Utc).AddTicks(2419),
+                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2504),
                             IsActive = false,
                             Name = "Shoes"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2026, 1, 20, 16, 3, 45, 940, DateTimeKind.Utc).AddTicks(2420),
+                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2505),
                             IsActive = false,
                             Name = "Home Appliances"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2026, 1, 20, 16, 3, 45, 940, DateTimeKind.Utc).AddTicks(2421),
+                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2505),
                             IsActive = false,
                             Name = "Books"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2026, 1, 20, 16, 3, 45, 940, DateTimeKind.Utc).AddTicks(2421),
+                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2506),
                             IsActive = false,
                             Name = "Gaming"
                         });
@@ -178,7 +178,10 @@ namespace ECommerceProject.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
@@ -272,228 +275,6 @@ namespace ECommerceProject.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Apple iPhone 14 with A15 Bionic chip",
-                            IsActive = true,
-                            Name = "iPhone 14",
-                            Price = 30000m,
-                            StockQuantity = 15
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Samsung flagship smartphone with high performance",
-                            IsActive = true,
-                            Name = "Samsung Galaxy S23",
-                            Price = 28000m,
-                            StockQuantity = 20
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Affordable smartphone with great features",
-                            IsActive = true,
-                            Name = "Xiaomi Redmi Note 12",
-                            Price = 12000m,
-                            StockQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 3,
-                            CreatedAt = new DateTime(2024, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "High-end laptop for professionals",
-                            IsActive = true,
-                            Name = "Dell XPS 15",
-                            Price = 45000m,
-                            StockQuantity = 8
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 3,
-                            CreatedAt = new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Reliable laptop for everyday use",
-                            IsActive = true,
-                            Name = "HP Pavilion 15",
-                            Price = 32000m,
-                            StockQuantity = 10
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 3,
-                            CreatedAt = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Business-class laptop with premium build",
-                            IsActive = true,
-                            Name = "Lenovo ThinkPad X1",
-                            Price = 50000m,
-                            StockQuantity = 6
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 4,
-                            CreatedAt = new DateTime(2024, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Comfortable cotton t-shirt",
-                            IsActive = true,
-                            Name = "Cotton T-Shirt",
-                            Price = 500m,
-                            StockQuantity = 50
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 4,
-                            CreatedAt = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Stylish slim fit jeans",
-                            IsActive = true,
-                            Name = "Slim Fit Jeans",
-                            Price = 900m,
-                            StockQuantity = 40
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 4,
-                            CreatedAt = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Warm jacket for winter season",
-                            IsActive = true,
-                            Name = "Winter Jacket",
-                            Price = 1800m,
-                            StockQuantity = 25
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoryId = 5,
-                            CreatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Comfortable running shoes from Nike",
-                            IsActive = true,
-                            Name = "Nike Air Max",
-                            Price = 3500m,
-                            StockQuantity = 18
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CategoryId = 5,
-                            CreatedAt = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "High performance running shoes",
-                            IsActive = true,
-                            Name = "Adidas Ultraboost",
-                            Price = 4000m,
-                            StockQuantity = 12
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CategoryId = 5,
-                            CreatedAt = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Lightweight shoes for daily training",
-                            IsActive = true,
-                            Name = "Puma Running Shoes",
-                            Price = 2800m,
-                            StockQuantity = 20
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CategoryId = 6,
-                            CreatedAt = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Modern microwave oven with multiple modes",
-                            IsActive = true,
-                            Name = "Microwave Oven",
-                            Price = 6000m,
-                            StockQuantity = 10
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CategoryId = 6,
-                            CreatedAt = new DateTime(2024, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Large capacity refrigerator",
-                            IsActive = true,
-                            Name = "Refrigerator",
-                            Price = 15000m,
-                            StockQuantity = 5
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CategoryId = 6,
-                            CreatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Automatic washing machine",
-                            IsActive = true,
-                            Name = "Washing Machine",
-                            Price = 13000m,
-                            StockQuantity = 7
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CategoryId = 7,
-                            CreatedAt = new DateTime(2024, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "A Handbook of Agile Software Craftsmanship",
-                            IsActive = true,
-                            Name = "Clean Code",
-                            Price = 600m,
-                            StockQuantity = 35
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CategoryId = 7,
-                            CreatedAt = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Elements of Reusable Object-Oriented Software",
-                            IsActive = true,
-                            Name = "Design Patterns",
-                            Price = 750m,
-                            StockQuantity = 25
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CategoryId = 8,
-                            CreatedAt = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "High precision gaming mouse",
-                            IsActive = true,
-                            Name = "Gaming Mouse",
-                            Price = 1200m,
-                            StockQuantity = 30
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CategoryId = 8,
-                            CreatedAt = new DateTime(2024, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Mechanical keyboard with RGB lighting",
-                            IsActive = true,
-                            Name = "Mechanical Keyboard",
-                            Price = 2500m,
-                            StockQuantity = 22
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CategoryId = 8,
-                            CreatedAt = new DateTime(2024, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Surround sound gaming headset",
-                            IsActive = true,
-                            Name = "Gaming Headset",
-                            Price = 2200m,
-                            StockQuantity = 28
-                        });
                 });
 
             modelBuilder.Entity("ECommerceProject.Domain.Entities.ShippingAddress", b =>

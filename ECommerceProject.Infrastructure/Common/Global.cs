@@ -4,6 +4,8 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using ECommerceProject.Application.Interfaces;
 global using ECommerceProject.Infrastructure.Data;
 global using ECommerceProject.Application.Services.Interfaces;
+global using ECommerceProject.Infrastructure.Identity;
+global using Microsoft.AspNetCore.Identity;
 
 
 
