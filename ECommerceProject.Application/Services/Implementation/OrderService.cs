@@ -88,6 +88,7 @@ namespace ECommerceProject.Application.Services.Implementation
 
         public async Task PlaceOrderAsync(PlaceOrderDto order)
         {
+            await _unitOfWork.BeginTransactionAsync();
 
             try
             {
@@ -122,9 +123,16 @@ namespace ECommerceProject.Application.Services.Implementation
 
                 // Save
                 await _unitOfWork.SaveChangesAsync();
+
+
+
+                // Commit
+                await _unitOfWork.CommitAsync();
+
             }
             catch (Exception)
             {
+                await _unitOfWork.RollbackAsync();
                 throw;
             }
 
