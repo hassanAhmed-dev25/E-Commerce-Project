@@ -1,5 +1,6 @@
 ﻿using ECommerceProject.Application.DTOs.CartItem;
 using ECommerceProject.Application.DTOs.Order;
+using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Domain.Entities;
 using ECommerceProject.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -158,7 +159,8 @@ namespace ECommerceProject.Application.Services.Implementation
                 {
                     Id = order.Id,
                     CreatedAt = order.CreatedAt,
-                    Status = order.OrderStatus,
+                    OrderStatus = order.OrderStatus,
+                    PaymentStatus = order.PaymentStatus,
                     TotalAmount = order.TotalAmount,
 
                     Items = order.OrderItems.Select(oi => new GetOrderItemDto
@@ -245,5 +247,44 @@ namespace ECommerceProject.Application.Services.Implementation
             await _unitOfWork.SaveChangesAsync();
         }
 
+        public async Task<Response<IEnumerable<GetOrderDto>>> GetMyOrdersAsync(string userId)
+        {
+            try
+            {
+                // Getting the Orders
+                var orders = await _unitOfWork.Orders.GetAllAsync(o => o.UserId == userId);
+
+                // Check is null or not
+                if (orders == null)
+                {
+                    return new Response<IEnumerable<GetOrderDto>>(null, "Products not found", false);
+                }
+
+
+                // Mapp Entity to DTO (Later i will add Auto Mapper)
+                var ordersResult = new List<GetOrderDto>();
+                foreach (var order in orders)
+                {
+                    ordersResult.Add(new GetOrderDto
+                    {
+                        Id = order.Id,
+                        TotalAmount = order.TotalAmount,
+                        OrderStatus = order.OrderStatus,
+                        PaymentStatus = order.PaymentStatus,
+                        CreatedAt = order.CreatedAt,
+
+                    });
+                }
+
+
+
+                return new Response<IEnumerable<GetOrderDto>>(ordersResult, null, true);
+
+            }
+            catch (Exception ex)
+            {
+                return new Response<IEnumerable<GetOrderDto>>(null, ex.Message, false);
+            }
+        }
     }
 }

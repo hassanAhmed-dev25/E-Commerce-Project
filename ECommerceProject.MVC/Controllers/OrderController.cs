@@ -1,14 +1,8 @@
-﻿using ECommerceProject.Application.DTOs.CartItem;
-using ECommerceProject.Application.DTOs.Order;
+﻿using ECommerceProject.Application.DTOs.Order;
 using ECommerceProject.Application.Services.Interfaces;
-using ECommerceProject.Domain.Enums;
-using ECommerceProject.Infrastructure.Common;
 using ECommerceProject.MVC.ViewModels;
-using MailKit.Search;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Stripe;
-using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace ECommerceProject.MVC.Controllers
@@ -25,10 +19,7 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
 
         public async Task<IActionResult> Checkout(List<int> selectedCartItemIds)
         {
@@ -75,6 +66,27 @@ namespace ECommerceProject.MVC.Controllers
             return View(orderId);
         }
 
+
+
+
+        public async Task<IActionResult> Index()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var orders = await _orderService.GetMyOrdersAsync(userId);
+
+            if (!orders.isSuccess)
+            {
+                return View("Error");
+            }
+
+            var res = orders.result;
+
+            return View(res);
+        }
 
 
 

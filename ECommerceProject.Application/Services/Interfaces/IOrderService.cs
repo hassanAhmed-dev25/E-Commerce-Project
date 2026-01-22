@@ -1,11 +1,9 @@
-﻿using ECommerceProject.Application.DTOs.Order;
-using Microsoft.EntityFrameworkCore;
-
-namespace ECommerceProject.Application.Services.Interfaces
+﻿namespace ECommerceProject.Application.Services.Interfaces
 {
     public interface IOrderService
     {
         Task<decimal> GetTotalPriceById(int id);
+        Task<Response<IEnumerable<GetOrderDto>>> GetMyOrdersAsync(string userId);
 
         Task<int> PlaceOrderAsync(PlaceOrderDto order);
         Task<GetOrderDto> GetOrderAsync(int orderId);

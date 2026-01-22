@@ -4,7 +4,8 @@
     {
         public int Id { get; set; }
         public decimal TotalAmount { get; set; }
-        public OrderStatus Status { get; set; }
+        public PaymentStatus PaymentStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public List<GetOrderItemDto> Items { get; set; }
