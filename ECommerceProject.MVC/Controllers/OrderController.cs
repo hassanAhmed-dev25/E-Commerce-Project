@@ -1,9 +1,14 @@
 ﻿using ECommerceProject.Application.DTOs.CartItem;
 using ECommerceProject.Application.DTOs.Order;
 using ECommerceProject.Application.Services.Interfaces;
+using ECommerceProject.Domain.Enums;
+using ECommerceProject.Infrastructure.Common;
 using ECommerceProject.MVC.ViewModels;
+using MailKit.Search;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace ECommerceProject.MVC.Controllers
@@ -59,10 +64,19 @@ namespace ECommerceProject.MVC.Controllers
                 UserId = userId
             };
 
-            await _orderService.PlaceOrderAsync(dto);
+            var orderId = await _orderService.PlaceOrderAsync(dto);
 
-            return View();
+            return RedirectToAction("Pay", new { orderId });
         }
+
+
+        public IActionResult Pay(int orderId)
+        {
+            return View(orderId);
+        }
+
+
+
 
 
     }

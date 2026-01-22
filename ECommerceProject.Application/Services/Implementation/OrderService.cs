@@ -86,7 +86,7 @@ namespace ECommerceProject.Application.Services.Implementation
         }
 
 
-        public async Task PlaceOrderAsync(PlaceOrderDto order)
+        public async Task<int> PlaceOrderAsync(PlaceOrderDto order)
         {
             await _unitOfWork.BeginTransactionAsync();
 
@@ -129,6 +129,7 @@ namespace ECommerceProject.Application.Services.Implementation
                 // Commit
                 await _unitOfWork.CommitAsync();
 
+                return newOrderId;
             }
             catch (Exception)
             {
@@ -218,6 +219,31 @@ namespace ECommerceProject.Application.Services.Implementation
         }
 
 
-        
+
+        public async Task<decimal> GetTotalPriceById(int id)
+        {
+            var order = await _unitOfWork.Orders.GetAsync(o => o.Id == id);
+            if (order == null)
+                throw new Exception("Order not found");
+
+            return order.TotalAmount;
+        }
+
+
+        public async Task MarkAsPaidAsync(int orderId)
+        {
+            var order = await _unitOfWork.Orders.GetAsync(o => o.Id == orderId);
+
+            if (order == null)
+                return;
+
+            if (order.PaymentStatus == PaymentStatus.Paid)
+                return;
+
+            order.PaymentStatus = PaymentStatus.Paid;
+
+            await _unitOfWork.SaveChangesAsync();
+        }
+
     }
 }

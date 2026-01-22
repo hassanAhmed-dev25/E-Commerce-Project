@@ -2,6 +2,6 @@
 {
     public interface IStripeService
     {
-        Task<string> CreatePaymentIntentAsync(decimal amount);
+        Task<string> CreatePaymentSessionAsync(Order order);
     }
 }

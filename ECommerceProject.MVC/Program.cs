@@ -9,6 +9,7 @@ using ECommerceProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 namespace ECommerceProject.MVC
 {
@@ -61,7 +62,8 @@ namespace ECommerceProject.MVC
 
             // Stripe
             builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
-            
+
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"] ?? throw new Exception("Stripe Secret Key not found");
 
 
 

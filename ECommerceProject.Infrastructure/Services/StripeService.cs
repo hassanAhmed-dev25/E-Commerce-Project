@@ -1,31 +1,58 @@
-﻿using Stripe;
+﻿using ECommerceProject.Application.DTOs.Order;
+using Microsoft.AspNetCore.Http;
+using Stripe.Checkout;
 
 namespace ECommerceProject.Infrastructure.Services
 {
     public class StripeService : IStripeService
     {
-        private readonly IConfiguration _configuration;
+        private readonly string _baseUrl;
 
-        public StripeService(IConfiguration configuration)
+        public StripeService(IHttpContextAccessor http)
         {
-            _configuration = configuration;
+            var req = http.HttpContext.Request;
+            _baseUrl = $"{req.Scheme}://{req.Host}";
         }
 
-        public async Task<string> CreatePaymentIntentAsync(decimal amount)
+
+
+        public async Task<string> CreatePaymentSessionAsync(Order order)
         {
-            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
             
-
-            var service = new PaymentIntentService();
-
-            var intent = await service.CreateAsync(new PaymentIntentCreateOptions
+            var options = new SessionCreateOptions
             {
-                Amount = (long)(amount * 100),
-                Currency = "usd"
-            });
+                Mode = "payment",
 
-            return intent.ClientSecret;
+                LineItems = order.OrderItems.Select(item => new SessionLineItemOptions
+                {
+                    Quantity = item.Quantity,
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        Currency = "egp",
+                        UnitAmount = (long)(item.UnitPrice * 100),
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.Product.Name,
+                        }
+                    }
+                }).ToList(),
+
+                Metadata = new Dictionary<string, string>
+                {
+                    { "orderId", order.Id.ToString() }
+                },
+
+                SuccessUrl = $"{_baseUrl}/Payment/ConfirmPayment?sessionId={{CHECKOUT_SESSION_ID}}",
+                CancelUrl = $"{_baseUrl}/Payment/Cancel"
+            };
+
+            var service = new SessionService();
+            var session = await service.CreateAsync(options);
+
+            return session.Url;
 
         }
+
+
     }
 }

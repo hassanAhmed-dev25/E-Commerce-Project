@@ -10,6 +10,7 @@ namespace ECommerceProject.Application.Interfaces
         Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
         Task RemoveAsync(int id);
+        void RemoveRangeAsync(IEnumerable<T> cartItems);
         Task UpdateAsync(T entity);
     }
 }

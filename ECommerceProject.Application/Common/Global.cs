@@ -6,6 +6,7 @@ global using System.ComponentModel.DataAnnotations;
 global using ECommerceProject.Application.DTOs.OrderItem;
 global using ECommerceProject.Application.DTOs.ShippingAddress;
 global using ECommerceProject.Domain.Enums;
+global using ECommerceProject.Application.DTOs.Order;
 
 
 

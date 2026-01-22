@@ -2,6 +2,7 @@
 {
     public interface IPaymentService
     {
-        Task<Response<bool>> StartPaymentAsync(decimal amount);
+        Task<string> PayAsync(int orderId, string userId);
+        Task HandleSuccessfulPaymentAsync(int orderId);
     }
 }

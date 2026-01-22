@@ -53,9 +53,17 @@ namespace ECommerceProject.Application.Services.Implementation
 
         }
 
+        public async Task RemoveItemsAsync(IEnumerable<int> cartItemIds)
+        {
+            var items = await _unitOfWork.CartItems
+                                        .GetAllAsync(ci => cartItemIds.Contains(ci.Id));
 
 
+            _unitOfWork.CartItems.RemoveRangeAsync(items);
 
+            await _unitOfWork.SaveChangesAsync();
+
+        }
 
     }
 }

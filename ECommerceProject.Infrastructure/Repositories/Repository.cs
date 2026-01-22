@@ -85,6 +85,12 @@ namespace ECommerceProject.Infrastructure.Repositories
                 _dbSet.Remove(curEntity);
             }
         }
+
+        public void RemoveRangeAsync(IEnumerable<T> cartItems)
+        {
+            _dbSet.RemoveRange(cartItems);
+        }
+
         public async Task UpdateAsync(T entity)
         {
             _context.Update(entity);

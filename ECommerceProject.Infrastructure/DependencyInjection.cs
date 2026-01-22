@@ -24,6 +24,7 @@ namespace ECommerceProject.Infrastructure
             services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
 
 
+            services.AddScoped<IStripeService, StripeService>();
 
 
             return services;

@@ -1,5 +1,6 @@
 ﻿using ECommerceProject.Application.Services.Implementation;
 using Microsoft.Extensions.DependencyInjection;
+using Org.BouncyCastle.Security;
 
 namespace ECommerceProject.Application
 {
@@ -16,6 +17,10 @@ namespace ECommerceProject.Application
             services.AddScoped<ICartItemService, CartItemService>();
 
             services.AddScoped<IOrderService, OrderService>();
+
+
+            services.AddScoped<IPaymentService, PaymentService>();
+            
 
 
             return services;
