@@ -1,6 +1,8 @@
 ﻿@using ECommerceProject.MVC.ViewModels
 @model ProductDetailsVM
 
+@Html.AntiForgeryToken()
+
 @{
     var prod = Model.Product;
     var isInCart = Model.IsInCart;
@@ -118,19 +120,12 @@
                 }
                 else
                 {
-                    <form asp-controller="CartItem"
-                          asp-action="AddToCart"
-                          method="post"
-                          class="d-grid">
-
-                        <input type="hidden" name="ProductId" value="@prod.Id" />
-                        <input type="hidden" id="quantityHidden" name="Quantity" value="" />
-                        <input type="hidden" name="UnitPrice" value="@prod.Price" />
-
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            Add to cart
-                        </button>
-                    </form>
+                    <button class="btn btn-primary btn-sm w-100 add-to-cart-btn"
+                            data-product-id="@prod.Id"
+                            data-price="@prod.Price"
+                            @(inStock ? "" : "disabled")>
+                        Add to cart
+                    </button>
                 }
 
                 
@@ -186,6 +181,40 @@
             });
 
 
+            // Add to cart Ajax
+            $(".add-to-cart-btn").on("click", function () {
+
+                const btn = $(this);
+
+                $.ajax({
+                    url: "/CartItem/AddToCartAjax",
+                    type: "POST",
+                    headers: {
+                        "RequestVerificationToken":
+                            $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    data: {
+                        productId: btn.data("product-id"),
+                        quantity: parseInt($qty.val()),
+                        unitPrice: btn.data("price")
+                    },
+                    success: function () {
+
+                        // UX feedback
+                        btn
+                            .removeClass("btn-primary")
+                            .addClass("btn-success")
+                            .text("Added to your cart")
+                            .prop("disabled", true);
+                    },
+                    error: function () {
+                        alert("Failed to add product to cart");
+                    }
+                });
+            });
+
+
+
             
             // If user write manually
             $qty.on("change keyup", function () {
@@ -196,6 +225,9 @@
             $("form").on("submit", function () {
                 syncQuantity();
             });
+
+
+
 
         });
     </script>
