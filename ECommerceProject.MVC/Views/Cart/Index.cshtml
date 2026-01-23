@@ -1,6 +1,10 @@
 ﻿@using ECommerceProject.MVC.ViewModels
 @model IEnumerable<CartItemVM>
 
+
+@Html.AntiForgeryToken()
+
+
 @{
     ViewData["Title"] = "Your Cart";
 }
@@ -56,28 +60,24 @@
                             </div>
 
                             <!-- Quantity -->
-                            <form method="post" asp-controller="CartItem" asp-action="EditQuantity">
+                            <div class="quantity-box d-flex align-items-center gap-2"
+                                 data-cart-item-id="@item.Id">
 
-                                <div class="quantity-box d-flex align-items-center gap-2">
+                                <button type="button"
+                                        class="btn btn-outline-secondary btn-sm qty-minus">
+                                    -
+                                </button>
 
-                                    <input type="hidden" name="CartItemId" value="@item.Id" />
+                                <span class="fw-semibold qty-value">
+                                    @item.Quantity
+                                </span>
 
-                                    <button type="submit"
-                                            name="Action"
-                                            value="decrease"
-                                        class="btn btn-outline-secondary btn-sm qty-minus">-</button>
+                                <button type="button"
+                                        class="btn btn-outline-secondary btn-sm qty-plus">
+                                    +
+                                </button>
+                            </div>
 
-                                    <span class="fw-semibold qty-value">
-                                        @item.Quantity
-                                    </span>
-
-                                    <button type="submit"
-                                            name="Action"
-                                            value="increase"
-                                            class="btn btn-outline-secondary btn-sm qty-plus">+</button>
-                                </div>
-
-                            </form>
                             
 
                             <div class="fw-bold text-success item-total"
@@ -86,15 +86,11 @@
                             </div>
 
                             <!-- Remove -->
-                            <form asp-controller="CartItem"
-                                  asp-action="RemoveFromCart"
-                                  asp-route-cartItemId="@item.Id">
-
-
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form>
+                            <button type="button"
+                                    class="btn btn-outline-danger btn-sm remove-item-btn"
+                                    data-cart-item-id="@item.Id">
+                                <i class="bi bi-trash"></i>
+                            </button>
 
                         </div>
                     </div>
@@ -149,40 +145,89 @@
 @section Scripts {
 
     <script>
-    $(document).ready(function () {
-        function updateSummary() {
-            let total = 0;
-            let count = 0;
-            let selectedIds = [];
 
-            $(".cart-checkbox:checked").each(function () {
-                const price = parseFloat($(this).data("price"));
-                const card = $(this).closest(".cart-item");
-                const qty = parseInt(card.find(".qty-value").text());
-                const id = $(this).val();
+            function updateSummary() {
+                let total = 0;
+                let count = 0;
 
-                total += price * qty;
-                count += qty;
-                selectedIds.push(id);
+                $(".cart-checkbox:checked").each(function () {
+                    const price = parseFloat($(this).data("price"));
+                    const card = $(this).closest(".cart-item");
+                    const qty = parseInt(card.find(".qty-value").text());
 
-              });
-            
-
-            $("#selectedTotal").text(total.toFixed(2));
-            $("#selectedCount").text(count);
-
-            $("#selectedItems").val(selectedIds.join(","));
-         }
-
-            
-            $(".cart-checkbox").on("change", function () {
-                    updateSummary();
+                    total += price * qty;
+                    count += qty;
                 });
 
+                $("#selectedTotal").text(total.toFixed(2));
+                $("#selectedCount").text(count);
+            }
 
-            updateSummary();
+
+        $(document).ready(function () {
+
+            const token = $('input[name="__RequestVerificationToken"]').val();
+
+            /* ========= EDIT QUANTITY ========= */
+            $(document).on("click", ".qty-plus, .qty-minus", function () {
+
+                const btn = $(this);
+                const box = btn.closest(".quantity-box");
+                const cartItemId = box.data("cart-item-id");
+                const action = btn.hasClass("qty-plus") ? "increase" : "decrease";
+                const qtySpan = box.find(".qty-value");
+                const card = btn.closest(".cart-item");
+                const price = parseFloat(card.find(".item-total").data("price"));
+
+                $.ajax({
+                    url: "/CartItem/EditQuantityAjax",
+                    type: "POST",
+                    headers: { "RequestVerificationToken": token },
+                    data: { cartItemId: cartItemId, action: action },
+                    success: function (res) {
+
+                        qtySpan.text(res.quantity);
+
+                        // Update item total
+                        card.find(".item-total")
+                            .text("$" + (res.quantity * price).toFixed(2));
+
+                        updateSummary();
+                    },
+                    error: function () {
+                        alert("Failed to update quantity");
+                    }
+                });
+            });
+
+            /* ========= REMOVE ITEM ========= */
+            $(document).on("click", ".remove-item-btn", function () {
+
+                const btn = $(this);
+                const card = btn.closest(".cart-item");
+                const cartItemId = btn.data("cart-item-id");
+
+                $.ajax({
+                    url: "/CartItem/RemoveFromCartAjax",
+                    type: "POST",
+                    headers: { "RequestVerificationToken": token },
+                    data: { cartItemId: cartItemId },
+                    success: function () {
+
+                        card.fadeOut(300, function () {
+                            $(this).remove();
+                            updateSummary();
+                        });
+                    },
+                    error: function () {
+                        alert("Failed to remove item");
+                    }
+                });
+            });
+
         });
     </script>
+
 
 }
 

@@ -10,7 +10,7 @@ namespace ECommerceProject.Application.Services.Interfaces
         Task<Response<IEnumerable<CartItemDto>>> GetMyCartItemsAsync(int cartId);
         Task<Response<IEnumerable<CartItemDto>>> GetCartItemsByIdAsync(IEnumerable<int> selectedCartItemIds);
 
-        Task Increase(int cartItemId);
-        Task Decrease(int cartItemId);
+        Task<int> Increase(int cartItemId);
+        Task<int> Decrease(int cartItemId);
     }
 }

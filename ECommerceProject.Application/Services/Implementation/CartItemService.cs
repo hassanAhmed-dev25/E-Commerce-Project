@@ -104,12 +104,14 @@ namespace ECommerceProject.Application.Services.Implementation
         }
 
 
-        public async Task Increase(int cartItemId)
+        public async Task<int> Increase(int cartItemId)
         {
+            int res;
+
             var entity = await _unitOfWork.CartItems.GetAsync(ci => ci.Id == cartItemId,
                                                                    q => q.Include(ci => ci.Product));
             if(entity == null)
-                return;
+                return 0;
 
 
             var stock = entity.Product.StockQuantity;
@@ -122,16 +124,30 @@ namespace ECommerceProject.Application.Services.Implementation
                 await _unitOfWork.CartItems.UpdateAsync(entity);
 
                 await _unitOfWork.SaveChangesAsync();
+
+                // Get new quantity
+                res = entity.Quantity;
             }
-            
+            else
+            {
+                // Get last quantity
+                res = entity.Quantity;
+            }
+
+
+            return res;
+
+
         }
 
-        public async Task Decrease(int cartItemId)
+        public async Task<int> Decrease(int cartItemId)
         {
+            int res;
+
             var entity = await _unitOfWork.CartItems.GetAsync(ci => ci.Id == cartItemId,
                                                                    q => q.Include(ci => ci.Product));
             if (entity == null)
-                return;
+                return 0;
 
 
             // Decrease
@@ -142,7 +158,16 @@ namespace ECommerceProject.Application.Services.Implementation
                 await _unitOfWork.CartItems.UpdateAsync(entity);
 
                 await _unitOfWork.SaveChangesAsync();
+                // Get new quantity
+                res = entity.Quantity;
             }
+            else
+            {
+                // Get last quantity
+                res = entity.Quantity;
+            }
+
+            return res;
         }
 
         
