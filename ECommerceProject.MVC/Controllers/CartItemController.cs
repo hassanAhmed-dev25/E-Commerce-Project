@@ -17,7 +17,34 @@ namespace ECommerceProject.MVC.Controllers
         }
 
 
-        public async Task<IActionResult> AddToCart(CreateCartItemDto cartItemDto)
+        #region Add to cart without Ajax
+        //public async Task<IActionResult> AddToCart(CreateCartItemDto cartItemDto)
+        //{
+
+        //    // UserId
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    if (string.IsNullOrEmpty(userId))
+        //        return Unauthorized();
+
+        //    // Get or Create Cart
+        //    var cart = await _cartService.GetOrCreateCartAsync(userId);
+
+        //    //var createCartItem =  productDetailsVM.CartItem;
+
+        //    // Add CartId
+        //    cartItemDto.CartId = cart.Id;
+
+        //    // Add to Cart
+        //    var cartItemResult = await _cartItemService.AddToCartItemAsync(cartItemDto);
+
+
+        //    return RedirectToAction("ShowAllProducts", "Product");
+
+        //}
+        #endregion
+
+        public async Task<IActionResult> AddToCartAjax(CreateCartItemDto cartItemDto)
         {
 
             // UserId
@@ -38,12 +65,15 @@ namespace ECommerceProject.MVC.Controllers
             var cartItemResult = await _cartItemService.AddToCartItemAsync(cartItemDto);
 
 
-            return RedirectToAction("ShowAllProducts", "Product");
-
+            return Json(new
+            {
+                success = true,
+                message = "Product added to cart"
+            });
         }
-
-
         
+
+
         public async Task<IActionResult> RemoveFromCart(int cartItemId)
         {
             // UserId
@@ -87,6 +117,9 @@ namespace ECommerceProject.MVC.Controllers
             return RedirectToAction("Index", "Cart");
 
         }
+
+
+        
 
     }
 }

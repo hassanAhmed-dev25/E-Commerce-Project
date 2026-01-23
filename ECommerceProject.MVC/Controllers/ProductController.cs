@@ -302,5 +302,34 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> FilterByCategoryAjax(int categoryId)
+        {
+            var products = categoryId == 0
+                ? await _productService.GetAllProductsAsync()
+                : await _productService.GetProductsByCategoryIdAsync(categoryId);
+
+
+            // get its cart
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            CartDto cart = null;
+            if (!string.IsNullOrEmpty(userId))
+                cart = await _cartService.GetOrCreateCartAsync(userId);
+
+            var vm = new List<ProductDetailsVM>();
+            foreach (var product in products.result)
+            {
+                vm.Add(new ProductDetailsVM
+                {
+                    Product = product,
+                    IsInCart = cart != null && await _cartItemService.IsProductInCartAsync(cart.Id, product.Id),
+                });
+            }
+
+            return PartialView("_ProductsPartial", vm);
+        }
+
     }
 }
