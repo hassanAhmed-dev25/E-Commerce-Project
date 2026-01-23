@@ -4,6 +4,7 @@ using ECommerceProject.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260123095947_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,56 +112,56 @@ namespace ECommerceProject.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7041),
+                            CreatedAt = new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6516),
                             IsActive = false,
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7044),
+                            CreatedAt = new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6519),
                             IsActive = false,
                             Name = "Mobile Phones"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7045),
+                            CreatedAt = new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6520),
                             IsActive = false,
                             Name = "Laptops"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7045),
+                            CreatedAt = new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6520),
                             IsActive = false,
                             Name = "Clothing"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7046),
+                            CreatedAt = new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6521),
                             IsActive = false,
                             Name = "Shoes"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7047),
+                            CreatedAt = new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6522),
                             IsActive = false,
                             Name = "Home Appliances"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7047),
+                            CreatedAt = new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6522),
                             IsActive = false,
                             Name = "Books"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7048),
+                            CreatedAt = new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6523),
                             IsActive = false,
                             Name = "Gaming"
                         });
@@ -200,9 +203,6 @@ namespace ECommerceProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CartItemId")
-                        .HasColumnType("int");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");

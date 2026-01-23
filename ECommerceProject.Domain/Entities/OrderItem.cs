@@ -12,6 +12,10 @@
         public int ProductId { get; set; }
         public string SellerId { get; set; }
 
+        
+        public int CartItemId { get; set; }
+
+
 
         // Navigation Properties
         public Order? Order { get; set; }

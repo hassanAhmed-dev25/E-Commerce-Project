@@ -28,7 +28,8 @@ namespace ECommerceProject.Application.Services.Implementation
                 throw new Exception("Order not found");
 
 
-            var cartItemIds = order.OrderItems.Select(oi => oi.Id ).ToList();
+            var cartItemIds = order.OrderItems.Select(oi => oi.CartItemId).ToList();
+
 
             // Change payment status to Paid
             await _orderService.MarkAsPaidAsync(orderId);

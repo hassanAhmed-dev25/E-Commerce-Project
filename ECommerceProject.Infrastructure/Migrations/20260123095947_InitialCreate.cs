@@ -319,14 +319,14 @@ namespace ECommerceProject.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2499), null, "Electronics" },
-                    { 2, new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2502), null, "Mobile Phones" },
-                    { 3, new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2503), null, "Laptops" },
-                    { 4, new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2503), null, "Clothing" },
-                    { 5, new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2504), null, "Shoes" },
-                    { 6, new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2505), null, "Home Appliances" },
-                    { 7, new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2505), null, "Books" },
-                    { 8, new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2506), null, "Gaming" }
+                    { 1, new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6516), null, "Electronics" },
+                    { 2, new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6519), null, "Mobile Phones" },
+                    { 3, new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6520), null, "Laptops" },
+                    { 4, new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6520), null, "Clothing" },
+                    { 5, new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6521), null, "Shoes" },
+                    { 6, new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6522), null, "Home Appliances" },
+                    { 7, new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6522), null, "Books" },
+                    { 8, new DateTime(2026, 1, 23, 9, 59, 47, 596, DateTimeKind.Utc).AddTicks(6523), null, "Gaming" }
                 });
 
             migrationBuilder.CreateIndex(

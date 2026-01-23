@@ -62,6 +62,7 @@ namespace ECommerceProject.Application.Services.Implementation
                     ProductId = product.Id,
                     SellerId = product.CreatedBy,
 
+                    CartItemId = ci.Id,
                 };
 
             }).ToList();

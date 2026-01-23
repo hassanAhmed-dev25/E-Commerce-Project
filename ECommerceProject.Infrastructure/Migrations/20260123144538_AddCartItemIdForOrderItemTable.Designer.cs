@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260121110756_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260123144538_AddCartItemIdForOrderItemTable")]
+    partial class AddCartItemIdForOrderItemTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,56 +112,56 @@ namespace ECommerceProject.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2499),
+                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7041),
                             IsActive = false,
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2502),
+                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7044),
                             IsActive = false,
                             Name = "Mobile Phones"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2503),
+                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7045),
                             IsActive = false,
                             Name = "Laptops"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2503),
+                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7045),
                             IsActive = false,
                             Name = "Clothing"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2504),
+                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7046),
                             IsActive = false,
                             Name = "Shoes"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2505),
+                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7047),
                             IsActive = false,
                             Name = "Home Appliances"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2505),
+                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7047),
                             IsActive = false,
                             Name = "Books"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2026, 1, 21, 11, 7, 56, 23, DateTimeKind.Utc).AddTicks(2506),
+                            CreatedAt = new DateTime(2026, 1, 23, 14, 45, 35, 176, DateTimeKind.Utc).AddTicks(7048),
                             IsActive = false,
                             Name = "Gaming"
                         });
@@ -203,6 +203,9 @@ namespace ECommerceProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartItemId")
+                        .HasColumnType("int");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
