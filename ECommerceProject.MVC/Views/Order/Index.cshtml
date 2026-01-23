@@ -1,4 +1,5 @@
 ﻿@using ECommerceProject.Application.DTOs.Order
+@using ECommerceProject.Domain.Enums
 
 
 @model IEnumerable<GetOrderDto>
@@ -23,6 +24,7 @@
                     <th>Order Status</th>
                     <th>Payment Status</th>
                     <th>Created At</th>
+                    <th>Actions</th>
                     <th></th>
                 </tr>
             </thead>
@@ -35,6 +37,30 @@
                         <td>@prod.OrderStatus</td>
                         <td>@prod.PaymentStatus</td>
                         <td>@prod.CreatedAt</td>
+
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                @if (prod.PaymentStatus == PaymentStatus.Pending)
+                                {
+                                    <a asp-controller="Payment" asp-action="Pay" asp-route-orderId="@prod.Id"
+                                    class="btn btn-success mx-2">
+                                        Pay Now
+                                    </a>
+                                }
+                                else if (prod.PaymentStatus == PaymentStatus.Paid)
+                                {
+                                    <button disabled class="btn btn-secondary mx-2">
+                                        Already Paid
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button disabled class="btn btn-danger mx-2">
+                                        Payment Faild
+                                    </button>
+                                }
+                            </div>
+                        </td>
                         
                     </tr>
                 }

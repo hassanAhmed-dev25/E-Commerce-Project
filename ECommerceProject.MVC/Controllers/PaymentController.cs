@@ -18,7 +18,7 @@ namespace ECommerceProject.MVC.Controllers
         }
         
         
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> Pay(int orderId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
