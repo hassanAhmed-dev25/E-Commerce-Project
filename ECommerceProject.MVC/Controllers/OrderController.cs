@@ -7,6 +7,7 @@ using System.Security.Claims;
 
 namespace ECommerceProject.MVC.Controllers
 {
+    //[Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;
@@ -19,8 +20,8 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
-        
 
+        [Authorize]
         public async Task<IActionResult> Checkout(List<int> selectedCartItemIds)
         {
             var cartItemsDto = (await _cartItemService.GetCartItemsByIdAsync(selectedCartItemIds)).result;
@@ -60,7 +61,7 @@ namespace ECommerceProject.MVC.Controllers
             return RedirectToAction("Pay", new { orderId });
         }
 
-
+        [Authorize]
         public IActionResult Pay(int orderId)
         {
             return View(orderId);
@@ -68,12 +69,12 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
-
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
-
+        //[Authorize]
         public async Task<IActionResult> GetOrders()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -90,7 +91,12 @@ namespace ECommerceProject.MVC.Controllers
 
             var res = orders.result;
 
-            return Json(new { data = res });
+            return Json(new {
+                draw = Request.Form["draw"],
+                recordsTotal = res.Count(),
+                recordsFiltered = res.Count(),
+                data = res
+            });
         }
 
 

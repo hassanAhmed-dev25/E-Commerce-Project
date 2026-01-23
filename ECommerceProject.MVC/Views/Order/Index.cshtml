@@ -29,78 +29,11 @@
 
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
 
-            // Initialize DataTable with AJAX (Server-Side)
-            $("#OrderTable").DataTable({
+    <!-- Data Table -->
+    <script src="~/DataTables/datatables.min.js"></script>
 
-                // Show loading indicator
-                processing: true,
+    <!-- Custom Table Script -->
+    <script src="~/js/custom/ordertable.js"></script>
 
-                // Enable server-side processing
-                serverSide: true,
-
-                // Enable searching
-                searching: true,
-
-                // Enable sorting
-                ordering: true,
-
-                // Enable pagination
-                paging: true,
-
-                // AJAX configuration
-                ajax: {
-                    url: "/Order/GetOrders", // Controller Action
-                    type: "POST",
-                    datatype: "json"
-                },
-
-                // Define table columns and data source
-                columns: [
-                    { data: "id", name: "Id" },
-                    { data: "totalAmount", name: "TotalAmount" },
-                    { data: "orderStatus", name: "OrderStatus" },
-                    { data: "paymentStatus", name: "PaymentStatus" },
-                    { data: "createdAt", name: "CreatedAt" },
-                    {
-                        data: "id",
-                        render: function (data, type, row) {
-
-                            console.log(row.paymentStatus);
-                            // Render action buttons based on payment status
-                            if (row.paymentStatus === 1) {
-                                return `
-                                    <a href="/Payment/Pay?orderId=${data}"
-                                       class="btn btn-success btn-sm">
-                                       Pay Now
-                                    </a>`;
-                            }
-
-                            if (row.paymentStatus === 2) {
-                                return `
-                                    <button class="btn btn-secondary btn-sm" disabled>
-                                        Already Paid
-                                    </button>`;
-                            }
-                            return `
-                                    <button class="btn btn-danger btn-sm" disabled>
-                                        Payment Failed
-                                    </button>`;
-                        },
-                        orderable: false,
-                        searchable: false
-                    }
-                ],
-
-                // Default content for empty cells
-                columnDefs: [{
-                    defaultContent: "-",
-                    targets: "_all"
-                }]
-            });
-
-        });
-    </script>
 }

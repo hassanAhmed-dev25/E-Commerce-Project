@@ -8,6 +8,11 @@
         public OrderStatus OrderStatus { get; set; }
         public DateTime CreatedAt { get; set; }
 
+
+        public string OrderStatusName { get; set; }
+        public string PaymentStatusName { get; set; }
+
+
         public List<GetOrderItemDto> Items { get; set; }
         public GetShippingAddressDto ShippingAddress { get; set; }
     }

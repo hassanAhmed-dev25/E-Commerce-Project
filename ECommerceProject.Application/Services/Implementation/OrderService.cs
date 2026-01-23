@@ -274,6 +274,9 @@ namespace ECommerceProject.Application.Services.Implementation
                         PaymentStatus = order.PaymentStatus,
                         CreatedAt = order.CreatedAt,
 
+                        OrderStatusName = order.OrderStatus.ToString(),
+                        PaymentStatusName = order.PaymentStatus.ToString(),
+
                     });
                 }
 
