@@ -69,7 +69,12 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetOrders()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -85,10 +90,8 @@ namespace ECommerceProject.MVC.Controllers
 
             var res = orders.result;
 
-            return View(res);
+            return Json(new { data = res });
         }
-
-
 
 
     }

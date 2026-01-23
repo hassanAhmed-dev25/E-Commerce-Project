@@ -1,8 +1,4 @@
-﻿@using ECommerceProject.Application.DTOs.Order
-@using ECommerceProject.Domain.Enums
-
-
-@model IEnumerable<GetOrderDto>
+﻿
 
 <div class="w-100 card border-0 p-4">
     <div class="card-header gg-title ml-0 py-3">
@@ -13,59 +9,98 @@
         </div>
     </div>
     <div class="card-body border p-4">
-       
-        <table class="table table-bordered table-striped">
+
+        <table id="OrderTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>
-                        Order Id
-                    </th>
+                    <th>Order Id</th>
                     <th>Total Amount</th>
                     <th>Order Status</th>
                     <th>Payment Status</th>
                     <th>Created At</th>
                     <th>Actions</th>
-                    <th></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var prod in Model)
-                {
-                    <tr>
-                        <td>@prod.Id</td>
-                        <td>@prod.TotalAmount</td>
-                        <td>@prod.OrderStatus</td>
-                        <td>@prod.PaymentStatus</td>
-                        <td>@prod.CreatedAt</td>
-
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                @if (prod.PaymentStatus == PaymentStatus.Pending)
-                                {
-                                    <a asp-controller="Payment" asp-action="Pay" asp-route-orderId="@prod.Id"
-                                    class="btn btn-success mx-2">
-                                        Pay Now
-                                    </a>
-                                }
-                                else if (prod.PaymentStatus == PaymentStatus.Paid)
-                                {
-                                    <button disabled class="btn btn-secondary mx-2">
-                                        Already Paid
-                                    </button>
-                                }
-                                else
-                                {
-                                    <button disabled class="btn btn-danger mx-2">
-                                        Payment Faild
-                                    </button>
-                                }
-                            </div>
-                        </td>
-                        
-                    </tr>
-                }
-            </tbody>
         </table>
+
     </div>
 </div>
 
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            // Initialize DataTable with AJAX (Server-Side)
+            $("#OrderTable").DataTable({
+
+                // Show loading indicator
+                processing: true,
+
+                // Enable server-side processing
+                serverSide: true,
+
+                // Enable searching
+                searching: true,
+
+                // Enable sorting
+                ordering: true,
+
+                // Enable pagination
+                paging: true,
+
+                // AJAX configuration
+                ajax: {
+                    url: "/Order/GetOrders", // Controller Action
+                    type: "POST",
+                    datatype: "json"
+                },
+
+                // Define table columns and data source
+                columns: [
+                    { data: "id", name: "Id" },
+                    { data: "totalAmount", name: "TotalAmount" },
+                    { data: "orderStatus", name: "OrderStatus" },
+                    { data: "paymentStatus", name: "PaymentStatus" },
+                    { data: "createdAt", name: "CreatedAt" },
+                    {
+                        data: "id",
+                        render: function (data, type, row) {
+
+                            console.log(row.paymentStatus);
+                            // Render action buttons based on payment status
+                            if (row.paymentStatus === 1) {
+                                return `
+                                    <a href="/Payment/Pay?orderId=${data}"
+                                       class="btn btn-success btn-sm">
+                                       Pay Now
+                                    </a>`;
+                            }
+
+                            if (row.paymentStatus === 2) {
+                                return `
+                                    <button class="btn btn-secondary btn-sm" disabled>
+                                        Already Paid
+                                    </button>`;
+                            }
+                            return `
+                                    <button class="btn btn-danger btn-sm" disabled>
+                                        Payment Failed
+                                    </button>`;
+                        },
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+
+                // Default content for empty cells
+                columnDefs: [{
+                    defaultContent: "-",
+                    targets: "_all"
+                }]
+            });
+
+        });
+    </script>
+}
