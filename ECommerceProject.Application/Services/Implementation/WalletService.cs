@@ -60,9 +60,51 @@ namespace ECommerceProject.Application.Services.Implementation
 
 
         // Seller
-        public Task RequestWithdrawalAsync(int sellerId, decimal amount)
+        public async Task RequestWithdrawalAsync(int sellerId, decimal amount)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Validation
+                if (amount <= 0)
+                    throw new ArgumentException("Amount must be greater than zero.");
+
+                var wallet = await _unitOfWork.walletRepository.GetAsync(w => w.UserId == sellerId);
+
+                if (wallet == null)
+                    throw new Exception("Wallet not found.");
+
+                if (wallet.Balance < amount)
+                    throw new Exception("Insufficient balance.");
+
+
+                // Create Withdrawal Request
+                var request = new WithdrawalRequest
+                {
+                    Amount = amount,
+                    WithdrawalStatus = WithdrawalStatus.Pending,
+                    SellerId = sellerId,
+                    RequestedAt = DateTime.UtcNow,
+                };
+
+                // Withdraw the money
+                wallet.Balance -= amount;
+
+
+                // Create the rquest
+                await _unitOfWork.WithdrawalRepository.AddAsync(request);
+
+                // Update the wallet
+                await _unitOfWork.walletRepository.UpdateAsync(wallet);
+
+
+                // Save it
+                await _unitOfWork.SaveChangesAsync();
+
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
 
         public Task CompleteWithdrawalAsync(int withdrawalRequestId)
