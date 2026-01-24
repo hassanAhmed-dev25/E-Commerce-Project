@@ -28,6 +28,33 @@ namespace ECommerceProject.MVC.Controllers
             return View(res);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Withdraw()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var res = await _walletService.GetOrCreateWalletAsync(userId);
+
+            return View(res);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Withdraw(decimal amount)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            await _walletService.RequestWithdrawalAsync(userId, amount);
+
+            return RedirectToAction("History");
+        }
+
+
+
 
     }
 }
