@@ -61,3 +61,13 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+
+
+# Treat DataTables and other JS libs as vendor code
+wwwroot/datatables/** linguist-vendored
+
+# Ignore minified files in language stats
+*.min.js linguist-generated
+*.min.css linguist-generated
+
