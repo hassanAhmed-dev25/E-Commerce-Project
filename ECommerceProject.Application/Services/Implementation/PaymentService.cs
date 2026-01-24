@@ -37,6 +37,12 @@ namespace ECommerceProject.Application.Services.Implementation
             // Remove items from cart
             await _cartService.RemoveItemsAsync(cartItemIds);
 
+            // Reduce Quantity
+
+
+            // Send money to Seller wallet 
+
+
         }
 
         public async Task<string> PayAsync(int orderId, string userId)
