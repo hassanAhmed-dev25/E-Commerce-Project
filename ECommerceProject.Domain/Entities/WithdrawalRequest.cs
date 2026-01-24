@@ -9,8 +9,8 @@ namespace ECommerceProject.Domain.Entities
         public WithdrawalStatus WithdrawalStatus { get; set; } = WithdrawalStatus.Pending;
 
         public DateTime RequestedAt { get; set; } = DateTime.UtcNow;
-        public DateTime ApprovedAt { get; set; }
-        public DateTime CompletedAt { get; set; }
+        public DateTime? ApprovedAt { get; set; }
+        public DateTime? CompletedAt { get; set; }
 
 
 
