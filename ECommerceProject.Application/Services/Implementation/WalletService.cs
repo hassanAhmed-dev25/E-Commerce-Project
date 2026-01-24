@@ -1,4 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.Wallet;
+using ECommerceProject.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -123,6 +124,45 @@ namespace ECommerceProject.Application.Services.Implementation
 
             await _unitOfWork.SaveChangesAsync();
         }
+
+
+        public async Task<decimal> GetTotalSalesAsync(string sellerId)
+        {
+            var orderItems = await _unitOfWork.OrderItems.GetAllAsync(oi => oi.SellerId == sellerId &&
+                                                                                                 oi.Order.PaymentStatus == PaymentStatus.Paid );
+
+
+            var totalSales = orderItems.Sum(oi => oi.UnitPrice * oi.Quantity);
+
+            return totalSales;
+        }
+
+        public async Task<decimal> GetWalletBalanceAsync(string sellerId)
+        {
+            var wallet = await _unitOfWork.walletRepository.GetAsync(w => w.UserId == sellerId);
+
+            if (wallet == null)
+                throw new Exception("Wallet not found");
+
+
+            var totalAmount = wallet.Balance;
+
+            return totalAmount;
+        }
+
+        public async Task<decimal> GetWalletPendingWithdrawalsAsync(string sellerId)
+        {
+            var pendingWithdrawals = await _unitOfWork.WithdrawalRepository.GetAllAsync(
+                w => w.SellerId == sellerId &&
+                              w.WithdrawalStatus == WithdrawalStatus.Pending);
+
+
+            var totalPending = pendingWithdrawals.Sum(w => w.Amount);
+
+            return totalPending;
+        }
+
+
 
 
         // Seller
@@ -304,5 +344,6 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
+        
     }
 }

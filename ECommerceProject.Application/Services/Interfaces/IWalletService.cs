@@ -9,6 +9,11 @@ namespace ECommerceProject.Application.Services.Interfaces
         Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalRequests(string userId);
         Task SendMoneyToSellers(int orderId);
 
+        Task<decimal> GetTotalSalesAsync(string sellerId);
+        Task<decimal> GetWalletBalanceAsync(string sellerId);
+        Task<decimal> GetWalletPendingWithdrawalsAsync(string sellerId);
+
+
 
         // Seller
         Task RequestWithdrawalAsync(string sellerId, decimal amount);
