@@ -10,7 +10,7 @@ namespace ECommerceProject.Application.Services.Interfaces
 
         // Seller
         Task RequestWithdrawalAsync(int sellerId, decimal amount);
-        Task CompleteWithdrawalAsync(int withdrawalRequestId);
+        Task CompleteWithdrawalAsync(int sellerId, int withdrawalRequestId);
 
 
         // Admin

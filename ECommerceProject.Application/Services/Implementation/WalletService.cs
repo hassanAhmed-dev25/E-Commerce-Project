@@ -1,4 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.Wallet;
+using System.Numerics;
 
 namespace ECommerceProject.Application.Services.Implementation
 {
@@ -107,9 +108,46 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        public Task CompleteWithdrawalAsync(int withdrawalRequestId)
+        public async Task CompleteWithdrawalAsync(int sellerId, int withdrawalRequestId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Validation
+                var wallet = await _unitOfWork.walletRepository.GetAsync(w => w.UserId == sellerId);
+
+                if (wallet == null)
+                    throw new Exception("Wallet not found.");
+
+
+                // Get Withdrawal Request
+                var request = await _unitOfWork.WithdrawalRepository.GetAsync(wr => wr.Id == withdrawalRequestId && wr.SellerId == sellerId);
+
+                if (request == null)
+                    throw new Exception("Withdrawal rquest found.");
+
+                if (request.WithdrawalStatus != WithdrawalStatus.Pending)
+                    throw new Exception("Withdrawal request is not pending.");
+
+
+
+                // Complete withdrawal
+                request.WithdrawalStatus = WithdrawalStatus.Completed;
+                request.CompletedAt = DateTime.UtcNow;
+
+
+
+                // Update the Request
+                await _unitOfWork.WithdrawalRepository.UpdateAsync(request);
+
+
+                // Save it
+                await _unitOfWork.SaveChangesAsync();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
