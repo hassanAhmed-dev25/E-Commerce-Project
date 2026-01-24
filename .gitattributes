@@ -65,7 +65,8 @@
 
 
 # Treat DataTables and other JS libs as vendor code
-wwwroot/datatables/** linguist-vendored
+wwwroot/DataTables/** linguist-vendored
+wwwroot/lib/** linguist-vendored
 
 # Ignore minified files in language stats
 *.min.js linguist-generated
