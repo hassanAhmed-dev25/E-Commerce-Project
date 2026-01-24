@@ -57,7 +57,31 @@ namespace ECommerceProject.Application.Services.Implementation
                 throw;
             }
         }
+        public async Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalRequests(string userId)
+        {
+            try
+            {
+                var requests = await _unitOfWork.WithdrawalRepository.GetAllAsync(w => w.SellerId == userId);
 
+
+                // return it if its already exists
+                if (requests == null)
+                    throw new Exception("requests not found");
+
+
+                return requests.Select(wi => new WithdrawalRequestDto
+                {
+                    Id = wi.Id,
+                    Amount = wi.Amount,
+                    RequestedAt = wi.RequestedAt,
+                    WithdrawalStatus = wi.WithdrawalStatus
+                }).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
         // Seller
@@ -239,6 +263,6 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        
+       
     }
 }

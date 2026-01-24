@@ -1,0 +1,95 @@
+﻿
+
+<div class="container my-5">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold mb-0">
+                    <i class="bi bi-clock-history me-2 text-primary"></i>
+                    Withdrawal History
+                </h4>
+
+                <a asp-action="Withdraw"
+                   class="btn btn-primary rounded-pill px-4">
+                    <i class="bi bi-cash-stack me-2"></i>
+                    New Withdrawal
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table id="WithdrawalRequestTable"
+                       class="table table-hover align-middle w-100">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Id</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Requested At</th>
+                        </tr>
+                    </thead>
+
+                  @*   <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>#@item.Id</td>
+
+                                <td class="fw-semibold">
+                                    @item.Amount.ToString("C")
+                                </td>
+
+                                <td>
+                                    @switch (item.WithdrawalStatus)
+                                    {
+                                        case WithdrawalStatus.Pending:
+                                            <span class="badge bg-warning text-dark">
+                                                Pending
+                                            </span>
+                                            break;
+
+                                        case WithdrawalStatus.Approved:
+                                            <span class="badge bg-info">
+                                                Approved
+                                            </span>
+                                            break;
+
+                                        case WithdrawalStatus.Completed:
+                                            <span class="badge bg-success">
+                                                Completed
+                                            </span>
+                                            break;
+
+                                        case WithdrawalStatus.Rejected:
+                                            <span class="badge bg-danger">
+                                                Rejected
+                                            </span>
+                                            break;
+                                    }
+                                </td>
+
+                                <td>
+                                    @item.RequestedAt.ToString("dd MMM yyyy")
+                                </td>
+                            </tr>
+                        }
+                    </tbody> *@
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <!-- Data Table -->
+    <script src="~/DataTables/datatables.min.js"></script>
+
+    <!-- Custom Table Script -->
+    <script src="~/js/custom/withdrawalrequeststable.js"></script>
+
+}

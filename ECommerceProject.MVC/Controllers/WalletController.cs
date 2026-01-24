@@ -55,6 +55,30 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
+        [HttpGet]
+        public IActionResult GetWithdrawals()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetWithdrawalsAjax()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-    }
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var res = await _walletService.GetAllWithdrawalRequests(userId);
+
+            return Json(new
+            {
+                
+                recordsTotal = res.Count(),
+                recordsFiltered = res.Count(),
+                data = res
+            });
+
+        }
+    } 
 }
