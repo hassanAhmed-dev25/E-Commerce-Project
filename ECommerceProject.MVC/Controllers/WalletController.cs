@@ -29,7 +29,7 @@ namespace ECommerceProject.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Withdraw()
+        public async Task<IActionResult> RequestWithdraw()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -41,7 +41,7 @@ namespace ECommerceProject.MVC.Controllers
             return View(res);
         }
         [HttpPost]
-        public async Task<IActionResult> Withdraw(decimal amount)
+        public async Task<IActionResult> RequestWithdraw(decimal amount)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -50,35 +50,43 @@ namespace ECommerceProject.MVC.Controllers
 
             await _walletService.RequestWithdrawalAsync(userId, amount);
 
-            return RedirectToAction("History");
+            return RedirectToAction("GetWithdrawas");
         }
 
 
 
         [HttpGet]
-        public IActionResult GetWithdrawals()
+        public IActionResult GetWithdrawas()
         {
             return View();
         }
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetWithdrawalsAjax()
+        //[AllowAnonymous]
+        public async Task<IActionResult> GetWithdrawasAjax()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (string.IsNullOrEmpty(userId))
-                return Unauthorized();
+            //if (string.IsNullOrEmpty(userId))
+            //    return Unauthorized();
 
             var res = await _walletService.GetAllWithdrawalRequests(userId);
 
             return Json(new
             {
-                
+                draw = Request.Form["draw"].FirstOrDefault(),
                 recordsTotal = res.Count(),
                 recordsFiltered = res.Count(),
                 data = res
             });
 
         }
+
+
+
+        public IActionResult WithdrwaMoney(int withdrawalId)
+        {
+            return View();
+        }
+
     } 
 }

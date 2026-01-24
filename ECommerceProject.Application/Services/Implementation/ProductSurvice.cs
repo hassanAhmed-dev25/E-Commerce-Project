@@ -1,6 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Helper;
-using ECommerceProject.Domain.Entities;
 namespace ECommerceProject.Application.Services.Implementation
 {
     public class ProductSurvice : IProductSurvice
@@ -365,6 +364,59 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        
+        public async Task<Response<bool>> ReduceQuantitiesAsync(IEnumerable<OrderItem> orderItems)
+        {
+            try
+            {
+                // Validation
+                if (orderItems == null || !orderItems.Any())
+                    return new Response<bool>(false, "Order items are empty", false);
+
+
+                var productIds = orderItems.Select(p => p.ProductId).ToList();
+
+                // Get existing product
+                var products = await _unitOfWork.Products
+                                                               .GetAllAsync(p => productIds.Contains(p.Id));
+
+                if (products == null || !products.Any())
+                    return new Response<bool>(false, "Products not found", false);
+
+
+
+                // Update Entities
+                foreach (var item in orderItems)
+                {
+                    var product = products.FirstOrDefault(p => p.Id == item.ProductId);
+
+                    if (product == null)
+                        return new Response<bool>(false, $"Product not found: {item.ProductId}", false);
+
+                    if(product.StockQuantity < item.Quantity)
+                        return new Response<bool>(false,$"Insufficient stock for product: {product.Name}", false);
+
+
+                    product.StockQuantity -= item.Quantity;
+
+                }
+
+
+
+                // Update database
+                _unitOfWork.Products.UpdateRange(products);
+
+                // Saving database
+                await _unitOfWork.SaveChangesAsync();
+
+
+                // Return Response
+                return new Response<bool>(true, "Category updated successfully", true);
+
+            }
+            catch (Exception ex)
+            {
+                return new Response<bool>(false, ex.Message, false);
+            }
+        }
     }
 }

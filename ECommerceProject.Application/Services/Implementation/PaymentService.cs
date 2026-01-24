@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ECommerceProject.Application.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceProject.Application.Services.Implementation
 {
@@ -7,41 +8,63 @@ namespace ECommerceProject.Application.Services.Implementation
         private readonly IUnitOfWork _unitOfWork;
         private readonly IStripeService _stripeService;
 
+        private readonly IProductSurvice _productService;
         private readonly IOrderService _orderService;
         private readonly ICartService _cartService;
-        public PaymentService(IStripeService stripeService, IUnitOfWork unitOfWork, IOrderService orderService, ICartService cartService)
+
+        private readonly IWalletService _walletService;
+        public PaymentService(IStripeService stripeService, IUnitOfWork unitOfWork, IOrderService orderService, ICartService cartService, IWalletService walletService, IProductSurvice productService)
         {
             _stripeService = stripeService;
             _unitOfWork = unitOfWork;
 
+            _productService = productService;
             _orderService = orderService;
             _cartService = cartService;
+
+            _walletService = walletService;
         }
 
         public async Task HandleSuccessfulPaymentAsync(int orderId)
         {
-            var order = await _unitOfWork.Orders.GetAsync(o => o.Id == orderId, 
+            await _unitOfWork.BeginTransactionAsync();
+
+            try
+            {
+                var order = await _unitOfWork.Orders.GetAsync(o => o.Id == orderId,
                                                     q => q.Include(o => o.OrderItems));
 
-            // is order found
-            if (order == null)
-                throw new Exception("Order not found");
+                // is order found
+                if (order == null)
+                    throw new Exception("Order not found");
 
 
-            var cartItemIds = order.OrderItems.Select(oi => oi.CartItemId).ToList();
+                var cartItemIds = order.OrderItems.Select(oi => oi.CartItemId).ToList();
 
 
-            // Change payment status to Paid
-            await _orderService.MarkAsPaidAsync(orderId);
 
-            // Remove items from cart
-            await _cartService.RemoveItemsAsync(cartItemIds);
+                // Change payment status to Paid
+                await _orderService.MarkAsPaidAsync(orderId);
 
-            // Reduce Quantity
+                // Remove items from cart
+                await _cartService.RemoveItemsAsync(cartItemIds);
+
+                // Reduce Quantity
+                await _productService.ReduceQuantitiesAsync(order.OrderItems);
+
+                // Send money to Seller wallet 
+                await _walletService.SendMoneyToSellers(order.Id);
 
 
-            // Send money to Seller wallet 
+                // Commit
+                await _unitOfWork.CommitAsync();
 
+            }
+            catch(Exception)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
 
         }
 

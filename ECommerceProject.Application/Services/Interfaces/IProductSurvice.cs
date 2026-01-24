@@ -16,5 +16,7 @@ namespace ECommerceProject.Application.Services.Interfaces
 
         Task<Response<GetProductDto>> GetProductForUpdateAsync(int productId, string userId);
 
+        Task<Response<bool>> ReduceQuantitiesAsync(IEnumerable<OrderItem> orderItems);
+
     }
 }

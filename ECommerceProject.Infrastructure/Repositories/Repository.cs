@@ -1,4 +1,5 @@
 ﻿
+using ECommerceProject.Domain.Entities;
 using System.Linq.Expressions;
 
 namespace ECommerceProject.Infrastructure.Repositories
@@ -96,5 +97,9 @@ namespace ECommerceProject.Infrastructure.Repositories
             _context.Update(entity);
         }
 
+        public void UpdateRange(IEnumerable<T> entities)
+        {
+            _dbSet.UpdateRange(entities);
+        }
     }
 }

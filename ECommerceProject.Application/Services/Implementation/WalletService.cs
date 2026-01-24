@@ -1,5 +1,6 @@
 ﻿using ECommerceProject.Application.DTOs.Wallet;
-using System.Numerics;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ECommerceProject.Application.Services.Implementation
 {
@@ -81,6 +82,46 @@ namespace ECommerceProject.Application.Services.Implementation
             {
                 throw;
             }
+        }
+
+        public async Task SendMoneyToSellers(int orderId)
+        {
+
+            var order = await _unitOfWork.Orders.GetAsync(o => o.Id == orderId, 
+                                                       q => q.Include(o => o.OrderItems));
+
+            if (order == null)
+                throw new Exception("Order not found");
+
+            var sellers = order.OrderItems.GroupBy(oi => oi.SellerId).ToList();
+
+            foreach(var seller in sellers)
+            {
+                var sellerId = seller.Key;
+                var totalAmount = seller.Sum(oi => oi.Quantity * oi.UnitPrice);
+
+
+                var wallet = await _unitOfWork.walletRepository.GetAsync(w => w.UserId == sellerId);
+
+                if (wallet == null)
+                {
+                    wallet = new Wallet
+                    {
+                        UserId = sellerId,
+                        Balance = totalAmount
+                    };
+
+                    await _unitOfWork.walletRepository.AddAsync(wallet);
+                }
+                else
+                {
+                    wallet.Balance += totalAmount;
+                    await _unitOfWork.walletRepository.UpdateAsync(wallet);
+                }
+
+            }
+
+            await _unitOfWork.SaveChangesAsync();
         }
 
 
@@ -263,6 +304,5 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-       
     }
 }

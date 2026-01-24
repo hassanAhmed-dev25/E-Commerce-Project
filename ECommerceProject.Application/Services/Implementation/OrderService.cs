@@ -1,10 +1,5 @@
-﻿using ECommerceProject.Application.DTOs.CartItem;
-using ECommerceProject.Application.DTOs.Order;
-using ECommerceProject.Application.DTOs.Product;
-using ECommerceProject.Domain.Entities;
-using ECommerceProject.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
+﻿using Microsoft.EntityFrameworkCore;
+
 
 namespace ECommerceProject.Application.Services.Implementation
 {
@@ -245,6 +240,7 @@ namespace ECommerceProject.Application.Services.Implementation
 
             order.PaymentStatus = PaymentStatus.Paid;
 
+            await _unitOfWork.Orders.UpdateAsync(order);
             await _unitOfWork.SaveChangesAsync();
         }
 
