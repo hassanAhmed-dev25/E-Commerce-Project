@@ -9,7 +9,7 @@
         Task<GetOrderDto> GetOrderAsync(int orderId);
         Task CancelOrderAsync(int orderId);
 
-        Task<int> GetTotalOrders(string userId);
+        Task<int> GetTotalOrdersAsync(string userId);
 
         Task MarkAsPaidAsync(int orderId);
       

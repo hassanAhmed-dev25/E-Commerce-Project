@@ -2,6 +2,7 @@
 using ECommerceProject.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ECommerceProject.MVC.Controllers
@@ -10,10 +11,12 @@ namespace ECommerceProject.MVC.Controllers
     public class DashboardController : Controller
     {
         public IWalletService _walletServive { get; set; }
+        public IOrderService _orderService { get; set; }
 
-        public DashboardController(IWalletService walletServive)
+        public DashboardController(IWalletService walletServive, IOrderService orderService)
         {
             _walletServive = walletServive;
+            _orderService = orderService;
         }
 
 
@@ -30,16 +33,25 @@ namespace ECommerceProject.MVC.Controllers
         }
 
 
-        //public async Task<IActionResult> Seller()
-        //{
-             
-        //    var vm = new GetSellerDataForDashboardVM
-        //    {
-        //        WalletBalance = await _walletServive.get
-        //    };
+        public async Task<IActionResult> Seller()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        //    return View(vm);
-        //}
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+
+            var vm = new GetSellerDataForDashboardVM
+            {
+                TotalSales = await _walletServive.GetTotalSalesAsync(userId),
+                WalletBalance = await _walletServive.GetWalletBalanceAsync(userId),
+                PendingWithdrawals = await _walletServive.GetWalletPendingWithdrawalsAsync(userId),
+
+                TotalOrders = await _orderService.GetTotalOrdersAsync(userId),
+            };
+
+            return View(vm);
+        }
 
     }
 }

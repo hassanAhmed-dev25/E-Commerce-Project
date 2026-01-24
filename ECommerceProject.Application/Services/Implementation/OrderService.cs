@@ -287,7 +287,7 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        public async Task<int> GetTotalOrders(string userId)
+        public async Task<int> GetTotalOrdersAsync(string userId)
         {
             try
             {
