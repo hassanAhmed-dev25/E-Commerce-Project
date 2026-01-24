@@ -1,6 +1,5 @@
 ﻿using ECommerceProject.Application.Services.Implementation;
 using Microsoft.Extensions.DependencyInjection;
-using Org.BouncyCastle.Security;
 
 namespace ECommerceProject.Application
 {
@@ -21,6 +20,8 @@ namespace ECommerceProject.Application
 
             services.AddScoped<IPaymentService, PaymentService>();
             
+
+            services.AddScoped<IWalletService, WalletService>();
 
 
             return services;
