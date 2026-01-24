@@ -193,9 +193,50 @@ namespace ECommerceProject.Application.Services.Implementation
         }
         
 
-        public Task RejectWithdrawalAsync(int withdrawalRequestId)
+        public async Task RejectWithdrawalAsync(int withdrawalRequestId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Validation
+
+
+                // Get Withdrawal Request
+                var request = await _unitOfWork.WithdrawalRepository.GetAsync(wr => wr.Id == withdrawalRequestId);
+
+                if (request == null)
+                    throw new Exception("Withdrawal request not found.");
+
+                if (request.WithdrawalStatus != WithdrawalStatus.Pending)
+                    throw new Exception("Withdrawal request is not pending.");
+
+                var wallet = await _unitOfWork.walletRepository.GetAsync(w => w.UserId == request.SellerId);
+
+                if (wallet == null)
+                    throw new Exception("Wallet not found.");
+
+
+
+                // Reject withdrawal
+                request.WithdrawalStatus = WithdrawalStatus.Rejected;
+                request.ApprovedAt = DateTime.UtcNow;
+
+                // Return money
+                wallet.Balance += request.Amount;
+
+
+                // Update the Request and wallet
+                await _unitOfWork.WithdrawalRepository.UpdateAsync(request);
+                await _unitOfWork.walletRepository.UpdateAsync(wallet);
+
+
+                // Save it
+                await _unitOfWork.SaveChangesAsync();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         
