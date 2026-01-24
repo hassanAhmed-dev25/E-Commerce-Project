@@ -1,5 +1,4 @@
 ﻿using ECommerceProject.Infrastructure.Data.SeedData;
-using ECommerceProject.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
@@ -37,6 +36,8 @@ namespace ECommerceProject.Infrastructure.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<ShippingAddress> ShippingAddresses { get; set; }
 
+        public DbSet<Wallet> Wallets { get; set; }
+        public DbSet<WithdrawalRequest> WithdrawalRequests { get; set;}
 
 
     }
