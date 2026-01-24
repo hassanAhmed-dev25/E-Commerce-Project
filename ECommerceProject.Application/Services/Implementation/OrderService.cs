@@ -286,5 +286,27 @@ namespace ECommerceProject.Application.Services.Implementation
                 return new Response<IEnumerable<GetOrderDto>>(null, ex.Message, false);
             }
         }
+
+        public async Task<int> GetTotalOrders(string userId)
+        {
+            try
+            {
+                // Getting the Orders
+                var orders = await _unitOfWork.Orders.GetAllAsync(o => o.UserId == userId);
+
+                // Check is null or not
+                if (orders == null)
+                {
+                    return -1;
+                }
+
+                return orders.Count();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
