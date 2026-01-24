@@ -14,7 +14,7 @@ namespace ECommerceProject.Application.Services.Implementation
 
 
         // Wallet
-        public async Task<GetWalletDto> GetOrCreateWalletAsync(int userId)
+        public async Task<GetWalletDto> GetOrCreateWalletAsync(string userId)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace ECommerceProject.Application.Services.Implementation
 
 
         // Seller
-        public async Task RequestWithdrawalAsync(int sellerId, decimal amount)
+        public async Task RequestWithdrawalAsync(string sellerId, decimal amount)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        public async Task CompleteWithdrawalAsync(int sellerId, int withdrawalRequestId)
+        public async Task CompleteWithdrawalAsync(string sellerId, int withdrawalRequestId)
         {
             try
             {

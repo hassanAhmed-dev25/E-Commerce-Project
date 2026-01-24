@@ -5,12 +5,12 @@ namespace ECommerceProject.Application.Services.Interfaces
     public interface IWalletService
     {
         // Wallet
-        Task<GetWalletDto> GetOrCreateWalletAsync(int userId);
+        Task<GetWalletDto> GetOrCreateWalletAsync(string userId);
 
 
         // Seller
-        Task RequestWithdrawalAsync(int sellerId, decimal amount);
-        Task CompleteWithdrawalAsync(int sellerId, int withdrawalRequestId);
+        Task RequestWithdrawalAsync(string sellerId, decimal amount);
+        Task CompleteWithdrawalAsync(string sellerId, int withdrawalRequestId);
 
 
         // Admin

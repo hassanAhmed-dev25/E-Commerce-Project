@@ -6,6 +6,6 @@
         public decimal Balance { get; set; }
 
         // Foreign Keys
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

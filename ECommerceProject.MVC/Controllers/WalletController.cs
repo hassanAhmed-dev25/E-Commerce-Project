@@ -1,0 +1,33 @@
+﻿using ECommerceProject.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
+
+namespace ECommerceProject.MVC.Controllers
+{
+    [Authorize]
+    public class WalletController : Controller
+    {
+        private IWalletService _walletService;
+        public WalletController(IWalletService walletService)
+        {
+            _walletService = walletService;
+        }
+
+
+        public async Task<IActionResult> Index()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var res = await _walletService.GetOrCreateWalletAsync(userId);
+
+            return View(res);
+        }
+
+
+    }
+}

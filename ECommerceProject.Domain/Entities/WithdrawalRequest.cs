@@ -15,6 +15,6 @@ namespace ECommerceProject.Domain.Entities
 
 
         // Foreign Keys
-        public int SellerId { get; set; }
+        public string SellerId { get; set; }
     }
 }
