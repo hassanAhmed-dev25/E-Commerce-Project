@@ -1,0 +1,135 @@
+﻿@{
+    ViewData["Title"] = "Seller Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="p-4 bg-light min-vh-100">
+
+        <!-- Header -->
+        <div class="mb-4">
+            <h3 class="mb-1">Seller Dashboard</h3>
+            <small class="text-muted">Quick overview of your store performance</small>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-3">
+
+            <!-- Total Sales -->
+            <div class="col-md-3">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="d-flex align-items-center mb-2 fw-bold text-primary">
+                        <i class="bi bi-cash-stack fs-4 me-2"></i>
+                        <span class="fw-semibold fs-6">Total Sales</span>
+                    </div>
+                    <h3 class="fw-bold mb-0">$12,450</h3>
+                </div>
+            </div>
+
+            <!-- Total Orders -->
+            <div class="col-md-3">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="d-flex align-items-center mb-2 fw-bold text-primary">
+                        <i class="bi bi-bag-check fs-4 me-2"></i>
+                        <span class="fw-semibold fs-6">Total Orders</span>
+                    </div>
+                    <h3 class="fw-bold mb-1">183</h3>
+                    <a asp-controller="Order" asp-action="Index" class="small text-primary">
+                        View orders →
+                    </a>
+                </div>
+            </div>
+
+
+
+            <!-- Wallet Balance -->
+            <div class="col-md-3">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="d-flex align-items-center mb-2 fw-bold text-primary">
+                        <i class="bi bi-wallet2 fs-4 me-2"></i>
+                        <span class="fw-semibold fs-6">Wallet Balance</span>
+                    </div>
+                    <h3 class="fw-bold mb-1">$3,200</h3>
+                    <a asp-controller="Wallet" asp-action="Index" class="small text-primary">
+                        View wallet →
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- Pending Withdrawals -->
+            <div class="col-md-3">
+                <div class="card shadow-sm p-3 h-100 border-warning">
+                    <div class="d-flex align-items-center mb-2 fw-bold text-warning">
+                        <i class="bi bi-hourglass-split fs-4 me-2"></i>
+                        <span class="fw-semibold fs-6">Pending Withdrawals</span>
+                    </div>
+                    <h3 class="fw-bold text-warning mb-0">$900</h3>
+                    <small class="text-muted">Under review</small>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mt-4 g-3">
+
+            <!-- Products -->
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h6 class="mb-2">
+                        <i class="bi bi-box-seam me-1"></i>
+                        Manage Products
+                    </h6>
+                    <p class="small text-muted mb-3">
+                        Add, update, or remove your products.
+                    </p>
+                    <a asp-controller="Product"
+                       asp-action="Index"
+                       class="btn btn-outline-primary btn-sm">
+                        Go to products
+                    </a>
+                </div>
+            </div>
+
+            <!-- Orders -->
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h6 class="mb-2">
+                        <i class="bi bi-receipt me-1"></i>
+                        View Orders
+                    </h6>
+                    <p class="small text-muted mb-3">
+                        Track and manage recent orders.
+                    </p>
+                    <a asp-controller="Order"
+                       asp-action="Index"
+                       class="btn btn-outline-primary btn-sm">
+                        Go to orders
+                    </a>
+                </div>
+            </div>
+
+            <!-- Withdrawal -->
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h6 class="mb-2">
+                        <i class="bi bi-arrow-down-circle me-1"></i>
+                        Request Withdrawal
+                    </h6>
+                    <p class="small text-muted mb-3">
+                        Withdraw your available balance.
+                    </p>
+                    <a asp-controller="Wallet"
+                       asp-action="RequestWithdraw"
+                       class="btn btn-outline-warning btn-sm">
+                        Request withdrawal
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
