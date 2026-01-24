@@ -125,8 +125,8 @@ namespace ECommerceProject.Application.Services.Implementation
                 if (request == null)
                     throw new Exception("Withdrawal rquest found.");
 
-                if (request.WithdrawalStatus != WithdrawalStatus.Pending)
-                    throw new Exception("Withdrawal request is not pending.");
+                if (request.WithdrawalStatus != WithdrawalStatus.Approved)
+                    throw new Exception("Withdrawal request is not approved.");
 
 
 
@@ -154,9 +154,42 @@ namespace ECommerceProject.Application.Services.Implementation
 
 
         // Admin
-        public Task ApproveWithdrawalAsync(int withdrawalRequestId)
+        public async Task ApproveWithdrawalAsync(int withdrawalRequestId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Validation
+
+
+                // Get Withdrawal Request
+                var request = await _unitOfWork.WithdrawalRepository.GetAsync(wr => wr.Id == withdrawalRequestId);
+
+                if(request == null)
+                    throw new Exception("Withdrawal request not found.");
+
+                if (request.WithdrawalStatus != WithdrawalStatus.Pending)
+                    throw new Exception("Withdrawal request is not pending.");
+
+
+
+                // Complete withdrawal
+                request.WithdrawalStatus = WithdrawalStatus.Approved;
+                request.ApprovedAt = DateTime.UtcNow;
+
+
+
+                // Update the Request
+                await _unitOfWork.WithdrawalRepository.UpdateAsync(request);
+
+
+                // Save it
+                await _unitOfWork.SaveChangesAsync();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         
 
