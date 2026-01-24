@@ -13,6 +13,9 @@
         IOrderItemRepository OrderItems { get; }
         IShippingAddressRepository ShippingAddresses { get; }
 
+        IWalletRepository walletRepository { get; }
+        IWithdrawalRequestRepository WithdrawalRepository { get; }
+
 
 
 

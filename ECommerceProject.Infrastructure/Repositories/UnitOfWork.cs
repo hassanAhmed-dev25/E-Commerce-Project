@@ -23,6 +23,9 @@ namespace ECommerceProject.Infrastructure.Repositories
             OrderItems = new OrderItemRepository(_context);
             ShippingAddresses = new ShippingAddressRepository(_context);
 
+            walletRepository = new WalletRepository(_context);
+            WithdrawalRepository = new WithdrawalRequestRepository(_context);
+
         }
 
 
@@ -41,7 +44,12 @@ namespace ECommerceProject.Infrastructure.Repositories
         public IShippingAddressRepository ShippingAddresses { get; }
 
 
-        
+        public IWalletRepository walletRepository { get; }
+
+        public IWithdrawalRequestRepository WithdrawalRepository { get; }
+
+
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
