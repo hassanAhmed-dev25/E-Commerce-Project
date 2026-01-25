@@ -10,5 +10,19 @@ namespace ECommerceProject.MVC.Controllers
         {
             return View();
         }
+
+        public IActionResult ManageUsers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetAllUsers()
+        {
+
+            
+
+        }
+
     }
 }
