@@ -7,7 +7,7 @@ namespace ECommerceProject.Application.Services.Implementation
     {
 
 
-        public Task<GetUsersDto> GetAllUsers()
+        public Task<GetUserDto> GetAllUsers()
         {
             throw new NotImplementedException();
         }

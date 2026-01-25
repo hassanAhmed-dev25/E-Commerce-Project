@@ -1,6 +1,6 @@
 ﻿namespace ECommerceProject.Application.DTOs.Admin
 {
-    public class GetUsersDto
+    public class GetUserDto
     {
         //public string Id { get; set; }
         public string Email { get; set; }

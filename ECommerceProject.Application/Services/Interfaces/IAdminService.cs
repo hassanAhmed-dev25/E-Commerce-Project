@@ -4,6 +4,6 @@ namespace ECommerceProject.Application.Services.Interfaces
 {
     public interface IAdminService
     {
-        Task<GetUsersDto> GetAllUsers();
+        Task<GetUserDto> GetAllUsers();
     }
 }
