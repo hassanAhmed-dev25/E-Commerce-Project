@@ -68,6 +68,10 @@
 wwwroot/DataTables/** linguist-vendored
 wwwroot/lib/** linguist-vendored
 
+wwwroot/js/** linguist-vendored
+wwwroot/js/custom/** linguist-vendored=false
+
+
 # Ignore minified files in language stats
 *.min.js linguist-generated
 *.min.css linguist-generated
