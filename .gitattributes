@@ -76,3 +76,8 @@ wwwroot/js/custom/** linguist-vendored=false
 *.min.js linguist-generated
 *.min.css linguist-generated
 
+
+
+# Force JS to be non-primary language
+**/*.js linguist-language=Other
+
