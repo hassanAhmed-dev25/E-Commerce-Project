@@ -13,6 +13,9 @@ namespace ECommerceProject.Application.Services.Interfaces
         Task<Response<IEnumerable<GetProductDto>>> GetAllProductsAsync();
         Task<Response<IEnumerable<GetProductDto>>> GetMyProductsAsync(string userId);
 
+        Task<int> GetTotalProductsAsync(string userId);
+        
+
 
         Task<Response<GetProductDto>> GetProductForUpdateAsync(int productId, string userId);
 

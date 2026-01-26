@@ -6,7 +6,7 @@ namespace ECommerceProject.Application.Services.Interfaces
     {
         //Task<IEnumerable<GetUserDto>> GetAllAsync();
         //Task<IList<string>> GetUserRolesAsync(string userId);
-        Task<IEnumerable<GetUserDto>> GetAllWithRolesAsync(string email);
+        Task<IEnumerable<GetUserDto>> GetAllWithRolesAsync();
     }
 
 }

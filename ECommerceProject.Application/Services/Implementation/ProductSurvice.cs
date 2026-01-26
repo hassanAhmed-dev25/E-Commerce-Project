@@ -278,7 +278,29 @@ namespace ECommerceProject.Application.Services.Implementation
                 return new Response<GetProductDto>(null, ex.Message, false);
             }
         }
-        
+
+
+        public async Task<int> GetTotalProductsAsync(string userId)
+        {
+            try
+            {
+                // Getting the Products
+                var products = await _unitOfWork.Products.GetAllAsync(p => p.CreatedBy == userId);
+
+                // Check is null or not
+                if (products == null)
+                {
+                    return -1;
+                }
+
+                return products.Count();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
 
         public async Task<Response<IEnumerable<GetProductDto>>> GetMyProductsAsync(string userId)
@@ -418,5 +440,7 @@ namespace ECommerceProject.Application.Services.Implementation
                 return new Response<bool>(false, ex.Message, false);
             }
         }
+
+        
     }
 }

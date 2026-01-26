@@ -16,13 +16,13 @@ namespace ECommerceProject.MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> GetAllUsers()
-        {
+        //[HttpPost]
+        //public async Task<IActionResult> GetAllUsers()
+        //{
 
             
 
-        }
+        //}
 
     }
 }
