@@ -1,5 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.Admin;
-using Microsoft.AspNetCore.Identity;
+using ECommerceProject.Application.DTOs.Wallet;
 
 namespace ECommerceProject.Application.Services.Implementation
 {
@@ -20,6 +20,9 @@ namespace ECommerceProject.Application.Services.Implementation
             return await _userService.GetAllWithRolesAsync();
         }
 
-
+        public async Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalsAsync()
+        {
+            return await _walletService.GetAllWithdrawalRequestsForAllUsersAsync();
+        }
     }
 }
