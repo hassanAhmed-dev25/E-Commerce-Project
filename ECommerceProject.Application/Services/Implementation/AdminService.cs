@@ -5,11 +5,19 @@ namespace ECommerceProject.Application.Services.Implementation
 {
     public class AdminService : IAdminService
     {
-
-
-        public Task<GetUserDto> GetAllUsers()
+        public IUserService _userService;
+        public AdminService(IUserService userService)
         {
-            throw new NotImplementedException();
+            _userService = userService;
         }
+
+
+
+        public async Task<IEnumerable<GetUserDto>> GetAllUsersWithRolesAsync()
+        {
+            return await _userService.GetAllWithRolesAsync();
+        }
+
+
     }
 }
