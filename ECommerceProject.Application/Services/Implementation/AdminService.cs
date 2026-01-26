@@ -13,16 +13,31 @@ namespace ECommerceProject.Application.Services.Implementation
             _walletService = walletService;
         }
 
-
-
         public async Task<IEnumerable<GetUserDto>> GetAllUsersWithRolesAsync()
         {
             return await _userService.GetAllWithRolesAsync();
         }
 
+
+
+
         public async Task<IEnumerable<GetManageWithdrawalsDto>> GetAllWithdrawalsAsync()
         {
             return await _walletService.GetAllWithdrawalRequestsForAllUsersAsync();
         }
+
+
+
+        public Task ApproveWithdrawalsAsync()
+        {
+            throw new NotImplementedException();
+        }
+        public Task RejectWithdrawalsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        
+        
     }
 }
