@@ -49,21 +49,12 @@
                                    data-bs-toggle="dropdown">
                                     Admin Panel
                                 </a>
-                                <ul class="dropdown-menu ms-2">
-                                    <li>
-                                        <a class="dropdown-item"
-                                           asp-controller="Dashboard"
-                                           asp-action="Admin">
-                                            Dashboard
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item"
-                                           asp-controller="Admin"
-                                           asp-action="ManageUsers">
-                                            Manage Users
-                                        </a>
-                                    </li>
+                                <ul class="dropdown-menu ms-2">  
+                                    <li><a class="dropdown-item" asp-controller="Dashboard" asp-action="Admin">Dashboard</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="ManageWithdrawals">Manage Withdrawals</a></li>
+
                                 </ul>
                             </li>
                         }

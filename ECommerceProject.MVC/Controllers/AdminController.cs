@@ -19,11 +19,12 @@ namespace ECommerceProject.MVC.Controllers
             return View();
         }
 
+
+        // Manage Users
         public IActionResult ManageUsers()
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -39,6 +40,20 @@ namespace ECommerceProject.MVC.Controllers
             });
 
         }
+
+
+
+
+        // Manage Withdrawals
+        public IActionResult ManageWithdrawals()
+        {
+            return View();
+        }
+        //[HttpPost]
+        //public async Task<IActionResult> GetAllWithdrawalsAjax()
+        //{
+
+        //}
 
     }
 }
