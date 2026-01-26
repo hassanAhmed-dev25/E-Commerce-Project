@@ -20,6 +20,11 @@ namespace ECommerceProject.Application.Services.Interfaces
         Task<bool> IsUserNameUniqueAsync(string userName);
         Task<bool> IsEmailUniqueAsync(string email);
 
+
+
+        Task<int> GetTotalUsers();
+
+
         
     }
 }

@@ -177,5 +177,10 @@ namespace ECommerceProject.Infrastructure.Identity
 
             return IdentityResult.Success;
         }
+
+        public Task<int> GetTotalUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
