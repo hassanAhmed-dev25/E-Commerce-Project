@@ -385,7 +385,7 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        public async Task<decimal> GetTotalRevenue()
+        public async Task<decimal> GetTotalRevenueAsync()
         {
             var paidOrders = await _unitOfWork.Orders.GetAllAsync(o => o.PaymentStatus == PaymentStatus.Paid);
 
@@ -400,7 +400,7 @@ namespace ECommerceProject.Application.Services.Implementation
 
         }
 
-        public async Task<int> GetTotalPendingWithdrawals()
+        public async Task<int> GetTotalPendingWithdrawalsAsync()
         {
             var pendingWithdrawals = await _unitOfWork.WithdrawalRepository.GetAllAsync(wr => wr.WithdrawalStatus == WithdrawalStatus.Pending);
 

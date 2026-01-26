@@ -22,7 +22,7 @@ namespace ECommerceProject.Application.Services.Interfaces
 
 
 
-        Task<int> GetTotalUsers();
+        Task<int> GetTotalUsersAsync();
 
 
         

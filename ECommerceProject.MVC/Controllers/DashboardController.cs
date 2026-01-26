@@ -10,13 +10,16 @@ namespace ECommerceProject.MVC.Controllers
     [Authorize]
     public class DashboardController : Controller
     {
-        public IWalletService _walletServive { get; set; }
-        public IOrderService _orderService { get; set; }
+        private readonly IWalletService _walletServive;
+        private readonly IOrderService _orderService;
+        private readonly IAccountServive _accountServive;
+        
 
-        public DashboardController(IWalletService walletServive, IOrderService orderService)
+        public DashboardController(IWalletService walletServive, IOrderService orderService, IAccountServive accountServive)
         {
             _walletServive = walletServive;
             _orderService = orderService;
+            _accountServive = accountServive;
         }
 
 
@@ -64,7 +67,12 @@ namespace ECommerceProject.MVC.Controllers
 
             var vm = new GetAdminDataForDashboardVM
             {
+                TotalRevenue = await _walletServive.GetTotalRevenueAsync(),
+                PendingWithdrawals = await _walletServive.GetTotalPendingWithdrawalsAsync(),
                 
+                TotalOrders = await _orderService.GetTotalOrdersAsync(),
+                
+                TotalUsers = await _accountServive.GetTotalUsersAsync()
             };
 
             return View(vm);

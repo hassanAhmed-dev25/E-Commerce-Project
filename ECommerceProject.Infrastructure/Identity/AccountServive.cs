@@ -178,7 +178,7 @@ namespace ECommerceProject.Infrastructure.Identity
             return IdentityResult.Success;
         }
 
-        public async Task<int> GetTotalUsers()
+        public async Task<int> GetTotalUsersAsync()
         {
             return await _userManager.Users.CountAsync();
         }
