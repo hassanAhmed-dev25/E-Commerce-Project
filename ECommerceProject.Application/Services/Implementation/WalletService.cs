@@ -400,6 +400,11 @@ namespace ECommerceProject.Application.Services.Implementation
 
         }
 
+        public async Task<int> GetTotalPendingWithdrawals()
+        {
+            var pendingWithdrawals = await _unitOfWork.WithdrawalRepository.GetAllAsync(wr => wr.WithdrawalStatus == WithdrawalStatus.Pending);
 
+            return pendingWithdrawals.Count();
+        }
     }
 }
