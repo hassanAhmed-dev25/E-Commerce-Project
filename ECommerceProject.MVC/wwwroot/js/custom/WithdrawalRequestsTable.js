@@ -68,13 +68,13 @@
 
                     switch (data) {
                         case 1:
-                            return `<button class="btn btn-danger btn-sm" disabled>
+                            return `<button class="btn btn-secondary btn-sm" disabled>
                                         Under Review </button>`;
                         case 2:
                             return `<a href="/Wallet/WithdrawMoney?withdrawalId=${row.id}"
                                             class="btn btn-success btn-sm">Withdraw Now</a>`;
                         case 3:
-                            return `<button class="btn btn-danger btn-sm" disabled>
+                            return `<button class="btn btn-primary btn-sm" disabled>
                                         Completed</button>`;
                         case 4:
                             return `<button class="btn btn-danger btn-sm" disabled>

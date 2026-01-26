@@ -61,7 +61,6 @@ namespace ECommerceProject.MVC.Controllers
             return View();
         }
         [HttpPost]
-        //[AllowAnonymous]
         public async Task<IActionResult> GetWithdrawasAjax()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -83,9 +82,20 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
-        public IActionResult WithdrwaMoney(int withdrawalId)
+        public async  Task<IActionResult> WithdrawMoney(int withdrawalId)
         {
-            return View();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            if (withdrawalId < 0)
+                return BadRequest();
+
+            await _walletService.CompleteWithdrawalAsync(userId, withdrawalId);
+
+
+            return RedirectToAction("GetWithdrawas");
         }
 
     } 
