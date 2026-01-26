@@ -72,19 +72,17 @@
 
                     if (row.withdrawalStatus === 1) { // Pending
                         return `
-                <button class="btn btn-success btn-sm me-1"
-                        onclick="approveWithdrawal(${id})">
+                <button class="btn btn-success btn-sm me-1">
                     Approve
                 </button>
 
-                <button class="btn btn-danger btn-sm"
-                        onclick="rejectWithdrawal(${id})">
+                <button class="btn btn-danger btn-sm">
                     Reject
                 </button>
             `;
                     }
 
-                    return `<span class="text-muted">—</span>`;
+                    return `<span class="text-muted">Approved</span>`;
                 }
             }
 
