@@ -5,10 +5,12 @@ namespace ECommerceProject.Application.Services.Implementation
 {
     public class AdminService : IAdminService
     {
-        public IUserService _userService;
-        public AdminService(IUserService userService)
+        private readonly IUserService _userService;
+        private readonly IWalletService _walletService;
+        public AdminService(IUserService userService, IWalletService walletService)
         {
             _userService = userService;
+            _walletService = walletService;
         }
 
 

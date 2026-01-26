@@ -7,6 +7,7 @@ namespace ECommerceProject.Application.Services.Interfaces
         // Wallet
         Task<GetWalletDto> GetOrCreateWalletAsync(string userId);
         Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalRequests(string userId);
+        Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalRequestsForAllUsersAsync();
         Task SendMoneyToSellers(int orderId);
 
         Task<decimal> GetTotalSalesAsync(string sellerId);

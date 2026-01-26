@@ -84,6 +84,31 @@ namespace ECommerceProject.Application.Services.Implementation
                 throw;
             }
         }
+        public async Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalRequestsForAllUsersAsync()
+        {
+            try
+            {
+                var requests = await _unitOfWork.WithdrawalRepository.GetAllAsync();
+
+
+                
+                if (requests == null)
+                    throw new Exception("requests not found");
+
+
+                return requests.Select(wi => new WithdrawalRequestDto
+                {
+                    Id = wi.Id,
+                    Amount = wi.Amount,
+                    RequestedAt = wi.RequestedAt,
+                    WithdrawalStatus = wi.WithdrawalStatus
+                }).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task SendMoneyToSellers(int orderId)
         {
