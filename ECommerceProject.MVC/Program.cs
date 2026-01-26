@@ -6,10 +6,13 @@ using ECommerceProject.Infrastructure.Common;
 using ECommerceProject.Infrastructure.Data;
 using ECommerceProject.Infrastructure.Data.SeedData;
 using ECommerceProject.Infrastructure.Identity;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using ECommerceProject.MVC.Languages;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
+using System.Globalization;
 
 namespace ECommerceProject.MVC
 {
@@ -20,7 +23,15 @@ namespace ECommerceProject.MVC
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+
+            // Localization/ Globalization Configurations
+            .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+            .AddDataAnnotationsLocalization(options =>
+            {
+                options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    factory.Create(typeof(SharedResource));
+            });
 
 
 
@@ -69,6 +80,14 @@ namespace ECommerceProject.MVC
 
             var app = builder.Build();
 
+            // Localization/ Globalization Caltures
+            var supportedCultures = new[]
+            {
+                new CultureInfo("ar-EG"),
+                new CultureInfo("en-US"),
+            };
+
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -107,6 +126,21 @@ namespace ECommerceProject.MVC
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+
+            // Localization/ Globalization Middleware
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures,
+                RequestCultureProviders = new List<IRequestCultureProvider>
+                {
+                    new QueryStringRequestCultureProvider(),
+                    new CookieRequestCultureProvider()
+                }
+            });
+
 
             app.MapControllerRoute(
                 name: "default",
