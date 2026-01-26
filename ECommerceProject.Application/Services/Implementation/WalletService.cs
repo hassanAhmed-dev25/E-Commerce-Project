@@ -338,8 +338,7 @@ namespace ECommerceProject.Application.Services.Implementation
                 throw;
             }
         }
-        
-
+       
         public async Task RejectWithdrawalAsync(int withdrawalRequestId)
         {
             try
@@ -386,9 +385,19 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        public Task<decimal> GetTotalRevenue()
+        public async Task<decimal> GetTotalRevenue()
         {
-            throw new NotImplementedException();
+            var paidOrders = await _unitOfWork.Orders.GetAllAsync(o => o.PaymentStatus == PaymentStatus.Paid);
+
+            if (!paidOrders.Any())
+                return 0;
+
+
+            var res = paidOrders.Sum(o => o.TotalAmount);
+
+
+            return res;
+
         }
 
 
