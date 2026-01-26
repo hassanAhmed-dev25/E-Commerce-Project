@@ -53,5 +53,22 @@ namespace ECommerceProject.MVC.Controllers
             return View(vm);
         }
 
+
+
+        public async Task<IActionResult> Admin()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var vm = new GetAdminDataForDashboardVM
+            {
+                
+            };
+
+            return View(vm);
+        }
+
     }
 }

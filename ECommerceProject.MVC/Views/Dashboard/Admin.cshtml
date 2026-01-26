@@ -1,0 +1,122 @@
+﻿@using ECommerceProject.MVC.ViewModels
+@model GetAdminDataForDashboardVM
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="p-4 bg-light min-vh-100">
+
+        <!-- Header -->
+        <div class="mb-4">
+            <h3 class="mb-1">Admin Dashboard</h3>
+            <small class="text-muted">System overview & control panel</small>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-3">
+
+            <div class="col-md-3">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="d-flex align-items-center mb-2 text-primary fw-bold">
+                        <i class="bi bi-cash-stack fs-4 me-2"></i>
+                        Total Revenue
+                    </div>
+                    <h3 class="fw-bold">$@Model.TotalRevenue</h3>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="d-flex align-items-center mb-2 text-primary fw-bold">
+                        <i class="bi bi-receipt fs-4 me-2"></i>
+                        Total Orders
+                    </div>
+                    <h3 class="fw-bold">@Model.TotalOrders</h3>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm p-3 h-100 border-warning">
+                    <div class="d-flex align-items-center mb-2 text-warning fw-bold">
+                        <i class="bi bi-hourglass-split fs-4 me-2"></i>
+                        Pending Withdrawals
+                    </div>
+                    <h3 class="fw-bold text-warning">
+                        @Model.PendingWithdrawals
+                    </h3>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="d-flex align-items-center mb-2 text-primary fw-bold">
+                        <i class="bi bi-people fs-4 me-2"></i>
+                        Total Users
+                    </div>
+                    <h3 class="fw-bold">@Model.TotalUsers</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mt-4 g-3">
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h6>
+                        <i class="bi bi-arrow-down-up me-1"></i>
+                        Manage Withdrawals
+                    </h6>
+                    <p class="small text-muted">
+                        Approve or reject sellers withdrawal requests.
+                    </p>
+                    <a asp-controller="Admin"
+                       asp-action="ManageWithdrawals"
+                       class="btn btn-outline-warning btn-sm">
+                        View withdrawals
+                    </a>
+                </div>
+            </div>
+
+            @* <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h6>
+                        <i class="bi bi-box-seam me-1"></i>
+                        Manage Products
+                    </h6>
+                    <p class="small text-muted">
+                        Review, approve or remove products.
+                    </p>
+                    <a asp-controller="Admin"
+                       asp-action="Products"
+                       class="btn btn-outline-primary btn-sm">
+                        View products
+                    </a>
+                </div>
+            </div> *@
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h6>
+                        <i class="bi bi-people me-1"></i>
+                        Manage Users
+                    </h6>
+                    <p class="small text-muted">
+                        Block, activate or view system users.
+                    </p>
+                    <a asp-controller="Admin"
+                       asp-action="ManageUsers"
+                       class="btn btn-outline-danger btn-sm">
+                        View users
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
