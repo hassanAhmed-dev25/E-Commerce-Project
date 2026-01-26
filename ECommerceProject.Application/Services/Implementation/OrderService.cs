@@ -287,12 +287,18 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        public async Task<int> GetTotalOrdersAsync(string userId)
+        public async Task<int> GetTotalOrdersAsync(string? userId = null)
         {
             try
             {
                 // Getting the Orders
-                var orders = await _unitOfWork.Orders.GetAllAsync(o => o.UserId == userId);
+                IEnumerable<Order> orders;
+
+                if (userId == null)
+                    orders = await _unitOfWork.Orders.GetAllAsync();
+                else
+                    orders = await _unitOfWork.Orders.GetAllAsync(o => o.UserId == userId);
+
 
                 // Check is null or not
                 if (orders == null)
