@@ -120,11 +120,8 @@
   <data name="Home" xml:space="preserve">
     <value>القائمة الرئيسية</value>
   </data>
-  <data name="Signup" xml:space="preserve">
+  <data name="SignUp" xml:space="preserve">
     <value>انشاء حساب</value>
-  </data>
-  <data name="Manage Orders" xml:space="preserve">
-    <value>ادارة المنتجات</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>مرحبا</value>
@@ -141,7 +138,31 @@
   <data name="Cart" xml:space="preserve">
     <value>السله</value>
   </data>
-  <data name="Seller Section " xml:space="preserve">
+  <data name="ManageOrders" xml:space="preserve">
+    <value>ادارة المنتجات</value>
+  </data>
+  <data name="SellerSection" xml:space="preserve">
     <value>قسم البائع</value>
+  </data>
+  <data name="AdminSection" xml:space="preserve">
+    <value>قسم الادمن</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>لوحة التحكم</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>ادارة المستخدمين</value>
+  </data>
+  <data name="ManageWithdrawals" xml:space="preserve">
+    <value>ادارة السحوبات</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>المنتجات</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>الفئات</value>
+  </data>
+  <data name="Wallet" xml:space="preserve">
+    <value>المحفظة</value>
   </data>
 </root>
