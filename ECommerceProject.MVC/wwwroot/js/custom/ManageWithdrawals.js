@@ -72,14 +72,20 @@
 
                     if (row.withdrawalStatus === 1) { // Pending
                         return `
-                <button class="btn btn-success btn-sm me-1">
-                    Approve
-                </button>
+                            <button 
+                                class="btn btn-success btn-sm me-1 btn-withdrawal-action"
+                                data-id="${id}"
+                                data-action="approve">
+                                Approve
+                            </button>
 
-                <button class="btn btn-danger btn-sm">
-                    Reject
-                </button>
-            `;
+                            <button 
+                                class="btn btn-danger btn-sm btn-withdrawal-action"
+                                data-id="${id}"
+                                data-action="reject">
+                                Reject
+                            </button>
+                        `;
                     }
 
                     return `<span class="text-muted">Approved</span>`;
@@ -100,3 +106,45 @@
     });
 
 });
+
+
+
+$(document).on("click", ".btn-withdrawal-action", function () {
+
+    const id = $(this).data("id");
+    const action = $(this).data("action");
+
+    let confirmMsg = action === "approve"
+        ? "Are you sure you want to approve this withdrawal?"
+        : "Are you sure you want to reject this withdrawal?";
+
+    if (!confirm(confirmMsg))
+        return;
+
+    $.ajax({
+        url: "/Admin/UpdateWithdrawalStatusAjax",
+        type: "POST",
+        data: {
+            withdrawalRequestId: id,
+            action: action
+        },
+        success: function (res) {
+
+            if (res.success) {
+                alert(res.message);
+
+                // Reload DataTable
+                $("#ManageWithdrawals").DataTable().ajax.reload(null, false);
+            } else {
+                alert(res.message);
+            }
+        },
+        error: function () {
+            alert("Something went wrong!");
+        }
+    });
+});
+
+
+
+

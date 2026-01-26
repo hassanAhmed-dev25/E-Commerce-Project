@@ -67,10 +67,12 @@
                 render: function (data, type, row) {
 
                     switch (data) {
-
+                        case 1:
+                            return `<button class="btn btn-danger btn-sm" disabled>
+                                        Under Review </button>`;
                         case 2:
                             return `<a href="/Wallet/WithdrawMoney?withdrawalId=${row.id}"
-                                            class="btn btn-success btn-sm">Pay Now</a>`;
+                                            class="btn btn-success btn-sm">Withdraw Now</a>`;
                         case 3:
                             return `<button class="btn btn-danger btn-sm" disabled>
                                         Completed</button>`;
@@ -78,8 +80,7 @@
                             return `<button class="btn btn-danger btn-sm" disabled>
                                         Rejected</button>`;
                         default:
-                            return `<button class="btn btn-danger btn-sm" disabled>
-                                        Under Review </button>`;
+                            return "-";
                     }
                 }
                 

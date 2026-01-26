@@ -1,4 +1,5 @@
 ﻿using ECommerceProject.Application.Services.Interfaces;
+using ECommerceProject.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,11 +66,31 @@ namespace ECommerceProject.MVC.Controllers
 
 
 
-        // Approve Withdrawal
-        //public async Task<IActionResult> ApproveWithdrawalAjax()
-        //{
-        //    await _
-        //}
+        // Approve and Reject Withdrawal
+        public async Task<IActionResult> UpdateWithdrawalStatusAjax(int withdrawalRequestId, string action)
+        {
+           
+            if (action == "approve")
+            {
+                await _adminService.ApproveWithdrawalsAsync(withdrawalRequestId);
+            }
+            else if (action == "reject")
+            {
+                await _adminService.RejectWithdrawalsAsync(withdrawalRequestId);
+            }
+            else
+            {
+                return Json(new { success = false, message = "Invalid action" });
+            }
+
+
+            return Json(new
+            {
+                success = true,
+                message = $"Withdrawal {action}d successfully"
+            });
+
+        }
 
 
     }

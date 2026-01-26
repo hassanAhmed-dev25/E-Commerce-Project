@@ -8,8 +8,8 @@ namespace ECommerceProject.Application.Services.Interfaces
         Task<IEnumerable<GetUserDto>> GetAllUsersWithRolesAsync();
 
         Task<IEnumerable<GetManageWithdrawalsDto>> GetAllWithdrawalsAsync();
-        Task ApproveWithdrawalsAsync();
-        Task RejectWithdrawalsAsync();
+        Task ApproveWithdrawalsAsync(int withdrawalRequestId);
+        Task RejectWithdrawalsAsync(int withdrawalRequestId);
 
 
     }

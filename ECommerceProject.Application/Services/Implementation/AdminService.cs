@@ -1,5 +1,4 @@
 ﻿using ECommerceProject.Application.DTOs.Admin;
-using ECommerceProject.Application.DTOs.Wallet;
 
 namespace ECommerceProject.Application.Services.Implementation
 {
@@ -28,13 +27,13 @@ namespace ECommerceProject.Application.Services.Implementation
 
 
 
-        public Task ApproveWithdrawalsAsync()
+        public async Task ApproveWithdrawalsAsync(int withdrawalRequestId)
         {
-            throw new NotImplementedException();
+            await _walletService.ApproveWithdrawalAsync(withdrawalRequestId);
         }
-        public Task RejectWithdrawalsAsync()
+        public async Task RejectWithdrawalsAsync(int withdrawalRequestId)
         {
-            throw new NotImplementedException();
+            await _walletService.RejectWithdrawalAsync(withdrawalRequestId);
         }
 
         
