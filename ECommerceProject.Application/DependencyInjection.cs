@@ -23,6 +23,8 @@ namespace ECommerceProject.Application
 
             services.AddScoped<IWalletService, WalletService>();
 
+            services.AddScoped<IAdminService, AdminService>();
+
 
             return services;
         }

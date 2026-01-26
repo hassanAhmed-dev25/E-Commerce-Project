@@ -1,5 +1,4 @@
 ﻿using ECommerceProject.Application.Validation.Account;
-using ECommerceProject.Infrastructure.Identity;
 using ECommerceProject.Infrastructure.Repositories;
 using ECommerceProject.Infrastructure.Services;
 using FluentValidation;
@@ -25,6 +24,8 @@ namespace ECommerceProject.Infrastructure
 
 
             services.AddScoped<IStripeService, StripeService>();
+
+            services.AddScoped<IUserService, UserService>();
 
 
             return services;
