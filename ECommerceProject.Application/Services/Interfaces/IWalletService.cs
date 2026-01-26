@@ -25,5 +25,8 @@ namespace ECommerceProject.Application.Services.Interfaces
         // Admin
         Task ApproveWithdrawalAsync(int withdrawalRequestId);
         Task RejectWithdrawalAsync(int withdrawalRequestId);
+        Task<decimal> GetTotalRevenue();
+
+
     }
 }

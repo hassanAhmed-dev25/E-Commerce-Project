@@ -386,6 +386,11 @@ namespace ECommerceProject.Application.Services.Implementation
             }
         }
 
-        
+        public Task<decimal> GetTotalRevenue()
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }
