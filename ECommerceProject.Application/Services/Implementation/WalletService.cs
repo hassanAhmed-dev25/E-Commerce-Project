@@ -1,4 +1,5 @@
-﻿using ECommerceProject.Application.DTOs.Wallet;
+﻿using ECommerceProject.Application.DTOs.Admin;
+using ECommerceProject.Application.DTOs.Wallet;
 using ECommerceProject.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +9,12 @@ namespace ECommerceProject.Application.Services.Implementation
     public class WalletService : IWalletService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public WalletService(IUnitOfWork unitOfWork)
+        public WalletService(IUnitOfWork unitOfWork, IUserService userService)
         {
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
 
@@ -84,25 +87,39 @@ namespace ECommerceProject.Application.Services.Implementation
                 throw;
             }
         }
-        public async Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalRequestsForAllUsersAsync()
+        public async Task<IEnumerable<GetManageWithdrawalsDto>> GetAllWithdrawalRequestsForAllUsersAsync()
         {
             try
             {
-                var requests = await _unitOfWork.WithdrawalRepository.GetAllAsync();
+                var withdrawals = await _unitOfWork.WithdrawalRepository.GetAllAsync();
 
 
                 
-                if (requests == null)
+                if (withdrawals == null)
                     throw new Exception("requests not found");
 
 
-                return requests.Select(wi => new WithdrawalRequestDto
+                var users = await _userService.GetAllWithRolesAsync();
+
+                var result = withdrawals.Select(wr =>
                 {
-                    Id = wi.Id,
-                    Amount = wi.Amount,
-                    RequestedAt = wi.RequestedAt,
-                    WithdrawalStatus = wi.WithdrawalStatus
-                }).ToList();
+                    var user = users.FirstOrDefault(u => u.Id == wr.SellerId);
+
+                    return new GetManageWithdrawalsDto
+                    {
+                        Id = wr.Id,
+                        Amount = wr.Amount,
+                        RequestedAt = wr.RequestedAt,
+                        WithdrawalStatus = wr.WithdrawalStatus,
+
+                        Email = user?.Email,
+                        
+                    };
+                });
+
+                return result;
+
+
             }
             catch (Exception)
             {

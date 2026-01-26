@@ -20,7 +20,7 @@ namespace ECommerceProject.Application.Services.Implementation
             return await _userService.GetAllWithRolesAsync();
         }
 
-        public async Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalsAsync()
+        public async Task<IEnumerable<GetManageWithdrawalsDto>> GetAllWithdrawalsAsync()
         {
             return await _walletService.GetAllWithdrawalRequestsForAllUsersAsync();
         }

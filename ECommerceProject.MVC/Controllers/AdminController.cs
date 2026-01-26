@@ -49,11 +49,19 @@ namespace ECommerceProject.MVC.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public async Task<IActionResult> GetAllWithdrawalsAjax()
-        //{
+        [HttpPost]
+        public async Task<IActionResult> GetAllWithdrawalsAjax()
+        {
+            var withdrawals = await _adminService.GetAllWithdrawalsAsync();
 
-        //}
+            return Json(new
+            {
+                draw = Request.Form["draw"],
+                recordsTotal = withdrawals.Count(),
+                recordsFiltered = withdrawals.Count(),
+                data = withdrawals
+            });
+        }
 
     }
 }

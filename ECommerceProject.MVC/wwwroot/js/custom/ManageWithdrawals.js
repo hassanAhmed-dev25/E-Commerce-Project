@@ -10,27 +10,33 @@
 
         ajax: {
             url: "/Admin/GetAllWithdrawalsAjax",
-            type: "POST",
-            datatype: "json"
+            type: "POST"
         },
 
         columns: [
             { data: "id", name: "Id" },
 
             {
-                data: "amount",
-                name: "Amount",
-                render: function (data) {
-                    return `<strong>${data.toFixed(2)} EGP</strong>`;
-                }
+                data: "fullName",
+                name: "FullName"
             },
 
+            {
+                data: "email",
+                name: "Email"
+            },
+
+            {
+                data: "amount",
+                name: "Amount",
+                className: "text-center",
+                render: data => `<strong>${data.toFixed(2)} EGP</strong>`
+            },
 
             {
                 data: "withdrawalStatus",
                 name: "WithdrawalStatus",
                 render: function (data) {
-
                     switch (data) {
                         case 1:
                             return `<span class="badge bg-warning text-dark">Pending</span>`;
@@ -43,8 +49,6 @@
                         default:
                             return "-";
                     }
-
-
                 }
             },
 
@@ -58,35 +62,34 @@
                         year: 'numeric'
                     });
                 }
-
             },
 
             {
-                data: "withdrawalStatus",
-                name: "WithdrawalStatus",
-                render: function (data, type, row) {
+                data: "id",
+                orderable: false,
+                searchable: false,
+                render: function (id, type, row) {
 
-                    switch (data) {
+                    if (row.withdrawalStatus === 1) { // Pending
+                        return `
+                <button class="btn btn-success btn-sm me-1"
+                        onclick="approveWithdrawal(${id})">
+                    Approve
+                </button>
 
-                        case 2:
-                            return `<a href="/Wallet/WithdrawMoney?withdrawalId=${row.id}"
-                                            class="btn btn-success btn-sm">Pay Now</a>`;
-                        case 3:
-                            return `<button class="btn btn-danger btn-sm" disabled>
-                                        Completed</button>`;
-                        case 4:
-                            return `<button class="btn btn-danger btn-sm" disabled>
-                                        Rejected</button>`;
-                        default:
-                            return `<button class="btn btn-danger btn-sm" disabled>
-                                        Under Review </button>`;
+                <button class="btn btn-danger btn-sm"
+                        onclick="rejectWithdrawal(${id})">
+                    Reject
+                </button>
+            `;
                     }
-                }
 
+                    return `<span class="text-muted">—</span>`;
+                }
             }
 
-
         ],
+
 
         order: [[3, "desc"]],
 

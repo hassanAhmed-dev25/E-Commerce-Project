@@ -33,6 +33,7 @@ namespace ECommerceProject.Infrastructure.Services
 
                 res.Add(new GetUserDto
                 {
+                    Id = user.Id,
                     Email = user.Email,
                     Role = role.ElementAt(0),
                     IsBlocked = false, // not supported yet

@@ -1,4 +1,5 @@
-﻿using ECommerceProject.Application.DTOs.Wallet;
+﻿using ECommerceProject.Application.DTOs.Admin;
+using ECommerceProject.Application.DTOs.Wallet;
 
 namespace ECommerceProject.Application.Services.Interfaces
 {
@@ -7,7 +8,7 @@ namespace ECommerceProject.Application.Services.Interfaces
         // Wallet
         Task<GetWalletDto> GetOrCreateWalletAsync(string userId);
         Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalRequests(string userId);
-        Task<IEnumerable<WithdrawalRequestDto>> GetAllWithdrawalRequestsForAllUsersAsync();
+        Task<IEnumerable<GetManageWithdrawalsDto>> GetAllWithdrawalRequestsForAllUsersAsync();
         Task SendMoneyToSellers(int orderId);
 
         Task<decimal> GetTotalSalesAsync(string sellerId);
