@@ -276,4 +276,46 @@
   <data name="Login" xml:space="preserve">
     <value>تسجيل</value>
   </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
+  <data name="SendResetLink" xml:space="preserve">
+    <value>ارسال رسالة تاكيد</value>
+  </data>
+  <data name="CreateNewPassword" xml:space="preserve">
+    <value>انشار كلمة مرور جديدة</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>كلمة مرور جديدة</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="CheckYourEmailTitle" xml:space="preserve">
+    <value>تحقق من بريدك الإلكتروني</value>
+  </data>
+  <data name="EmailSentMessage" xml:space="preserve">
+    <value>لقد أرسلنا رابط تأكيد إلى بريدك الإلكتروني.</value>
+  </data>
+  <data name="ResetPasswordInstruction" xml:space="preserve">
+    <value>يرجى فتح بريدك الإلكتروني والضغط على الرابط لإعادة تعيين كلمة المرور.</value>
+  </data>
+  <data name="CheckSpamNote" xml:space="preserve">
+    <value>إذا لم تجد الرسالة، يرجى التحقق من مجلد الرسائل غير المرغوب فيها.</value>
+  </data>
+  <data name="GotoLogin" xml:space="preserve">
+    <value>الذهاب إلى تسجيل الدخول</value>
+  </data>
+  <data name="EmailConfirmedTitle" xml:space="preserve">
+    <value>تم تأكيد البريد الالكترونى</value>
+  </data>
+  <data name="EmailConfirmedMessage" xml:space="preserve">
+    <value>يمكنك تسجيل الدخول الآن.</value>
+  </data>
+  <data name="ConfirmationFailed" xml:space="preserve">
+    <value>فشل التأكيد</value>
+  </data>
+  <data name="ConfirmationFailedDesc" xml:space="preserve">
+    <value>الرابط غير صالح أو منتهي الصلاحية.</value>
+  </data>
 </root>

@@ -271,9 +271,51 @@
     <value>Forgot your password?</value>
   </data>
   <data name="LoginTitle" xml:space="preserve">
-    <value>LoginTitle</value>
+    <value>Login</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="SendResetLink" xml:space="preserve">
+    <value>Send Reset Link</value>
+  </data>
+  <data name="CreateNewPassword" xml:space="preserve">
+    <value>Create New Password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="CheckYourEmailTitle" xml:space="preserve">
+    <value>Check your email</value>
+  </data>
+  <data name="EmailSentMessage" xml:space="preserve">
+    <value>We have sent a confirmation link to your email address.</value>
+  </data>
+  <data name="ResetPasswordInstruction" xml:space="preserve">
+    <value>Please open your email and click the link to reset your password.</value>
+  </data>
+  <data name="CheckSpamNote" xml:space="preserve">
+    <value>If you don’t see the email, check your spam folder.</value>
+  </data>
+  <data name="GotoLogin" xml:space="preserve">
+    <value>Go to Login</value>
+  </data>
+  <data name="EmailConfirmedTitle" xml:space="preserve">
+    <value>Email Confirmed</value>
+  </data>
+  <data name="EmailConfirmedMessage" xml:space="preserve">
+    <value>You can now login.</value>
+  </data>
+  <data name="ConfirmationFailed" xml:space="preserve">
+    <value>Confirmation Failed</value>
+  </data>
+  <data name="ConfirmationFailedDesc" xml:space="preserve">
+    <value>Invalid or expired link.</value>
   </data>
 </root>
