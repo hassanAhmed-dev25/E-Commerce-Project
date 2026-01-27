@@ -165,4 +165,67 @@
   <data name="Wallet" xml:space="preserve">
     <value>المحفظة</value>
   </data>
+  <data name="WelcomeTitle" xml:space="preserve">
+    <value>مرحبًا بك في متجرنا</value>
+  </data>
+  <data name="WelcomeSubtitle" xml:space="preserve">
+    <value>اكتشف منتجات رائعة بأسعار مميزة</value>
+  </data>
+  <data name="ShopByCategory" xml:space="preserve">
+    <value>تسوق حسب الفئة</value>
+  </data>
+  <data name="Electronics" xml:space="preserve">
+    <value>إلكترونيات</value>
+  </data>
+  <data name="MobilePhones" xml:space="preserve">
+    <value>الهواتف المحمولة</value>
+  </data>
+  <data name="Laptops" xml:space="preserve">
+    <value>أجهزة اللابتوب</value>
+  </data>
+  <data name="Clothing" xml:space="preserve">
+    <value>ملابس</value>
+  </data>
+  <data name="Shoes" xml:space="preserve">
+    <value>أحذية</value>
+  </data>
+  <data name="HomeAppliances" xml:space="preserve">
+    <value>الأجهزة المنزلية</value>
+  </data>
+  <data name="Books" xml:space="preserve">
+    <value>كتب</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>الألعاب</value>
+  </data>
+  <data name="FastDeliveryTitle" xml:space="preserve">
+    <value>توصيل سريع</value>
+  </data>
+  <data name="FastDeliveryDesc" xml:space="preserve">
+    <value>احصل على طلبك بسرعة</value>
+  </data>
+  <data name="SecurePaymentTitle" xml:space="preserve">
+    <value>دفع آمن</value>
+  </data>
+  <data name="SecurePaymentDesc" xml:space="preserve">
+    <value>عملية دفع آمنة 100٪</value>
+  </data>
+  <data name="BestPricesTitle" xml:space="preserve">
+    <value>أفضل الأسعار</value>
+  </data>
+  <data name="BestPricesDesc" xml:space="preserve">
+    <value>أسعار مناسبة وتنافسية</value>
+  </data>
+  <data name="StartShopping" xml:space="preserve">
+    <value>جاهز لبدء التسوق؟</value>
+  </data>
+  <data name="ShopNow" xml:space="preserve">
+    <value>تسوق الان</value>
+  </data>
+  <data name="ViewProducts" xml:space="preserve">
+    <value>عرض المنتجات</value>
+  </data>
+  <data name="BrowseProducts" xml:space="preserve">
+    <value>تصفح المنتجات</value>
+  </data>
 </root>

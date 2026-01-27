@@ -11,12 +11,12 @@
 
 <!-- Welcome -->
 <section class="hero text-center py-5 bg-light">
-    <h1 class="display-5 fw-bold">Welcome to Our Store</h1>
-    <p class="lead text-muted">Discover amazing products with great prices</p>
+    <h1 class="display-5 fw-bold">@SharedLocalizer["WelcomeTitle"]</h1>
+    <p class="lead text-muted">@SharedLocalizer["WelcomeSubtitle"]</p>
 
     <a asp-controller="Product" asp-action="ShowAllProducts"
        class="btn btn-primary btn-lg mt-3">
-        Browse Products
+        @SharedLocalizer["BrowseProducts"]
     </a>
 </section>
 
@@ -25,7 +25,7 @@
 
 <!-- Categories -->
 <section class="container my-5">
-    <h2 class="text-center mb-4">Shop by Category</h2>
+    <h2 class="text-center mb-4">@SharedLocalizer["ShopByCategory"]</h2>
 
     <div class="row">
         @foreach (var cat in Model)
@@ -33,13 +33,13 @@
             <div class="col-md-3 mb-3">
                 <div class="card text-center h-100 shadow-sm">
                     <div class="card-body">
-                        <h5>@cat.Name</h5>
+                        <h5>@SharedLocalizer[@cat.Name]</h5>
 
                         <a asp-controller="Product"
                            asp-action="ShowAllProducts"
                            asp-route-catgId="@cat.Id"
                            class="btn btn-outline-primary btn-sm mt-2">
-                            View Products
+                            @SharedLocalizer["ViewProducts"]
                         </a>
                     </div>
                 </div>
@@ -56,16 +56,16 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-md-4">
-                <h4>Fast Delivery</h4>
-                <p>Get your order quickly</p>
+                <h4>@SharedLocalizer["FastDeliveryTitle"]</h4>
+                <p>@SharedLocalizer["FastDeliveryDesc"]</p>
             </div>
             <div class="col-md-4">
-                <h4>Secure Payment</h4>
-                <p>100% safe checkout</p>
+                <h4>@SharedLocalizer["SecurePaymentTitle"]</h4>
+                <p>@SharedLocalizer["SecurePaymentDesc"]</p>
             </div>
             <div class="col-md-4">
-                <h4>Best Prices</h4>
-                <p>Affordable and competitive</p>
+                <h4>@SharedLocalizer["BestPricesTitle"]</h4>
+                <p>@SharedLocalizer["BestPricesDesc"]</p>
             </div>
         </div>
     </div>
@@ -75,11 +75,11 @@
 
 <!-- Shop Now -->
 <section class="text-center my-5">
-    <h3>Ready to start shopping?</h3>
+    <h3>@SharedLocalizer["StartShopping"]</h3>
 
     <a asp-controller="Product"
        asp-action="ShowAllProducts"
        class="btn btn-success btn-lg mt-3">
-        Shop Now
+        @SharedLocalizer["ShopNow"]
     </a>
 </section>
