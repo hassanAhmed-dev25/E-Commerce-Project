@@ -1,6 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
 using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
 
 namespace ECommerceProject.Application.Services.Interfaces
 {
@@ -24,7 +23,8 @@ namespace ECommerceProject.Application.Services.Interfaces
 
         Task<int> GetTotalUsersAsync();
 
+        Task<bool> AddRoleAsync(string role, string userId);
 
-        
+
     }
 }

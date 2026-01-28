@@ -241,11 +241,18 @@ namespace ECommerceProject.MVC.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public async Task<IActionResult> ChooseRole()
-        //{
-            
-        //}
+        [HttpPost]
+        public async Task<IActionResult> ChooseRole(string selectedRole)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var ress = await _accountServive.AddRoleAsync(selectedRole, userId);
+
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }

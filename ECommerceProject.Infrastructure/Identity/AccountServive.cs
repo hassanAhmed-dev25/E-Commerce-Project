@@ -1,8 +1,5 @@
 ﻿using ECommerceProject.Application.Common;
 using ECommerceProject.Application.DTOs.Account;
-using Microsoft.AspNetCore.Identity;
-using System.Data;
-using System.Net;
 
 namespace ECommerceProject.Infrastructure.Identity
 {
@@ -181,6 +178,24 @@ namespace ECommerceProject.Infrastructure.Identity
         public async Task<int> GetTotalUsersAsync()
         {
             return await _userManager.Users.CountAsync();
+        }
+
+        public async Task<bool> AddRoleAsync(string role, string userId)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null) return false;
+
+            // Add role
+            string[] allowedRoles = { "Seller", "Buyer" };
+
+            if (!allowedRoles.Contains(role))
+            {
+                return false;
+            }
+            var resultRole = await _userManager.AddToRoleAsync(user, role);
+
+            return true;
         }
     }
 }
