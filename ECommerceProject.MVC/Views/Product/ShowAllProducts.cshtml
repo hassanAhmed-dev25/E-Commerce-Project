@@ -18,7 +18,7 @@
         <a href="#"
            class="category-pill category-btn category-all"
            data-category-id="0">
-            All
+            @SharedLocalizer["All"]
         </a>
 
         <!-- Categories -->
@@ -27,7 +27,7 @@
             <a href="#"
                class="category-pill category-btn"
                data-category-id="@cat.Id">
-                @cat.Name
+                @SharedLocalizer[@cat.Name]
             </a>
         }
     </div>
@@ -70,13 +70,13 @@
                                asp-action="ViewProduct"
                                asp-route-prodId="@prod.Id"
                                class="btn btn-outline-primary btn-sm">
-                                View
+                                @SharedLocalizer["View"]
                             </a>
 
                         @if (item.IsInCart)
                             {
                                 <button class="btn btn-success btn-sm" disabled>
-                                    Added to your cart
+                                    @SharedLocalizer["AddedToYourCart"]
                                 </button>
                             }
                             else
@@ -84,7 +84,7 @@
                                 <button class="btn btn-primary btn-sm add-to-cart-btn"
                                         data-product-id="@prod.Id"
                                         data-price="@prod.Price">
-                                    Add to cart
+                                    @SharedLocalizer["AddToCart"]
                                 </button>
                             }
 

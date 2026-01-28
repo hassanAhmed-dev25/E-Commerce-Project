@@ -318,4 +318,16 @@
   <data name="ConfirmationFailedDesc" xml:space="preserve">
     <value>Invalid or expired link.</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="AddToCart" xml:space="preserve">
+    <value>Add To Cart</value>
+  </data>
+  <data name="AddedToYourCart" xml:space="preserve">
+    <value>Added to your cart</value>
+  </data>
 </root>

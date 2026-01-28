@@ -318,4 +318,16 @@
   <data name="ConfirmationFailedDesc" xml:space="preserve">
     <value>الرابط غير صالح أو منتهي الصلاحية.</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="AddToCart" xml:space="preserve">
+    <value>اضافة الى السلة</value>
+  </data>
+  <data name="AddedToYourCart" xml:space="preserve">
+    <value>تم اضافتها الى السلة</value>
+  </data>
 </root>
