@@ -7,6 +7,7 @@ using ECommerceProject.Infrastructure.Data;
 using ECommerceProject.Infrastructure.Data.SeedData;
 using ECommerceProject.Infrastructure.Identity;
 using ECommerceProject.MVC.Languages;
+using ECommerceProject.MVC.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -134,6 +135,7 @@ namespace ECommerceProject.MVC
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseMiddleware<RoleSelectionMiddleware>();
             app.UseAuthorization();
 
 
