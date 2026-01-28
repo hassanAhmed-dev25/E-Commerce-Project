@@ -330,4 +330,16 @@
   <data name="AddedToYourCart" xml:space="preserve">
     <value>تم اضافتها الى السلة</value>
   </data>
+  <data name="OrRegisterWith" xml:space="preserve">
+    <value>او انشاء حساب من خلال</value>
+  </data>
+  <data name="ContinueWithGoogle" xml:space="preserve">
+    <value>المتابعة من خلال جوجل</value>
+  </data>
+  <data name="ContinueWithMicrosoft" xml:space="preserve">
+    <value>المتابعة من خلال مايكروسوفت</value>
+  </data>
+  <data name="ContinueWithFacebook" xml:space="preserve">
+    <value>المتابعة من خلال فيسبوك</value>
+  </data>
 </root>

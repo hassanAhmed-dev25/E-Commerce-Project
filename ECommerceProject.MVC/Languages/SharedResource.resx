@@ -330,4 +330,16 @@
   <data name="AddedToYourCart" xml:space="preserve">
     <value>Added to your cart</value>
   </data>
+  <data name="OrRegisterWith" xml:space="preserve">
+    <value>Or Register With</value>
+  </data>
+  <data name="ContinueWithGoogle" xml:space="preserve">
+    <value>Continue With Google</value>
+  </data>
+  <data name="ContinueWithMicrosoft" xml:space="preserve">
+    <value>Continue With Microsoft</value>
+  </data>
+  <data name="ContinueWithFacebook" xml:space="preserve">
+    <value>Continue With Facebook</value>
+  </data>
 </root>
