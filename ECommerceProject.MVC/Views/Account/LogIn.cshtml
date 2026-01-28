@@ -71,5 +71,66 @@
 
             </div>
         </form>
+
+        <div class="row my-4">
+            <div class="col-12 text-center">
+                <hr />
+                <span class="text-muted fw-bold">
+                    @SharedLocalizer["OrLoginWith"]
+                </span>
+            </div>
+        </div>
+
+
+        <div class="row text-center pb-3">
+
+            <div class="card border-0 bg-light-subtle p-3">
+
+
+
+                <!-- Google -->
+                <a asp-controller="Account"
+                   asp-action="ExternalLogin"
+                   asp-route-provider="Google"
+                   class="btn btn-light border w-100 mb-2 d-flex align-items-center justify-content-center gap-2">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                         width="18" height="18" />
+                    <span class="fw-medium">
+                        @SharedLocalizer["ContinueWithGoogle"]
+                    </span>
+                </a>
+
+                @*     <!-- Microsoft -->
+                <a asp-controller ="Account"
+                   asp-action="ExternalLogin"
+                   asp-route-provider="Microsoft"
+                   class="btn btn-light border w-100 mb-2 d-flex align-items-center justify-content-center gap-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+                         width="18" height="18" />
+                    <span class="fw-medium">
+                        @SharedLocalizer["ContinueWithMicrosoft"]
+                    </span>
+                </a>
+
+                    <!-- Facebook -->
+                <a asp-controller="Account"
+                   asp-action="ExternalLogin"
+                   asp-route-provider="Facebook"
+                   class="btn btn-light border w-100 d-flex align-items-center justify-content-center gap-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                         width="18" height="18" />
+                    <span class="fw-medium">
+                        @SharedLocalizer["ContinueWithFacebook"]
+                    </span>
+                </a> *@
+
+
+
+            </div>
+
+
+        </div>
+
+
     </div>
 </div>

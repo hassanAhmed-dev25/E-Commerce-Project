@@ -6,7 +6,8 @@ using System.Security.Claims;
 
 namespace ECommerceProject.MVC.Controllers
 {
-    
+
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartService _cartService;

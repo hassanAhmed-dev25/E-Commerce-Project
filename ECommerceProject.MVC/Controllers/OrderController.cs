@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace ECommerceProject.MVC.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;

@@ -1,7 +1,6 @@
 ﻿using ECommerceProject.Application.DTOs.Cart;
 using ECommerceProject.Application.DTOs.Product;
 using ECommerceProject.Application.Services.Interfaces;
-using ECommerceProject.Domain.Entities;
 using ECommerceProject.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

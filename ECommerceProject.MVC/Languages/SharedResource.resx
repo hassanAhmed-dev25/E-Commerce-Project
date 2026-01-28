@@ -342,4 +342,7 @@
   <data name="ContinueWithFacebook" xml:space="preserve">
     <value>Continue With Facebook</value>
   </data>
+  <data name="OrLoginWith" xml:space="preserve">
+    <value>Or Login With</value>
+  </data>
 </root>

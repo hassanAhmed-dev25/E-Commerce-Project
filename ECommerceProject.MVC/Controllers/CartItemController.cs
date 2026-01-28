@@ -1,11 +1,13 @@
 ﻿using ECommerceProject.Application.DTOs.CartItem;
 using ECommerceProject.Application.Services.Interfaces;
 using ECommerceProject.MVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace ECommerceProject.MVC.Controllers
 {
+    [Authorize]
     public class CartItemController : Controller
     {
         private readonly ICartService _cartService;

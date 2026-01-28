@@ -342,4 +342,7 @@
   <data name="ContinueWithFacebook" xml:space="preserve">
     <value>المتابعة من خلال فيسبوك</value>
   </data>
+  <data name="OrLoginWith" xml:space="preserve">
+    <value>او تسجيل الدخول من خلال</value>
+  </data>
 </root>
