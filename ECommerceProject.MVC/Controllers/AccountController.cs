@@ -1,10 +1,12 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
 using ECommerceProject.Application.Services.Interfaces;
 using ECommerceProject.Infrastructure.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Tsp;
 using System.Data;
+using System.Security.Claims;
 
 
 namespace ECommerceProject.MVC.Controllers
@@ -12,9 +14,15 @@ namespace ECommerceProject.MVC.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountServive _accountServive;
-        public AccountController(IAccountServive accountServive)
+        private readonly IExternalAuthService _externalAuthService;
+
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public AccountController(IAccountServive accountServive, IExternalAuthService externalAuthService, SignInManager<ApplicationUser> signInManager)
         {
             _accountServive = accountServive;
+            _externalAuthService = externalAuthService;
+
+            _signInManager = signInManager;
         }
 
 
@@ -177,5 +185,67 @@ namespace ECommerceProject.MVC.Controllers
         {
             return View();
         }
+
+
+
+
+
+
+        // External Login
+        public IActionResult ExternalLogin(string provider)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account");
+
+            var properties =
+                _signInManager.ConfigureExternalAuthenticationProperties(
+                    provider,
+                    redirectUrl);
+
+            return Challenge(properties, provider);
+        }
+
+
+        public async Task<IActionResult> ExternalLoginCallback()
+        {
+            
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            if (info == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var dto = new ExternalLoginDto
+            {
+                Provider = info.LoginProvider,
+                ProviderKey = info.ProviderKey,
+                Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
+                LastName = info.Principal.FindFirstValue(ClaimTypes.Surname)
+            };
+
+
+            var result = await _externalAuthService.ExternalLoginAsync(dto);
+
+            if (!result.IsHaveRole)
+            {
+                return RedirectToAction("ChooseRole");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpGet]
+        public IActionResult ChooseRole()
+        {
+            return View();
+        }
+        //[HttpPost]
+        //public async Task<IActionResult> ChooseRole()
+        //{
+            
+        //}
+
     }
 }

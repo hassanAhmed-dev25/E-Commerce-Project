@@ -61,6 +61,15 @@ namespace ECommerceProject.MVC
             .AddDefaultTokenProviders();
 
 
+            // External login
+            builder.Services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+                    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+                });
+
+
 
 
 

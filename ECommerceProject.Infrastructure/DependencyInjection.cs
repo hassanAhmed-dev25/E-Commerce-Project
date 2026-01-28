@@ -27,6 +27,8 @@ namespace ECommerceProject.Infrastructure
 
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<IExternalAuthService, ExternalAuthService>();
+
 
             return services;
         }

@@ -1,4 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.Account;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ECommerceProject.Infrastructure.Services
 {
@@ -31,16 +32,23 @@ namespace ECommerceProject.Infrastructure.Services
 
         public async Task<ExternalLoginResultDto> ExternalLoginAsync(ExternalLoginDto dto)
         {
-            
+            bool isNewUser = false;
+            bool isHaveRole = false;
+
             var user = await _userManager.FindByEmailAsync(dto.Email);
 
             if (user == null)
             {
+                isNewUser = true;
+
                 user = new ApplicationUser
                 {
                     UserName = await GenerateUniqueUsernameAsync(dto.FirstName, dto.LastName),
                     Email = dto.Email,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
                 };
 
                 await _userManager.CreateAsync(user);
@@ -53,12 +61,19 @@ namespace ECommerceProject.Infrastructure.Services
                     );
             }
 
+            var userRoles = await _userManager.GetRolesAsync(user);
+            if (!userRoles.IsNullOrEmpty())
+                isHaveRole = true;
+
             await _signInManager.SignInAsync(user, false);
 
 
             return new ExternalLoginResultDto
             {
                 IsSuccess = true,
+                IsNewUser = isNewUser,
+                IsHaveRole = isHaveRole,
+
                 Message = "Logged in successfully"
             };
 
