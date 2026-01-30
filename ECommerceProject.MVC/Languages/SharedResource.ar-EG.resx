@@ -151,7 +151,7 @@
     <value>ادارة المستخدمين</value>
   </data>
   <data name="ManageWithdrawals" xml:space="preserve">
-    <value>ادارة السحوبات</value>
+    <value>ادارة طلبات السحب</value>
   </data>
   <data name="Products" xml:space="preserve">
     <value>المنتجات</value>
@@ -344,5 +344,71 @@
   </data>
   <data name="OrLoginWith" xml:space="preserve">
     <value>او تسجيل الدخول من خلال</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>المتابعة</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>الدور</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>الطلبات</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>تم الانشاء فى</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>الاجراءات</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>محظور</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>فعال</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>حظر</value>
+  </data>
+  <data name="Unblock" xml:space="preserve">
+    <value>فك الحظر</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="RequestedAt" xml:space="preserve">
+    <value>تم الطلب فى</value>
+  </data>
+  <data name="AdminDashboard" xml:space="preserve">
+    <value>لوحة تحكم الادمن</value>
+  </data>
+  <data name="TotalRevenue" xml:space="preserve">
+    <value>اجمالى الايرادات</value>
+  </data>
+  <data name="TotalOrders" xml:space="preserve">
+    <value>اجمالى الطلبات</value>
+  </data>
+  <data name="PendingWithdrawals" xml:space="preserve">
+    <value>طلبات السحب المعلقة</value>
+  </data>
+  <data name="TotalUsers" xml:space="preserve">
+    <value>اجمالى المستخدمين</value>
+  </data>
+  <data name="SystemOverview" xml:space="preserve">
+    <value>نظرة عامة على النظام ولوحة التحكم</value>
+  </data>
+  <data name="ManageWithdrawalsDesc" xml:space="preserve">
+    <value>الموافقة او رفض طلبات السحب الخاصه بالبائعين</value>
+  </data>
+  <data name="ManageUsersDesc" xml:space="preserve">
+    <value>حظر او تفعيل او عرض مستخدمى النظام.</value>
+  </data>
+  <data name="ViewUsers" xml:space="preserve">
+    <value>عرض المستخدمين</value>
+  </data>
+  <data name="ViewWithdrawals" xml:space="preserve">
+    <value>عرض طلبات السحب</value>
   </data>
 </root>

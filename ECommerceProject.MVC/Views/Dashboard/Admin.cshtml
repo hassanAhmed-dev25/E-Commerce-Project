@@ -11,8 +11,8 @@
 
         <!-- Header -->
         <div class="mb-4">
-            <h3 class="mb-1">Admin Dashboard</h3>
-            <small class="text-muted">System overview & control panel</small>
+            <h3 class="mb-1">@SharedLocalizer["AdminDashboard"]</h3>
+            <small class="text-muted">@SharedLocalizer["SystemOverview"]</small>
         </div>
 
         <!-- Stats Cards -->
@@ -22,7 +22,7 @@
                 <div class="card shadow-sm p-3 h-100">
                     <div class="d-flex align-items-center mb-2 text-primary fw-bold">
                         <i class="bi bi-cash-stack fs-4 me-2"></i>
-                        Total Revenue
+                        @SharedLocalizer["TotalRevenue"]
                     </div>
                     <h3 class="fw-bold">$@Model.TotalRevenue</h3>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="card shadow-sm p-3 h-100">
                     <div class="d-flex align-items-center mb-2 text-primary fw-bold">
                         <i class="bi bi-receipt fs-4 me-2"></i>
-                        Total Orders
+                        @SharedLocalizer["TotalOrders"]
                     </div>
                     <h3 class="fw-bold">@Model.TotalOrders</h3>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="card shadow-sm p-3 h-100 border-warning">
                     <div class="d-flex align-items-center mb-2 text-warning fw-bold">
                         <i class="bi bi-hourglass-split fs-4 me-2"></i>
-                        Pending Withdrawals
+                        @SharedLocalizer["PendingWithdrawals"]
                     </div>
                     <h3 class="fw-bold text-warning">
                         @Model.PendingWithdrawals
@@ -54,7 +54,7 @@
                 <div class="card shadow-sm p-3 h-100">
                     <div class="d-flex align-items-center mb-2 text-primary fw-bold">
                         <i class="bi bi-people fs-4 me-2"></i>
-                        Total Users
+                        @SharedLocalizer["TotalUsers"]
                     </div>
                     <h3 class="fw-bold">@Model.TotalUsers</h3>
                 </div>
@@ -69,15 +69,15 @@
                 <div class="card shadow-sm p-3 h-100">
                     <h6>
                         <i class="bi bi-arrow-down-up me-1"></i>
-                        Manage Withdrawals
+                        @SharedLocalizer["ManageWithdrawals"]
                     </h6>
                     <p class="small text-muted">
-                        Approve or reject sellers withdrawal requests.
+                        @SharedLocalizer["ManageWithdrawalsDesc"]
                     </p>
                     <a asp-controller="Admin"
                        asp-action="ManageWithdrawals"
                        class="btn btn-outline-warning btn-sm">
-                        View withdrawals
+                        @SharedLocalizer["ViewWithdrawals"]
                     </a>
                 </div>
             </div>
@@ -103,15 +103,15 @@
                 <div class="card shadow-sm p-3 h-100">
                     <h6>
                         <i class="bi bi-people me-1"></i>
-                        Manage Users
+                        @SharedLocalizer["ManageUsers"]
                     </h6>
                     <p class="small text-muted">
-                        Block, activate or view system users.
+                        @SharedLocalizer["ManageUsersDesc"]
                     </p>
                     <a asp-controller="Admin"
                        asp-action="ManageUsers"
                        class="btn btn-outline-danger btn-sm">
-                        View users
+                        @SharedLocalizer["ViewUsers"]
                     </a>
                 </div>
             </div>

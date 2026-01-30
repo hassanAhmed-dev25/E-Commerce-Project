@@ -1,6 +1,6 @@
 ﻿<form asp-action="ChooseRole" method="post">
 
-    <h4>Register as</h4>
+    <h4>@SharedLocalizer["RegisterAs"]</h4>
 
     <div class="form-check">
         <input class="form-check-input"
@@ -8,7 +8,7 @@
                name="selectedRole"
                value="Buyer" />
         <label class="form-check-label">
-            Buyer
+            @SharedLocalizer["Buyer"]
         </label>
     </div>
 
@@ -18,12 +18,12 @@
                name="selectedRole"
                value="Seller" />
         <label class="form-check-label">
-            Seller
+            @SharedLocalizer["Seller"]
         </label>
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">
-        Continue
+        @SharedLocalizer["Continue"]
     </button>
 
 </form>

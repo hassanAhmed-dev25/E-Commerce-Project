@@ -345,4 +345,70 @@
   <data name="OrLoginWith" xml:space="preserve">
     <value>Or Login With</value>
   </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>CreatedAt</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="Unblock" xml:space="preserve">
+    <value>Unblock</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="RequestedAt" xml:space="preserve">
+    <value>RequestedAt</value>
+  </data>
+  <data name="AdminDashboard" xml:space="preserve">
+    <value>Admin Dashboard</value>
+  </data>
+  <data name="TotalRevenue" xml:space="preserve">
+    <value>Total Revenue</value>
+  </data>
+  <data name="TotalOrders" xml:space="preserve">
+    <value>Total Orders</value>
+  </data>
+  <data name="PendingWithdrawals" xml:space="preserve">
+    <value>Pending Withdrawals</value>
+  </data>
+  <data name="TotalUsers" xml:space="preserve">
+    <value>Total Users</value>
+  </data>
+  <data name="SystemOverview" xml:space="preserve">
+    <value>System overview &amp; control panel</value>
+  </data>
+  <data name="ManageWithdrawalsDesc" xml:space="preserve">
+    <value>Approve or reject sellers withdrawal requests.</value>
+  </data>
+  <data name="ManageUsersDesc" xml:space="preserve">
+    <value>Block, activate or view system users.</value>
+  </data>
+  <data name="ViewUsers" xml:space="preserve">
+    <value>View Users</value>
+  </data>
+  <data name="ViewWithdrawals" xml:space="preserve">
+    <value>View Withdrawals</value>
+  </data>
 </root>
