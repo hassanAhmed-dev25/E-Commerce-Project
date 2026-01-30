@@ -136,7 +136,7 @@
     <value>السله</value>
   </data>
   <data name="ManageOrders" xml:space="preserve">
-    <value>ادارة المنتجات</value>
+    <value>ادارة الطلبات</value>
   </data>
   <data name="SellerSection" xml:space="preserve">
     <value>قسم البائع</value>
@@ -367,7 +367,7 @@
     <value>محظور</value>
   </data>
   <data name="Active" xml:space="preserve">
-    <value>فعال</value>
+    <value>نشط</value>
   </data>
   <data name="Block" xml:space="preserve">
     <value>حظر</value>
@@ -410,5 +410,233 @@
   </data>
   <data name="ViewWithdrawals" xml:space="preserve">
     <value>عرض طلبات السحب</value>
+  </data>
+  <data name="YourCartIsEmpty" xml:space="preserve">
+    <value>السلة الخاصة بك فارغة</value>
+  </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>سعر القطعة</value>
+  </data>
+  <data name="OrderSummary" xml:space="preserve">
+    <value>ملخص الطلب</value>
+  </data>
+  <data name="ShoppingCart" xml:space="preserve">
+    <value>عربة التسوق</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>عدد المنتجات</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>السعر الاجمالي</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteDesc" xml:space="preserve">
+    <value>هل تريد حذف</value>
+  </data>
+  <data name="Category!" xml:space="preserve">
+    <value> الفئة!</value>
+  </data>
+  <data name="CreateCategory" xml:space="preserve">
+    <value>انشاء فئة</value>
+  </data>
+  <data name="CategoryList" xml:space="preserve">
+    <value>قائمة الفئات</value>
+  </data>
+  <data name="CreateNewCategory" xml:space="preserve">
+    <value>انشاء فئة جديدة</value>
+  </data>
+  <data name="ProductCount" xml:space="preserve">
+    <value>عدد المنتجات</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="UpdateCategory" xml:space="preserve">
+    <value>تعديل الفئة</value>
+  </data>
+  <data name="SellerDashboard" xml:space="preserve">
+    <value>لوحة تحكم البائع</value>
+  </data>
+  <data name="SellerDashboardDesc" xml:space="preserve">
+    <value>نظرة سريعة على اداء متجرك</value>
+  </data>
+  <data name="TotalSales" xml:space="preserve">
+    <value>اجمالى المبيعات</value>
+  </data>
+  <data name="WalletBalance" xml:space="preserve">
+    <value>رصيد المحفظة</value>
+  </data>
+  <data name="ViewWallet" xml:space="preserve">
+    <value>عرض المجفظة --&gt;</value>
+  </data>
+  <data name="UnderReview" xml:space="preserve">
+    <value>تحت المراجعة</value>
+  </data>
+  <data name="GoToProducts" xml:space="preserve">
+    <value>الذهاب الى المنتجات</value>
+  </data>
+  <data name="ManageProducts" xml:space="preserve">
+    <value>ادارة المنتجات</value>
+  </data>
+  <data name="ManageProductsDesc" xml:space="preserve">
+    <value>اضافة او تعديل او حذف منتجاتك</value>
+  </data>
+  <data name="ViewOrders" xml:space="preserve">
+    <value>عرض الطلبات</value>
+  </data>
+  <data name="ViewOrdersDesc" xml:space="preserve">
+    <value>تتبع وادر طلباتك</value>
+  </data>
+  <data name="GoToOrders" xml:space="preserve">
+    <value>الذهاب الى الطلبات</value>
+  </data>
+  <data name="RequestWithdrawal" xml:space="preserve">
+    <value>طلب عملية سحب</value>
+  </data>
+  <data name="RequestWithdrawalDesc" xml:space="preserve">
+    <value>اسحب رصيدك المتاح.</value>
+  </data>
+  <data name="InStock" xml:space="preserve">
+    <value>الاتاحية</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>متاح</value>
+  </data>
+  <data name="OutOfStock" xml:space="preserve">
+    <value>غير متاح</value>
+  </data>
+  <data name="MaxAvailable" xml:space="preserve">
+    <value>الكمية المتاحة</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>المفضلة</value>
+  </data>
+  <data name="ShippingAddress" xml:space="preserve">
+    <value>عنوان الشحن</value>
+  </data>
+  <data name="PlaceOrder" xml:space="preserve">
+    <value>انشاء الطلب</value>
+  </data>
+  <data name="EGP" xml:space="preserve">
+    <value>ج.م</value>
+  </data>
+  <data name="OrderList" xml:space="preserve">
+    <value>قائمة الطلبات</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>رقم الطلب</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>المبلغ الاجمالي</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>حالة الطلب</value>
+  </data>
+  <data name="PaymentStatus" xml:space="preserve">
+    <value>حالة الدفع</value>
+  </data>
+  <data name="PayNow" xml:space="preserve">
+    <value>ادفع الأن</value>
+  </data>
+  <data name="CompletePayment" xml:space="preserve">
+    <value>اكمال الدفع</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>الدفع</value>
+  </data>
+  <data name="PaymentFailed" xml:space="preserve">
+    <value>فشل الدفع</value>
+  </data>
+  <data name="PaymentFailedDesc" xml:space="preserve">
+    <value>يمكنك المتابعة لاحقا او اختيار طريقة دفع اخرى</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>اعادة المحاولة</value>
+  </data>
+  <data name="PaymentSuccessful" xml:space="preserve">
+    <value>تم الدفع بنجاح</value>
+  </data>
+  <data name="PaymentSuccessfulDesc" xml:space="preserve">
+    <value>شكرا لك! تم الدفع بنجاح.</value>
+  </data>
+  <data name="ViewMyOrders" xml:space="preserve">
+    <value>عرض كل طلباتى</value>
+  </data>
+  <data name="PaymentSuccessfulDesc2" xml:space="preserve">
+    <value>يتم معالجة طلبك حاليا.</value>
+  </data>
+  <data name="Product!" xml:space="preserve">
+    <value>المنتج</value>
+  </data>
+  <data name="CreateProduct" xml:space="preserve">
+    <value>انشاء منتج</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>اختيار الفئة</value>
+  </data>
+  <data name="NotActive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>اسم المنتج</value>
+  </data>
+  <data name="CreateNewProduct" xml:space="preserve">
+    <value>انشاء منتج جديد</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+  <data name="StockQuantity" xml:space="preserve">
+    <value>الكمية المتوفرة</value>
+  </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>اسم الفئة</value>
+  </data>
+  <data name="ProductList" xml:space="preserve">
+    <value>قائمة المنتجات</value>
+  </data>
+  <data name="UpdateProduct" xml:space="preserve">
+    <value>تحديث المنتج</value>
+  </data>
+  <data name="WithdrawalHistory" xml:space="preserve">
+    <value>السحبات الخاصة بك</value>
+  </data>
+  <data name="New Withdrawal" xml:space="preserve">
+    <value>طلب سحب جديد</value>
+  </data>
+  <data name="WalletId" xml:space="preserve">
+    <value>رقم المحفظة</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>الاجراء</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>جميع السحبات</value>
+  </data>
+  <data name="AvailableBalance" xml:space="preserve">
+    <value>الرصيد المتاح</value>
+  </data>
+  <data name="SubmitRequest" xml:space="preserve">
+    <value>ارسال الطلب</value>
+  </data>
+  <data name="MinimumWithdrawal" xml:space="preserve">
+    <value>الحد الادني للسحب</value>
+  </data>
+  <data name="WithdrawalAmount" xml:space="preserve">
+    <value>كمية السحب</value>
+  </data>
+  <data name="NewWithdrawal" xml:space="preserve">
+    <value>طلب عملية سحب جديدة</value>
   </data>
 </root>

@@ -3,7 +3,7 @@
 
 
 <div class="container my-5">
-    <h2 class="mb-4 fw-bold">Checkout</h2>
+    <h2 class="mb-4 fw-bold">@SharedLocalizer["Checkout"]</h2>
 
     <form asp-controller="Order" asp-action="PlaceOrder" method="post">
 
@@ -22,7 +22,7 @@
                 <!-- Shipping Address -->
                 <div class="card mb-4">
                     <div class="card-header fw-bold">
-                        Shipping Address
+                        @SharedLocalizer["ShippingAddress"]
                     </div>
                     <div class="card-body row g-3">
                         <div class="col-md-6">
@@ -80,7 +80,7 @@
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header fw-bold">
-                        Order Summary
+                        @SharedLocalizer["OrderSummary"]
                     </div>
                     <div class="card-body">
 
@@ -88,20 +88,20 @@
                         {
                             <div class="d-flex justify-content-between mb-2">
                                 <span>@item.ProductName x @item.Quantity</span>
-                                <span>@item.UnitPrice EGP</span>
+                                <span>@item.UnitPrice @SharedLocalizer["EGP"]</span>
                             </div>
                         }
 
                         <hr />
 
                         <div class="d-flex justify-content-between fw-bold">
-                            <span>Total</span>
-                            <span>@Model.TotalAmount EGP</span>
+                            <span>@SharedLocalizer["Total"]</span>
+                            <span>@Model.TotalAmount @SharedLocalizer["EGP"]</span>
                         </div>
 
                         <button type="submit"
                                 class="btn btn-dark w-100 mt-3">
-                            Place Order
+                            @SharedLocalizer["PlaceOrder"]
                         </button>
 
                     </div>

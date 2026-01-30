@@ -7,7 +7,7 @@
     <div class="card-header gg-title ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Product List</h2>
+                <h2 class="text-white py-2">@SharedLocalizer["ProductList"]</h2>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
         <div class="row pb-3">
             <div class="col-6 offset-6 text-end">
                 <a asp-controller="Product" asp-action="Create" class="btn btn-secondary">
-                    <i class="bi bi-plus-circle"></i> Create New Product
+                    <i class="bi bi-plus-circle"></i> @SharedLocalizer["CreateNewProduct"]
                 </a>
             </div>
         </div>
@@ -24,13 +24,13 @@
             <thead>
                 <tr>
                     <th>
-                        Product Name
+                        @SharedLocalizer["ProductName"]
                     </th>
-                    <th>Price</th>
-                    <th>Stock Quantity</th>
-                    <th>Status</th>
-                    <th>Created At</th>
-                    <th>Category Name</th>
+                    <th>@SharedLocalizer["Price"]</th>
+                    <th>@SharedLocalizer["StockQuantity"]</th>
+                    <th>@SharedLocalizer["Status"]</th>
+                    <th>@SharedLocalizer["CreatedAt"]</th>
+                    <th>@SharedLocalizer["CategoryName"]</th>
                     <th></th>
                 </tr>
             </thead>
@@ -48,14 +48,14 @@
                             <div class="w-75 btn-group" role="group">
                                 <a asp-controller="Product" asp-action="Update" asp-route-prodId="@prod.Id"
                                    class="btn btn-success mx-2">
-                                    <i class="bi bi-pencil-square"></i> Edit
+                                    <i class="bi bi-pencil-square"></i> @SharedLocalizer["Edit"]
                                 </a>
                                 <button class="btn btn-danger mx-2"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteModal"
                                         data-id="@prod.Id"
                                         data-content="@prod.Name">
-                                    <i class="bi bi-trash-fill"></i> Delete
+                                    <i class="bi bi-trash-fill"></i> @SharedLocalizer["Delete"]
                                 </button>
                             </div>
                         </td>

@@ -411,4 +411,232 @@
   <data name="ViewWithdrawals" xml:space="preserve">
     <value>View Withdrawals</value>
   </data>
+  <data name="YourCartIsEmpty" xml:space="preserve">
+    <value>Your cart is empty</value>
+  </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>Unit Price</value>
+  </data>
+  <data name="OrderSummary" xml:space="preserve">
+    <value>Order Summary</value>
+  </data>
+  <data name="ShoppingCart" xml:space="preserve">
+    <value>Shopping Cart</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteDesc" xml:space="preserve">
+    <value>Are you shure that you want to delete</value>
+  </data>
+  <data name="Category!" xml:space="preserve">
+    <value>Category!</value>
+  </data>
+  <data name="CreateCategory" xml:space="preserve">
+    <value>Create Category</value>
+  </data>
+  <data name="CategoryList" xml:space="preserve">
+    <value>Category List</value>
+  </data>
+  <data name="CreateNewCategory" xml:space="preserve">
+    <value>Create New Category</value>
+  </data>
+  <data name="ProductCount" xml:space="preserve">
+    <value>Product Count</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="UpdateCategory" xml:space="preserve">
+    <value>Update Category</value>
+  </data>
+  <data name="SellerDashboard" xml:space="preserve">
+    <value>Seller Dashboard</value>
+  </data>
+  <data name="SellerDashboardDesc" xml:space="preserve">
+    <value>Quick overview of your store performance</value>
+  </data>
+  <data name="TotalSales" xml:space="preserve">
+    <value>Total Sales</value>
+  </data>
+  <data name="WalletBalance" xml:space="preserve">
+    <value>Wallet Balance</value>
+  </data>
+  <data name="ViewWallet" xml:space="preserve">
+    <value>View wallet --&gt;</value>
+  </data>
+  <data name="UnderReview" xml:space="preserve">
+    <value>Under review</value>
+  </data>
+  <data name="GoToProducts" xml:space="preserve">
+    <value>Go to products</value>
+  </data>
+  <data name="ManageProducts" xml:space="preserve">
+    <value>Manage products</value>
+  </data>
+  <data name="ManageProductsDesc" xml:space="preserve">
+    <value>Add, update, or remove your products.</value>
+  </data>
+  <data name="ViewOrders" xml:space="preserve">
+    <value>View Orders</value>
+  </data>
+  <data name="ViewOrdersDesc" xml:space="preserve">
+    <value>Track and manage recent orders.</value>
+  </data>
+  <data name="GoToOrders" xml:space="preserve">
+    <value>Go to orders</value>
+  </data>
+  <data name="RequestWithdrawal" xml:space="preserve">
+    <value>Request Withdrawal</value>
+  </data>
+  <data name="RequestWithdrawalDesc" xml:space="preserve">
+    <value>Withdraw your available balance.</value>
+  </data>
+  <data name="InStock" xml:space="preserve">
+    <value>InStock</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>available</value>
+  </data>
+  <data name="OutOfStock" xml:space="preserve">
+    <value>Out of Stock</value>
+  </data>
+  <data name="MaxAvailable" xml:space="preserve">
+    <value>Max available</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>Wishlist</value>
+  </data>
+  <data name="ShippingAddress" xml:space="preserve">
+    <value>Shipping Address</value>
+  </data>
+  <data name="PlaceOrder" xml:space="preserve">
+    <value>Place Order</value>
+  </data>
+  <data name="EGP" xml:space="preserve">
+    <value>EGP</value>
+  </data>
+  <data name="OrderList" xml:space="preserve">
+    <value>Order List</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>Order Id</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>Order Status</value>
+  </data>
+  <data name="PaymentStatus" xml:space="preserve">
+    <value>Payment Status</value>
+  </data>
+  <data name="PayNow" xml:space="preserve">
+    <value>Pay Now</value>
+  </data>
+  <data name="CompletePayment" xml:space="preserve">
+    <value>Complete Payment</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="PaymentFailed" xml:space="preserve">
+    <value>Payment Failed</value>
+  </data>
+  <data name="PaymentFailedDesc" xml:space="preserve">
+    <value>You can try again or choose another payment method.</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Try Again</value>
+  </data>
+  <data name="PaymentSuccessful" xml:space="preserve">
+    <value>Payment Successful</value>
+  </data>
+  <data name="PaymentSuccessfulDesc" xml:space="preserve">
+    <value>Thank you! Your payment was completed successfully.</value>
+  </data>
+  <data name="ViewMyOrders" xml:space="preserve">
+    <value>View My Orders</value>
+  </data>
+  <data name="PaymentSuccessfulDesc2" xml:space="preserve">
+    <value>Your order is now being processed.</value>
+  </data>
+  <data name="Product!" xml:space="preserve">
+    <value>Product!</value>
+  </data>
+  <data name="CreateProduct" xml:space="preserve">
+    <value>Create Product</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Select Category</value>
+  </data>
+  <data name="NotActive" xml:space="preserve">
+    <value>Not Active</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="CreateNewProduct" xml:space="preserve">
+    <value>Create New Product</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="StockQuantity" xml:space="preserve">
+    <value>Stock Quantity</value>
+  </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Category Name</value>
+  </data>
+  <data name="ProductList" xml:space="preserve">
+    <value>Product List</value>
+  </data>
+  <data name="UpdateProduct" xml:space="preserve">
+    <value>Update Product</value>
+  </data>
+  <data name="WithdrawalHistory" xml:space="preserve">
+    <value>Withdrawal History</value>
+  </data>
+  <data name="New Withdrawal" xml:space="preserve">
+    <value>New Withdrawal</value>
+  </data>
+  <data name="WalletId" xml:space="preserve">
+    <value>Wallet Id</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="AvailableBalance" xml:space="preserve">
+    <value>Available Balance</value>
+  </data>
+  <data name="SubmitRequest" xml:space="preserve">
+    <value>Submit Request</value>
+  </data>
+  <data name="MinimumWithdrawal" xml:space="preserve">
+    <value>Minimum withdrawal</value>
+  </data>
+  <data name="WithdrawalAmount" xml:space="preserve">
+    <value>Withdrawal Amount</value>
+  </data>
+  <data name="NewWithdrawal" xml:space="preserve">
+    <value>New Withdrawal</value>
+  </data>
 </root>

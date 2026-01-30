@@ -48,14 +48,14 @@
             {
                 <p class="text-success fw-semibold mt-2">
                     <i class="bi bi-check-circle"></i>
-                    In Stock (@Model.StockQuantity available)
+                    @SharedLocalizer["InStock"] (@Model.StockQuantity @SharedLocalizer["Available"])
                 </p>
             }
             else
             {
                 <p class="text-danger fw-semibold mt-2">
                     <i class="bi bi-x-circle"></i>
-                    Out of Stock
+                    @SharedLocalizer["OutOfStock"]
                 </p>
             }
 
@@ -70,7 +70,7 @@
             <!-- Quantity Selector -->
             <div class="mt-4">
                 <label class="form-label fw-semibold">
-                    Quantity
+                    @SharedLocalizer["Quantity"]
                 </label>
 
                 <div class="input-group quantity-selector" style="max-width: 150px;">
@@ -96,7 +96,7 @@
                 </div>
 
                 <small class="text-muted d-block mt-1">
-                    Max available: @Model.StockQuantity
+                    @SharedLocalizer["MaxAvailable"]: @Model.StockQuantity
                 </small>
             </div>
 
@@ -106,12 +106,12 @@
                 <button class="btn btn-primary px-4 py-2"
                         @(inStock ? "" : "disabled")>
                     <i class="bi bi-cart-plus"></i>
-                    Add to Cart
+                    @SharedLocalizer["AddToCart"]
                 </button>
 
                 <button class="btn btn-outline-secondary px-4 py-2">
                     <i class="bi bi-heart"></i>
-                    Wishlist
+                    @SharedLocalizer["Wishlist"]
                 </button>
 
             </div>
@@ -120,7 +120,7 @@
             <!-- Meta Info -->
             <div class="border-top pt-4 mt-5 small text-muted">
                 <div class="d-flex justify-content-between">
-                    <span>Created At</span>
+                    <span>@SharedLocalizer["CreatedAt"]</span>
                     <span>@Model.CreatedAt.ToString("dd MMM yyyy")</span>
                 </div>
             </div>

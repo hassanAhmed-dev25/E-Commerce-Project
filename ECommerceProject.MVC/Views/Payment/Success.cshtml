@@ -5,12 +5,12 @@
 <div style="max-width:500px;margin:80px auto;text-align:center;font-family:Arial;">
     <div style="font-size:72px;color:#28a745;">✔</div>
 
-    <h2 style="margin-top:20px;">Payment Successful</h2>
+    <h2 style="margin-top:20px;">@SharedLocalizer["PaymentSuccessful"]</h2>
 
     <p style="color:#555;margin:20px 0;">
-        Thank you! Your payment was completed successfully.
+        @SharedLocalizer["PaymentSuccessfulDesc"]
         <br />
-        Your order is now being processed.
+        @SharedLocalizer["PaymentSuccessfulDesc2"]
     </p>
 
     <a href="/order/myorders"
@@ -20,6 +20,6 @@
               color:white;
               text-decoration:none;
               border-radius:6px;">
-        View My Orders
+        @SharedLocalizer["ViewMyOrders"]
     </a>
 </div>

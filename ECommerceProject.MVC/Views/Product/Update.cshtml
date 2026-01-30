@@ -8,7 +8,7 @@
     <div class="card-header gg-title ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Create Product</h2>
+                <h2 class="text-white py-2">@SharedLocalizer["UpdateProduct"]</h2>
             </div>
         </div>
     </div>
@@ -43,8 +43,8 @@
                 <!-- Is Active -->
                 <div class="form-floating py-1 col-12">
                     <select asp-for="IsActive" class="form-select border shadow">
-                        <option value="true">Active</option>
-                        <option value="false">Not Active</option>
+                        <option value="true">@SharedLocalizer["Active"]</option>
+                        <option value="false">@SharedLocalizer["NotActive"]</option>
                     </select>
                     <label asp-for="IsActive" class="ms-2"></label>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
@@ -87,12 +87,12 @@
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-check-circle"></i> Update
+                            <i class="bi bi-check-circle"></i> @SharedLocalizer["Update"]
                         </button>
                     </div>
                     <div class="col-6 col-md-3">
                         <a asp-controller="Product" asp-action="Index" class="btn btn-secondary w-100">
-                            <i class="bi bi-x-circle"></i> Cancel
+                            <i class="bi bi-x-circle"></i> @SharedLocalizer["Cancel"]
                         </a>
                     </div>
                 </div>

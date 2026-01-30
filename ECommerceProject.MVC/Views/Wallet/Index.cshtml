@@ -11,8 +11,8 @@
                     </div>
 
                     <!-- Title -->
-                    <h4 class="fw-bold mb-1">Wallet Balance</h4>
-                    <small class="text-muted">Available balance</small>
+                    <h4 class="fw-bold mb-1">@SharedLocalizer["WalletBalance"]</h4>
+                    <small class="text-muted">@SharedLocalizer["AvailableBalance"]</small>
 
                     <!-- Balance -->
                     <h2 class="fw-bold text-success mt-3">
@@ -27,13 +27,13 @@
                         <a asp-controller="Wallet" asp-action="RequestWithdraw"
                            class="btn btn-primary px-4 rounded-pill">
                             <i class="bi bi-cash-stack me-2"></i>
-                            Request Withdrawal
+                            @SharedLocalizer["RequestWithdrawal"]
                         </a>
 
                         <a asp-controller="Wallet" asp-action="GetWithdrawas"
                            class="btn btn-outline-secondary px-4 rounded-pill">
                             <i class="bi bi-clock-history me-2"></i>
-                            History
+                            @SharedLocalizer["History"]
                         </a>
 
                     </div>

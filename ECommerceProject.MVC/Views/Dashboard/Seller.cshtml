@@ -12,8 +12,8 @@
 
         <!-- Header -->
         <div class="mb-4">
-            <h3 class="mb-1">Seller Dashboard</h3>
-            <small class="text-muted">Quick overview of your store performance</small>
+            <h3 class="mb-1">@SharedLocalizer["SellerDashboard"]</h3>
+            <small class="text-muted">@SharedLocalizer["SellerDashboardDesc"]</small>
         </div>
 
         <!-- Stats Cards -->
@@ -24,7 +24,7 @@
                 <div class="card shadow-sm p-3 h-100">
                     <div class="d-flex align-items-center mb-2 fw-bold text-primary">
                         <i class="bi bi-cash-stack fs-4 me-2"></i>
-                        <span class="fw-semibold fs-6">Total Sales</span>
+                        <span class="fw-semibold fs-6">@SharedLocalizer["TotalSales"]</span>
                     </div>
                     <h3 class="fw-bold mb-0">$@Model.TotalSales</h3>
                 </div>
@@ -51,11 +51,11 @@
                 <div class="card shadow-sm p-3 h-100">
                     <div class="d-flex align-items-center mb-2 fw-bold text-primary">
                         <i class="bi bi-wallet2 fs-4 me-2"></i>
-                        <span class="fw-semibold fs-6">Wallet Balance</span>
+                        <span class="fw-semibold fs-6">@SharedLocalizer["WalletBalance"]</span>
                     </div>
                     <h3 class="fw-bold mb-1">$@Model.WalletBalance</h3>
                     <a asp-controller="Wallet" asp-action="Index" class="small text-primary">
-                        View wallet →
+                        @SharedLocalizer["ViewWallet"]
                     </a>
                 </div>
             </div>
@@ -66,10 +66,10 @@
                 <div class="card shadow-sm p-3 h-100 border-warning">
                     <div class="d-flex align-items-center mb-2 fw-bold text-warning">
                         <i class="bi bi-hourglass-split fs-4 me-2"></i>
-                        <span class="fw-semibold fs-6">Pending Withdrawals</span>
+                        <span class="fw-semibold fs-6">@SharedLocalizer["PendingWithdrawals"]</span>
                     </div>
                     <h3 class="fw-bold text-warning mb-0">$@Model.PendingWithdrawals</h3>
-                    <small class="text-muted">Under review</small>
+                    <small class="text-muted">@SharedLocalizer["UnderReview"]</small>
                 </div>
             </div>
 
@@ -84,15 +84,15 @@
                 <div class="card shadow-sm p-3 h-100">
                     <h6 class="mb-2">
                         <i class="bi bi-box-seam me-1"></i>
-                        Manage Products
+                        @SharedLocalizer["ManageProducts"]
                     </h6>
                     <p class="small text-muted mb-3">
-                        Add, update, or remove your products.
+                        @SharedLocalizer["ManageProductsDesc"]
                     </p>
                     <a asp-controller="Product"
                        asp-action="Index"
                        class="btn btn-outline-primary btn-sm">
-                        Go to products
+                        @SharedLocalizer["GoToProducts"]
                     </a>
                 </div>
             </div>
@@ -102,15 +102,15 @@
                 <div class="card shadow-sm p-3 h-100">
                     <h6 class="mb-2">
                         <i class="bi bi-receipt me-1"></i>
-                        View Orders
+                        @SharedLocalizer["ViewOrders"]
                     </h6>
                     <p class="small text-muted mb-3">
-                        Track and manage recent orders.
+                        @SharedLocalizer["ViewOrdersDesc"]
                     </p>
                     <a asp-controller="Order"
                        asp-action="Index"
                        class="btn btn-outline-primary btn-sm">
-                        Go to orders
+                        @SharedLocalizer["GoToOrders"]
                     </a>
                 </div>
             </div>
@@ -120,15 +120,15 @@
                 <div class="card shadow-sm p-3 h-100">
                     <h6 class="mb-2">
                         <i class="bi bi-arrow-down-circle me-1"></i>
-                        Request Withdrawal
+                        @SharedLocalizer["RequestWithdrawal"]
                     </h6>
                     <p class="small text-muted mb-3">
-                        Withdraw your available balance.
+                        @SharedLocalizer["UpdateCategory"]
                     </p>
                     <a asp-controller="Wallet"
                        asp-action="RequestWithdraw"
                        class="btn btn-outline-warning btn-sm">
-                        Request withdrawal
+                        @SharedLocalizer["RequestWithdrawal"]
                     </a>
                 </div>
             </div>

@@ -2,16 +2,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-                <p>Are you shure that you want to delete <strong id="deleteProductName"></strong> Category!</p>
+                <p>@SharedLocalizer["DeleteDesc"] <strong id="deleteProductName">@SharedLocalizer["Products!"] </strong> </p>
             </div>
             <div class="modal-footer">
                 <form asp-controller="Product" asp-action="Delete" method="post">
                     <input type="hidden" id="deleteProductId" name="prodId" />
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Cancel
+                        @SharedLocalizer["Cancel"]
                     </button>
                     <button type="submit" class="btn btn-danger">
-                        Delete
+                        @SharedLocalizer["Delete"]
                     </button>
                 </form>
             </div>

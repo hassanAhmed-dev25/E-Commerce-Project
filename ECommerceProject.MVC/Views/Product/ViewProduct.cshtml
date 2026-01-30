@@ -55,14 +55,14 @@
             {
                 <p class="text-success fw-semibold mt-2">
                     <i class="bi bi-check-circle"></i>
-                    In Stock (@prod.StockQuantity available)
+                    @SharedLocalizer["InStock"] (@prod.StockQuantity @SharedLocalizer["Available"])
                 </p>
             }
             else
             {
                 <p class="text-danger fw-semibold mt-2">
                     <i class="bi bi-x-circle"></i>
-                    Out of Stock
+                    @SharedLocalizer["OutOfStock"]
                 </p>
             }
 
@@ -78,7 +78,7 @@
             <!-- Quantity Selector -->
             <div class="mt-4">
                 <label class="form-label fw-semibold">
-                    Quantity
+                    @SharedLocalizer["Quantity"]
                 </label>
 
                 <div class="input-group quantity-selector" style="max-width: 150px;">
@@ -104,7 +104,7 @@
                 </div>
 
                 <small class="text-muted d-block mt-1">
-                    Max available: @prod.StockQuantity
+                    @SharedLocalizer["MaxAvailable"]: @prod.StockQuantity
                 </small>
             </div>
 
@@ -115,7 +115,7 @@
                 @if (isInCart)
                 {
                     <button class="btn btn-success btn-sm w-100" disabled>
-                        Added to your cart
+                        @SharedLocalizer["Quantity"]Added to your cart
                     </button>
                 }
                 else
@@ -124,7 +124,7 @@
                             data-product-id="@prod.Id"
                             data-price="@prod.Price"
                             @(inStock ? "" : "disabled")>
-                        Add to cart
+                        @SharedLocalizer["AddToCart"]
                     </button>
                 }
 
@@ -132,7 +132,7 @@
 
                 <button class="btn btn-outline-secondary px-4 py-2">
                     <i class="bi bi-heart"></i>
-                    Wishlist
+                    @SharedLocalizer["Wishlist"]
                 </button>
 
             </div>
@@ -141,7 +141,7 @@
             <!-- Meta Info -->
             <div class="border-top pt-4 mt-5 small text-muted">
                 <div class="d-flex justify-content-between">
-                    <span>Created At</span>
+                    <span>@SharedLocalizer["CreatedAt"]</span>
                     <span>@prod.CreatedAt.ToString("dd MMM yyyy")</span>
                 </div>
             </div>
