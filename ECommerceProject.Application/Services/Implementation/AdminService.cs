@@ -16,7 +16,10 @@ namespace ECommerceProject.Application.Services.Implementation
         {
             return await _userService.GetAllWithRolesAsync();
         }
-
+        public async Task ToggleBlockAsync(string userId)
+        {
+            await _userService.ToggleBlockAsync(userId);
+        }
 
 
 
@@ -36,7 +39,6 @@ namespace ECommerceProject.Application.Services.Implementation
             await _walletService.RejectWithdrawalAsync(withdrawalRequestId);
         }
 
-        
         
     }
 }
