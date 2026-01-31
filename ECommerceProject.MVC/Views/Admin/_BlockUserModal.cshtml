@@ -13,8 +13,8 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         @SharedLocalizer["Cancel"]
                     </button>
-                    <button type="submit" class="btn btn-danger">
-                        @SharedLocalizer["Block"]
+                    <button id="blockButton" type="submit" class="btn btn-danger">
+                        
                     </button>
                 </form>
             </div>
@@ -33,14 +33,17 @@
         document.getElementById('blockUserId').value = userId;
             
         var blockMessage = document.getElementById('blockMessage');
+        var blockButton = document.getElementById('blockButton');
 
         if(isBlocked === "true")
         {
             blockMessage.innerHTML = '@SharedLocalizer["UnBlockDesc"] <strong id="userStatus">@SharedLocalizer["User"]! </strong>';
+            blockButton.innerHTML = '@SharedLocalizer["UnBlock"]';
         }
         else
         {
             blockMessage.innerHTML = '@SharedLocalizer["BlockDesc"] <strong id="userStatus">@SharedLocalizer["User"]! </strong>';
+            blockButton.innerHTML = '@SharedLocalizer["Block"]';
         }
 
     });

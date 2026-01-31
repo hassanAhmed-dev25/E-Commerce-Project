@@ -55,14 +55,14 @@
                 data: "id",
                 orderable: false,
                 searchable: false,
-                render: function (id, type, row) { // Later i will add this feature to toggle block status
+                render: function (id, type, row) {
                     return `
                         <button
                             data-bs-toggle="modal"
                             data-bs-target="#ToggleBlockModal"
                             data-id="${id}"
                             data-isBlocked="${row.isBlocked}"
-                            class="btn btn-sm btn-danger ms-1")">
+                            class="btn btn-sm ms-1 ${row.isBlocked ? 'btn-primary' : 'btn-danger'} ")">
                             ${row.isBlocked ? 'Unblock' : 'Block'}
                         </button>
                     `;

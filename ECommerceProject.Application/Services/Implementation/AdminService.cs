@@ -4,10 +4,12 @@ namespace ECommerceProject.Application.Services.Implementation
 {
     public class AdminService : IAdminService
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
         private readonly IWalletService _walletService;
-        public AdminService(IUserService userService, IWalletService walletService)
+        public AdminService(IUnitOfWork unitOfWork, IUserService userService, IWalletService walletService)
         {
+            _unitOfWork = unitOfWork;
             _userService = userService;
             _walletService = walletService;
         }
@@ -18,7 +20,11 @@ namespace ECommerceProject.Application.Services.Implementation
         }
         public async Task ToggleBlockAsync(string userId)
         {
+            // Toggle
             await _userService.ToggleBlockAsync(userId);
+
+            // Save
+            await _unitOfWork.SaveChangesAsync();
         }
 
 

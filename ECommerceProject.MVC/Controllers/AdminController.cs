@@ -43,7 +43,13 @@ namespace ECommerceProject.MVC.Controllers
 
         public async Task<IActionResult> BlockUser(string userId)
         {
-            return Ok();
+            if(string.IsNullOrEmpty(userId))
+                return BadRequest();
+
+            await _adminService.ToggleBlockAsync(userId);
+
+
+            return RedirectToAction("ManageUsers");
         }
 
 

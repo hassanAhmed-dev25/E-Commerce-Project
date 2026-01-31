@@ -31,13 +31,15 @@ namespace ECommerceProject.Infrastructure.Services
             foreach (var user in users)
             {
                 var role = await _userManager.GetRolesAsync(user);
+                if(role.ElementAt(0).ToLower() == "admin")
+                    continue;
 
                 res.Add(new GetUserDto
                 {
                     Id = user.Id,
                     Email = user.Email,
                     Role = role.ElementAt(0),
-                    IsBlocked = false, // not supported yet
+                    IsBlocked = user.IsBlocked,
 
                     OrdersCount = await _orderService.GetTotalOrdersAsync(user.Id),
                     ProductsCount = await _productService.GetTotalProductsAsync(user.Id)
@@ -58,10 +60,16 @@ namespace ECommerceProject.Infrastructure.Services
             if (user == null)
                 throw new ArgumentException("User is not exist");
 
+            var role = await _userManager.GetRolesAsync(user);
+            if (role.ElementAt(0).ToLower() == "admin")
+                throw new ArgumentException("You cannot block the Admin!!");
+
+            if (user.IsBlocked == null)
+                user.IsBlocked = false;
+
 
             // Toggle
             user.IsBlocked = !user.IsBlocked;
-
         }
     }
 }
