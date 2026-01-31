@@ -43,6 +43,8 @@ namespace ECommerceProject.Infrastructure.Identity
                     LastName = user.LastName,
                     Email = user.Email,
                     UserName = user.UserName,
+
+                    IsBlocked = false,
                 };
 
                 var result = await _userManager.CreateAsync(userRes, user.Password);
