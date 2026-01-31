@@ -1,4 +1,5 @@
 ﻿using ECommerceProject.Application.DTOs.Admin;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ECommerceProject.Infrastructure.Services
 {
@@ -48,5 +49,19 @@ namespace ECommerceProject.Infrastructure.Services
             return res;
         }
 
+        public async Task ToggleBlockAsync(string userId)
+        {
+            if(string.IsNullOrEmpty(userId))
+                throw new ArgumentException("User Id is null or empty");
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                throw new ArgumentException("User is not exist");
+
+
+            // Toggle
+            user.IsBlocked = !user.IsBlocked;
+
+        }
     }
 }
