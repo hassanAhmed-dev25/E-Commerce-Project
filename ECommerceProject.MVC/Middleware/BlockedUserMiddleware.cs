@@ -19,13 +19,15 @@ namespace ECommerceProject.MVC.Middleware
             {
                 var user = await userManager.GetUserAsync(context.User);
 
-                if (user != null)
+                if(user != null)
                 {
                     var isBlocked = user.IsBlocked;
 
                     if (isBlocked != null 
                         && isBlocked == true
-                        && !context.Request.Path.StartsWithSegments("/Account/Logout"))
+                        && !context.Request.Path.StartsWithSegments("/Account/Blocked")
+                        && !context.Request.Path.StartsWithSegments("/Home/SetLanguage")
+                        && !context.Request.Path.StartsWithSegments("/Account/LogOut"))
                     {
                         context.Response.Redirect("/Account/Blocked");
                         return;

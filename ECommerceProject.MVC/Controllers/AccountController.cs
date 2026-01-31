@@ -251,5 +251,14 @@ namespace ECommerceProject.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+
+        // Blocked
+        public IActionResult Blocked()
+        {
+            return View();
+        }
+
+
     }
 }

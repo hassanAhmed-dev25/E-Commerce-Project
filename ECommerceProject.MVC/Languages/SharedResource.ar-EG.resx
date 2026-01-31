@@ -648,4 +648,10 @@
   <data name="UnBlockDesc" xml:space="preserve">
     <value>هل تريد فك حظر هذا</value>
   </data>
+  <data name="AccountBlocked" xml:space="preserve">
+    <value>الحساب محظور</value>
+  </data>
+  <data name="AccountBlockedDesc" xml:space="preserve">
+    <value>من فضلك تواصل مع مالك الموقع</value>
+  </data>
 </root>

@@ -648,4 +648,10 @@
   <data name="UnBlockDesc" xml:space="preserve">
     <value>Do you want to un block this</value>
   </data>
+  <data name="AccountBlocked" xml:space="preserve">
+    <value>Account Blocked</value>
+  </data>
+  <data name="AccountBlockedDesc" xml:space="preserve">
+    <value>Please contact the owner of this app</value>
+  </data>
 </root>

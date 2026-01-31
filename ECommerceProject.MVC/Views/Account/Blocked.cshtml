@@ -1,0 +1,18 @@
+﻿
+
+<div class="text-center mt-5">
+    <h2 class="text-danger">
+        @SharedLocalizer["AccountBlocked"]
+    </h2>
+
+    <p>
+        @SharedLocalizer["AccountBlockedDesc"]
+    </p>
+
+    <form asp-controller="Account" asp-action="LogOut" method="post" class="d-inline">
+        <button type="submit" class="btn btn-secondary">
+            @SharedLocalizer["Logout"]
+        </button>
+    </form>
+
+</div>
