@@ -136,6 +136,7 @@ namespace ECommerceProject.MVC
 
             app.UseAuthentication();
             app.UseMiddleware<RoleSelectionMiddleware>();
+            app.UseMiddleware<BlockedUserMiddleware>();
             app.UseAuthorization();
 
 
