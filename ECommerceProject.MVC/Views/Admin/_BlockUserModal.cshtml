@@ -1,0 +1,47 @@
+﻿<div class="modal fade" tabindex="-1" id="ToggleBlockModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="blockMessage">
+
+                    
+                </p>
+            </div>
+            <div class="modal-footer">
+                <form asp-controller="Admin" asp-action="BlockUser" method="post">
+                    <input type="hidden" id="blockUserId" name="userId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        @SharedLocalizer["Cancel"]
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        @SharedLocalizer["Block"]
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ToggleBlockModal = document.getElementById('ToggleBlockModal');
+
+    ToggleBlockModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const userId = button.getAttribute('data-id');
+        const isBlocked = button.getAttribute('data-isBlocked');
+
+        document.getElementById('blockUserId').value = userId;
+            
+        var blockMessage = document.getElementById('blockMessage');
+
+        if(isBlocked === "true")
+        {
+            blockMessage.innerHTML = '@SharedLocalizer["UnBlockDesc"] <strong id="userStatus">@SharedLocalizer["User"]! </strong>';
+        }
+        else
+        {
+            blockMessage.innerHTML = '@SharedLocalizer["BlockDesc"] <strong id="userStatus">@SharedLocalizer["User"]! </strong>';
+        }
+
+    });
+</script>

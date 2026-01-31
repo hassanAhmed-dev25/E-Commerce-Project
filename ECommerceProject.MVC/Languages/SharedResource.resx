@@ -639,4 +639,13 @@
   <data name="NewWithdrawal" xml:space="preserve">
     <value>New Withdrawal</value>
   </data>
+  <data name="BlockDesc" xml:space="preserve">
+    <value>Do you want to block this</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="UnBlockDesc" xml:space="preserve">
+    <value>Do you want to un block this</value>
+  </data>
 </root>

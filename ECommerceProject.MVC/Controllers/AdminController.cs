@@ -1,5 +1,4 @@
 ﻿using ECommerceProject.Application.Services.Interfaces;
-using ECommerceProject.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,6 +41,10 @@ namespace ECommerceProject.MVC.Controllers
 
         }
 
+        public async Task<IActionResult> BlockUser(string userId)
+        {
+            return Ok();
+        }
 
 
 

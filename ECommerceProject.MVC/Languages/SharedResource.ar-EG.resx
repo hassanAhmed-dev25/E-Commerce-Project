@@ -639,4 +639,13 @@
   <data name="NewWithdrawal" xml:space="preserve">
     <value>طلب عملية سحب جديدة</value>
   </data>
+  <data name="BlockDesc" xml:space="preserve">
+    <value>هل تريد حظر هذا</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>المستخدم</value>
+  </data>
+  <data name="UnBlockDesc" xml:space="preserve">
+    <value>هل تريد فك حظر هذا</value>
+  </data>
 </root>
