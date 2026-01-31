@@ -6,6 +6,7 @@ namespace ECommerceProject.Application.Services.Interfaces
     public interface IAdminService
     {
         Task<IEnumerable<GetUserDto>> GetAllUsersWithRolesAsync();
+        Task ToggleBlockAsync(string userId);
 
         Task<IEnumerable<GetManageWithdrawalsDto>> GetAllWithdrawalsAsync();
         Task ApproveWithdrawalsAsync(int withdrawalRequestId);
