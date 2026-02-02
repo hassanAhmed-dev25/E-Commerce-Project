@@ -1,10 +1,5 @@
 ﻿# 🛒 E-Commerce Web Application
-
-🔗 Live Demo:  
-👤 Admin Demo Account:  
-- Email: admin@system.com  
-- Password: Admin@1234
-
+ 
 A modern E-Commerce web application built with ASP.NET Core MVC, designed using clean architecture (Onion Architecture) principles and real-world business workflows.
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-purple?logo=dotnet)
@@ -242,9 +237,6 @@ Steps:
 }
 ```
 
-## 📄 License
-
-This project is licensed under the MIT License.
 
 
 ## 📧 Contact
